@@ -1,0 +1,17 @@
+% !TEX root = ../00_thesis.tex
+
+\section{Leveraging \baloo}
+\label{sec:outcomes}
+
+One important motivation for working on \baloo was to leverage the tool for our other research projects, and \baloo has proved itself useful indeed.
+Within the time-frame of this thesis:
+\begin{itemize}
+  \item Master students used \baloo to participate in the 2019 EWSN Dependability Competition (\cref{subsec:usability}).
+  \item We used \baloo to implement and test the Time-Triggered Wireless protocol~(\cref{ch:ttw}).
+  \item We used \baloo to implement a generic firmware for collecting link quality data in wireless networks. We run this firmware on the FlockLab testbed multiple times per day and publish the newly collected data every month~\cite{jacobFlockLabLinkQuality}.
+\end{itemize}
+
+Contrarily to our original plans~\cite{jacob2019Baloo}, we decided not to pursue the integration of \baloo within Contiki-NG. The main reason is that \baloo barely uses any feature from the OS itself, which is more focused on offering standardized protocol implementations for the IPv6 stack. Ultimately, this hinders the portability of \baloo, as one needs to port the Contiki OS first.
+
+The development of the \baloo framework continues. In middle-term, we plan a new release of the framework (including improved features related to Chaos~\cite{landsiedel2013Chaos}), a port to the SX1262 platform~\cite{semtechSX1262} using FreeRTOS~\cite{FreeRTOS}, and a bare-metal port to the nRF52840 platform~\cite{nRF52840}.
+% Ideas of concrete research applications for \baloo are discussed in Conclusions~(\cref{ch:conclusions}).

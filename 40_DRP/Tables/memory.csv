@@ -1,0 +1,11 @@
+\begin{tabular}{ @{}  l  @{\qquad}  c  @{\qquad}   c @{} }
+ \toprule             
+     & \textbf{ MSP432P401R } & \textbf{ CC430F5147 } \\ %
+  \textbf{ Memory  }  [\bytes]  &  \AP  &  \CP  \\ 
+ \midrule             
+    Total  RAM   &  64k  &  4k  \\ 
+    Available  RAM   &  45k  &  2.4k  \\ 
+ \midrule             
+    Memory  required  (per  flow)   &  45  &  23+$L$  \\ 
+ \bottomrule             
+\end{tabular}              

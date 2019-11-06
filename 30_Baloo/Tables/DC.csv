@@ -1,0 +1,13 @@
+ %  DC  table 
+
+\begin{tabularx}{\linewidth}{@{}lXcccp{5em}cccp{5em}cc@{}}
+\toprule
+&&\multicolumn{3}{c}{Crystal}&& \multicolumn{3}{c}{Sleeping  Beauty} &&\multicolumn{2}{c}{LWB}\\
+&&$U=0$&$U=1$&$U=20$&&$12.5\%$&$25\%$&$50\%$&&$IPI=30s$&$IPI=4s$\\
+\toprule
+ Original  paper &&$0.367$&$0.487$&$2.890$&& $\approx  0.2$ & $\approx  0.3$ & $\approx  0.7$ &&na&na\\
+ Native  code &&$0.321$&$0.440$&$2.115$&&x&x&x&&$0.79$&$5.715$\\
+ Baloo  on  TelosB &&$0.362$&$0.493$&$2.703$&&$0.082$&$0.115$&$0.283$&&$0.976$&$6.646$\\
+ Baloo  on  CC430 &&$0.355$&$0.494$&$2.640$&&$0.070$&$0.106$&$0.270$&&$0.914$&$6.007$\\
+\bottomrule
+\end{tabularx}

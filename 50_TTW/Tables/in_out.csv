@@ -1,0 +1,21 @@
+\begin{tabularx}{\linewidth}{ @{}l@{\qquad}l@{\qquad}X@{}}
+\toprule
+\multirow{11}{*}{\textbf{Inputs}}&$\nodeset$&Set of nodes in the system\\
+&$\multirow{2}{*}{\appset,\, \persappset}$&Set of applications and persistent applications\\
+&&(including periods, deadlines, and precedence graphs)\\
+&$\modeset$&Set of operation modes (including mode priorities)\\
+&$\modeGraph$&Mode graph\\
+&$\tau.p,\, m.p$&Task and message periods, inherited from the application\\
+&$\tau.\map$&Mappings of tasks to nodes\\
+&$\tau.e$&Task worst-case execution time (WCET) given $\tau.\map$\\
+
+&$\nslotsmax$&Maximum number of slots per round\\
+&$\Lmax$&Maximum message payload size\\
+&$H$&Network diameter (in number of hops)\\
+&$N$&Number of transmissions in a Glossy flood~\cite{ferrari2011Glossy}\\
+\midrule
+\multirow{3}{*}{\textbf{Outputs}}&$\tau.o$&Task offsets\\
+&$m.o,\, m.d$&Message offsets and deadlines\\
+&$r.t,\, r.[\nslotsmax]$&Round starting times and allocation vectors\\
+\bottomrule
+\end{tabularx}

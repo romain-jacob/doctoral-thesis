@@ -1,0 +1,105 @@
+% !TEX root = ../00_thesis.tex
+
+\section{Advanced Functionalities}
+\label{sec:adv_features}
+
+In \cref{sec:baloo_overview} and \ref{sec:baloo_implementation} we presented the general concepts of \baloo and how we implemented them to meet the requirements presented in \cref{sec:baloo_intro}.
+To further extend the variety of network layer protocols that can be implemented using \baloo, we have enriched the framework with various features, most of which have been used in previous protocols and proved themselves useful.
+We briefly present these features in this section.
+
+\subsection{High-level Functions}
+
+\label{subsec:add_func}
+
+\begin{description}
+
+	\item [Detection of interference]
+	Low-power wireless networks often suffer from interference.
+	Multiple strategies have been proposed to escape and/or mitigate its effects.
+
+	\baloo allows to monitor the power level on the channel being used during a slot. This information can be used to detect potential interference and react accordingly.
+
+	This feature is used \eg in Crystal~\cite{istomin2018Interferenceresilient}.
+
+	\item [Advanced state machine]
+	The middleware in \baloo implements a minimal but sufficient state machine composed of three states (\textsl{Running}, \textsl{Suspended}, \textsl{Bootstrapping}; see \cref{subsec:state-machine} and \cref{fig:state-machine}).
+
+	\baloo lets the network layer protocol implement a more advanced state machine. The return value of the \texttt{on\_control\_slot\_post()} callback is used to inform the middleware of the desired behaviour for the node, \ie whether it should be in the  \textsl{Running}, \textsl{Suspended}, or \textsl{Bootstrapping} state for the coming round.
+
+	This feature is used \eg in LWB~\cite{ferrari2012LWB}.
+
+	\item[Starvation protection]
+	Skipping slots due to overrunning callbacks may lead to starvation problems. The middleware behaviour can be modified to interrupt these overruns.
+	%
+	If and when this occurs, the interrupted node will suspend its operation for the coming slot (or the complete round, in case the \texttt{on\_control\_slot\_post()} over-runs).
+
+	At the time of writing, this feature is \textbf{not included} in the publicly available implementation of \baloo.
+
+\end{description}
+
+\subsection{Scheduling Features}
+
+\label{subsec:adv_sched}
+
+\begin{description}
+
+	%scheduling
+	\item[Contention slots]
+	In a contention slot, all nodes are allowed to transmit their own packet; they ``contend'' for access to the wireless medium. The successful reception of one of the packets remains possible due to the capture effect~\cite{yuan2013LetTalkTogether}.
+
+	Contention slots are used in many protocols, including LWB~\cite{ferrari2012LWB} and Crystal~\cite{istomin2018Interferenceresilient}.
+
+	\item [Per-slot configuration]
+	By default, the same configuration parameters are used for all slots in the same round. \baloo lets the network layer specify some configuration on a per-slot basis. These optional parameters are sent by the host as part of the control packet.
+
+	Crystal~\cite{istomin2018Interferenceresilient} for example uses different number of retransmissions for data and acknowledgement packets (the latter are retransmitted more often).
+
+	\item [Static schedule and configuration]
+	In many network layer protocols, the scheduling policy is static: either the control information remains the same or it changes according to some offline algorithm.
+
+	In such cases, \baloo can spare the overhead of sending redundant information in the control packet, thus saving time and energy. All nodes are then responsible to locally update their control information.
+
+	Static schedules are used \eg in TTW~\cite{jacob2017TTW_extended} or Crystal~\cite{istomin2018Interferenceresilient}.
+
+	\item [Skipping slots and rounds]
+	It is sometimes useful that some nodes do not participate in certain slots, or even skip complete rounds, \eg to save energy, or to improve performance in very dense networks.
+
+	\baloo lets the network layer trigger slot skipping using the return value of the \texttt{on\_slot\_pre()} callback.
+	To skip an entire round, one can return \textsl{Suspended} in the \texttt{on\_control\_slot\_post()} callback (see \cref{subsec:add_func}).
+
+	This feature is used \eg in Sleeping Beauty~\cite{sarkar2016Sleeping}.
+
+	\item [Repeating slots or rounds]
+	On the contrary, it may be useful to repeat the execution of specific slots, or even entire communication rounds (\eg when the number of slots required in a round is dynamic) or to retransmit lost packets.
+
+	\baloo lets the network layer trigger slot and round repeat using the return value of the \texttt{on\_slot\_post()} callback.
+	\begin{subitemize}
+
+		\item
+		If the slot repeat flag is received, the middleware re-executes the same slot.
+
+		\item
+		If the round repeat flag is received, the middleware immediately restarts executing from the first slot of the round.
+
+	\end{subitemize}
+
+	This feature is used \eg in Crystal~\cite{istomin2018Interferenceresilient}.
+
+
+\end{description}
+
+\subsection{Radio Settings}
+\label{subsec:adv_radio}
+
+
+\begin{description}
+	%radio parameters
+	\item [Radio channel setting]
+	\baloo lets the network designer select the radio frequency channel for each slot. This can be useful to proactively or reactively hop between channels in case of interference.
+
+	This feature is used \eg in Crystal~\cite{istomin2018Interferenceresilient}.
+
+	\item [Transmit power setting]
+	\baloo lets the network designer set the desired transmit power, possibly changing between each communication slot.
+
+\end{description}

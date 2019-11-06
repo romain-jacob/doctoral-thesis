@@ -1,0 +1,110 @@
+% !TEX root = 00_thesis.tex
+
+\chapter[Abstract]{Abstract}
+
+% Context 1: information required to understand the need
+
+% Need 1: what you have vs. what you want
+One of the foundations of science is that a result can be considered valid only if it can be reproduced by others.
+In low-power wireless research however, assessing reproducibility remains a grand challenge, in part due to the intrinsic variability  of the wireless environment.
+Without reproducibility, one cannot hope to compare different results.
+
+The field of low-power wireless networking has tremendously progressed over the past decade:
+Researchers regularly report impressive performance results with respect to reliability (packet reception rate of 99.9\% and above), latency (end-to-end latency the order of milliseconds), and energy consumption (autonomous life time of multiple years).
+With such performance levels, it becomes all the more important to enable sound comparisons between different protocols and approaches.
+
+% Context 2
+Some of the performance improvements we mentioned were enabled by an approach called synchronous transmissions (\ST).
+% st is a technique that does xyz.
+In a nutshell, \ST consists in letting multiple nodes transmit a packet during the same time interval; communication is likely to be successful (\ie nodes in the vicinity receive a packet) if the transmissions are sufficiently well synchronized, henceforth the name of \textit{synchronous} transmissions.
+\ST has been shown to be very reliable and efficient in multi-hop networks.
+%, with the potential of providing new services for Internet of Things (IoT) or cyber-physical systems applications.
+
+% Need 2: what you have vs. what you want
+Unfortunately, the usability of \ST is limited by its very high sensitivity to precise timing. This sensitivity makes \ST-based protocols difficult to interface with the higher layers of a communication stack.
+Consequently, the adoption of \ST is currently limited to a relatively small circle of academic practitioners, despite almost a decade of development and multiple demonstrations of its potential for real-world applications.
+
+% Task: what we did to address the need
+In this dissertation, we first address the general challenge of repeatability and comparability in low-power wireless networking.
+We then focus on the \ST approach:
+we strive to make \ST more accessible and we demonstrate how it can efficiently provide certain performance guarantees in distributed applications.
+Specifically, we make the following contributions:
+
+\begin{description}
+
+% =============================== %
+% Contribution 1
+% =============================== %
+%
+\item[\chref{ch:triscale}]%
+% Object
+We study the process of evaluating and comparing the performance of low-power networking protocols.
+% Findings
+We propose a statistically sound methodology to assess the repeatability of experiments, tailored to the context of wireless networking,
+and we formalize this methodology as a set of guidelines.
+% Conclusions
+Following this methodology allows to make provable claims about a protocol performance, but also to compare protocols; for example, making (or refuting) claims such as \emph{``protocol A is better than protocol B''}.
+
+% =============================== %
+% Contribution 2
+% =============================== %
+
+\item[\chref{ch:baloo}]%
+% Object
+We propose \baloo, a flexible design framework for network stacks based on synchronous transmissions (\ST).
+% Findings
+We show that \baloo is flexible enough to implement a wide variety of network layer protocols, while introducing only limited memory and energy overhead. Most importantly \baloo makes \ST accessible: The framework is open source, well documented,
+% Conclusions
+and has already been used and extended by independent research groups.\rj{For now, such developments are plans... we shall see what happens in the next months.}
+
+% =============================== %
+% Contribution 3
+% =============================== %
+%
+\item[\chref{ch:realtime}]%
+% Object
+We design and implement two different network stacks that leverage \ST to efficiently provide end-to-end real-time guarantees in a multi-hop wireless network:
+% Findings
+the Distributed Real-time Protocol (\DRP) offers flexibility between the execution of distributed tasks;
+Time-Triggered Wireless (\TTW) targets minimal end-to-end latency.
+% Findings
+Both protocols have different design goals while providing end-to-end real-time guarantees.
+% Conclusion
+We illustrate the respective performance of these network stacks and evaluate how they compare against each other using the methodology we introduce in [\chref{ch:triscale}].
+% =============================== %
+
+\end{description}
+
+% Perspectives
+
+% -> These are not perspectives. It is merely a reformulation of the object (this paragraph could replace the one before the contributions...)
+
+%This work addresses some important challenges of state-of-the-art low-power wireless technology:
+%We contribute to make the \ST approach more accessible,
+%we illustrate how it enables novel designs with unprecedented performance guarantees, and
+%we tackle the need for repeatability and comparability in low-power wireless networking, which, beyond \ST, applies to any wireless communication approach.
+
+\newpage
+\section*{Claims}
+\begin{itemize}
+
+  \item
+  We work towards more rigorous and reproducible experimental networking research.
+  For the first time, we go beyond simple guidelines and propose a concrete methodology for designing networking experiments and analyzing their data.
+  We leverage this methodology to propose the first formalized definition of reproducibility for networking experiments.
+  We implemented our methodology in a framework called \triscale, a first-of-its-kind tool that assists researchers by streamlining the design process and automating the data analysis.
+
+  \item
+  We propose and implement \baloo, a design framework for network stacks based on synchronous transmissions.
+  \baloo significantly lowers the entry barrier for harnessing the efficiency, reliability and mobility support of synchronous transmissions:
+  users implement their protocol through a simple yet flexible API while \baloo handles all the complex low-level operations based on the users' inputs.
+
+  \item
+  We demonstrate for the first time that end-to-end real-time guarantees can be obtained in low-power wireless networks by leveraging the efficiency and reliability of synchronous transmissions.
+  We propose and implement wireless real-time protocols for two different design objectives.
+  \begin{itemize}
+    \item Distributed Real-time Protocol (\DRP) uses contracts to maximize the flexibility of execution between distributed tasks.
+    \item Time-Triggered Wireless (\TTW) statically co-schedules all task executions and message transfers to minimize end-to-end latency.
+  \end{itemize}
+
+\end{itemize}

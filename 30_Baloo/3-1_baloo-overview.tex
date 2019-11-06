@@ -1,0 +1,70 @@
+% !TEX root = ../00_thesis.tex
+
+\section{Overview of \baloo}
+\label{sec:baloo_overview}
+
+This section presents an overview of the concepts of \baloo. The implementation of these concepts using a middleware will be described in the next section (\cref{sec:baloo_implementation}).
+
+%[here a one sentence summary of Baloo and its concepts, which are then justified]
+\baloo is a flexible framework designed to harness the potential of the Synchronous Transmissions (\ST) technology and make it more accessible.
+\baloo uses Time Division Multiple Access (TDMA) rounds made of communication slots. A \ST primitive is executed in each slot.
+All necessarily control information is sent by a central node in the first slot of each round.
+The core of \baloo is made of a middleware layer (see \cref{fig:stack_baloo}) which isolates the network layer from the lower layers. Concretely, this separates the management of the radio and timer settings from the implementation of the protocol logic.
+
+\fakeparQM{Why Synchronous Transmissions}
+As discussed in \cref{sec:baloo_intro}, \ST is a wireless communication technique known to be reliable, fast, and energy efficient.
+%
+\ST primitives communicate using so-called \textsl{floods}, which realize an any-to-all communication. Thus, \ST seamlessly supports multiple types of transmission patterns (\ie unicast, multicast, broadcast).
+As a result, \ST enables to abstract away the complexity of a multi-hop mesh into a \textsl{virtual single-hop network}.
+%
+Furthermore, some \ST primitives (\eg Glossy~\cite{ferrari2011Glossy} or Robust Flooding~\cite{lim2017Competition}) provide tight bounds on the completion time of a flood, given the payload size and network diameter.
+
+This makes \ST particularly suited for a time-triggered communication scheme. Within one bounded time slot, one can schedule a communication from one to any (set of) node(s) in the network, which greatly simplifies the design of a network layer protocol.
+
+\baloo uses Glossy~\cite{ferrari2011Glossy} as default \ST primitive, but it also supports other primitives, \eg Chaos~\cite{landsiedel2013Chaos}. In principle, \baloo is compatible with arbitrarily many other primitives (see \cref{subsec:multi-ST-primitives}), thus addressing \feature{Versatility}.
+
+\fakepar{Round-based Design}
+To maximize the benefits of \ST, \baloo organizes communication in
+TDMA rounds, with dedicated time slots assigned to specific nodes which are then allowed to initiate a transmission in this slot.
+The first slot in each round is assigned to a central node, called the \textsl{host}, to send some control information (see below). This \textsl{control slot} is then followed by arbitrarily many \textsl{data slots}.
+Nodes turn their radio off between rounds to save energy.
+
+While this framework may look restrictive and hinder \feature{Generality}, such round-based design is in fact very generic, and compatible with many (if not all) \ST-based network stacks proposed so far in the literature. The flexibility and limitations of \baloo will be discussed in the evaluation (\cref{sec:baloo_eval} and \ref{sec:requirements}).
+
+\fakepar{Control Information}
+In \baloo, the control packet, sent at the beginning of each round, plays a key role. It is constructed such that if a node receives a control packet from the host, this nodes knows exactly
+\begin{itemize}
+	\item how to execute the current communication round, and
+	\item when to wake up for the next round.
+\end{itemize}
+
+Thus, the control packet contains both \textsl{schedule information} (\eg the slot assignment for the round or the time interval before the next round) and \textsl{configuration parameters}, like the length of the slots or the number of retransmissions.
+The control packet is broadcast using Glossy~\cite{ferrari2011Glossy}, which is also used to synchronize the whole network.
+
+\baloo is very flexible (\feature{Usability}, \feature{Generality}); both schedule and configuration can be updated at anytime by the host and the whole network adapts to follow the instructions.
+This poses the problem of a node not correctly decoding a control packet, thus having possibly outdated control information.
+
+Consequently, \baloo adopts the following fail-safe mechanism: \textsl{a node does not participates in a communication round unless it correctly decodes the control packet}. This guarantees that, even in case of packet losses, a node will never disturb the execution of the rest of the network.
+
+\fakepar{A Middleware to Provide the Right Level of Abstraction}
+The main challenge in the design of \baloo is the definition of an interface that isolates the management of the radio (\ie running the \ST communication primitives) from the implementation of the protocol logic at the network layer.
+%
+\baloo realizes this interface using a middleware layer that is responsible for the following tasks:
+\begin{itemize}
+
+	\item The middleware organizes the timers and controls the radio operations (\ie it executes the \ST primitives).
+
+	\item The middleware manages the communication round operations according to the control information received from the host.
+
+	\item The middleware executes callback functions, which are used to interact with the application running above the network layer (\ie passing packet payload and implementing the protocol logic).
+
+\end{itemize}
+The middleware is a \textsl{fixed piece of software} which can be configured but neither accessed nor modified by the network layer.
+The protocol logic (payload management, state keeping, \etc) is implemented entirely within the callback functions.%
+\footnote{The different callbacks are further described in \cref{subsec:CB}.}
+The middleware interface is illustrated in \cref{fig:callbacks}.
+
+With this approach, all low-level programming complexities are managed by the middleware and let the network designer focus on the main task: design the protocol logic of the network layer.
+
+These concepts form the core of \baloo and address the \feature{Usability}, \feature{Generality},  and \feature{Versatility} requirements of a flexible network stack design.
+Additional concepts are required to ensure that the timing requirements of \ST are met (\feature{Synchronicity}): this is the focus of the next section.

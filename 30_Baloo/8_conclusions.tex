@@ -1,0 +1,18 @@
+% !TEX root = ../00_thesis.tex
+
+\section{Summary}
+
+%What we presented
+This chapter presented \baloo, a flexible design framework for low-power wireless network stacks based on \ST.
+We illustrated its \feature{Usability} and \feature{Generality} by re-implementing three well-known network stacks: the Low-power Wireless Bus (LWB)~\cite{ferrari2012LWB}, Sleeping Beauty~\cite{sarkar2016Sleeping}, and Crystal~\cite{istomin2018Interferenceresilient}, and we showed that using \baloo induces only limited performance overhead in terms of radio duty cycle and memory usage.
+\baloo supports the use of multiple \ST primitives within the same network stack (\feature{Versatility}) while guaranteeing that the timing requirements for \ST are met (\feature{Synchronicity}).
+
+% Key concept/novel idea
+The key concept of \baloo is its clean API, based on callback functions, which let the users focus on implementing the protocol logic without worrying about low-level radio control (interrupt handling, timer settings, \etc).
+The API is generic and supports the different communication primitives. Through this API, multiple primitives can be used within the same network stack without additional complexity for the users.
+
+\pagebreak
+% Take aways
+The code of \baloo is openly available and is accompanied by a detailed documentation of its features and how to use them~(\cref{append:baloo_artifacts}).
+Our re-implementations of Crystal, Sleeping Beauty, and LWB are also available.
+We believe \baloo will be an important enabler for the development of future real-world applications leveraging state-of-the-art \ST technology.

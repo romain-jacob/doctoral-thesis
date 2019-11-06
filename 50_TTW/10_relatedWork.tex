@@ -1,0 +1,17 @@
+% !TEX root = ../00_thesis.tex
+
+\section{Related Work}
+\label{sec:ttw_relWork}
+
+Various high reliability protocols have been proposed for low-power multi-hop wireless network, like TSCH~\cite{watteyne2017Teaching}, WirelessHART~\cite{wirelessHART} or LWB~\cite{ferrari2012LWB}.
+Blink~\cite{zimmerling2017Blink} was proposed as a real-time scheduling extension for protocols based on synchronous transmissions.
+Despite their respective benefits, all these protocols consider only network resources. They do not take into account the scheduling of distributed tasks on the computation resources, and therefore they hardly support end-to-end deadlines as commonly required for \cps applications~\cite{akerberg2011Future}.
+In \cref{ch:drp}, we proposed \DRP a protocol that provides such end-to-end guarantees, but couples tasks and messages as loosely as possible, aiming for efficient support of sporadic or event-triggered applications.
+This results in high worst-case latency and is thus not suitable for demanding \cps applications~\cite{akerberg2011Future}.
+This observation points toward a fully time-triggered system where tasks and messages are co-scheduled.
+
+
+In the wired domain, much work has been done on time-triggered architecture, like TTP~\cite{kopetz1993TTP}, the static-segment of FlexRay~\cite{flexray2013ISO}, or TTEthernet~\cite{kopetz2005TimeTriggered}.
+Many recent works use SMT- of MILP-based methods to synthesize and/or analyze static (co-)schedules for those architectures~\cite{steiner2010evaluation,craciunas2016Combined,ashjaei2017Designing,tamas2012Synthesis,zhang2014Task}.
+However, these approaches assume that a message can be scheduled at any time. While being a perfectly valid hypothesis for a wired system, this assumption is not compatible with the use of communication rounds in a wireless setting.
+As shown in \cref{sec:ttw_evaluation_implem}, using rounds significantly reduces the energy consumed for communication, but it makes the schedule synthesis more complex~(\cref{sec:single_mode}).

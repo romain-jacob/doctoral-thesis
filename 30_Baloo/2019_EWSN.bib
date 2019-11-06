@@ -1,0 +1,813 @@
+
+@inproceedings{landsiedel2013Chaos,
+  address = {New York, NY, USA},
+  series = {{{SenSys}} '13},
+  title = {Chaos: {{Versatile}} and {{Efficient All}}-to-All {{Data Sharing}} and {{In}}-Network {{Processing}} at {{Scale}}},
+  isbn = {978-1-4503-2027-6},
+  shorttitle = {Chaos},
+  doi = {10.1145/2517351.2517358},
+  abstract = {An important building block for low-power wireless systems is to efficiently share and process data among all devices in a network. However, current approaches typically split such all-to-all interactions into sequential collection, processing, and dissemination phases, thus handling them inefficiently. We introduce Chaos, the first primitive that natively supports all-to-all data sharing in low-power wireless networks. Different from current approaches, Chaos embeds programmable in-network processing into a communication support based on synchronous transmissions. We show that this design enables a variety of common all-to-all interactions, including network-wide agreement and data aggregation. Results from three testbeds and simulations demonstrate that Chaos scales efficiently to networks consisting of hundreds of nodes, achieving severalfold improvements over LWB and CTP/Drip in radio duty cycle and latency with almost 100 \% reliability across all scenarios we tested. For example, Chaos computes simple aggregates, such as the maximum, in a 100-node multi-hop network within less than 90 milliseconds.},
+  booktitle = {Proceedings of the 11th {{ACM Conference}} on {{Embedded Networked Sensor Systems}}},
+  publisher = {{ACM}},
+  author = {Landsiedel, Olaf and Ferrari, Federico and Zimmerling, Marco},
+  year = {2013},
+  pages = {1:1--1:14},
+  file = {/home/romain/Zotero/storage/A8ELQB5Z/Landsiedel et al. - 2013 - Chaos Versatile and Efficient All-to-all Data Sha.pdf}
+}
+
+@article{jacob2017TTW,
+  archivePrefix = {arXiv},
+  eprinttype = {arxiv},
+  eprint = {1711.05581},
+  primaryClass = {cs},
+  title = {{{TTW}}: {{A Time}}-{{Triggered}}-{{Wireless Design}} for {{CPS}} [ {{Extended}} Version ]},
+  copyright = {All rights reserved},
+  shorttitle = {{{TTW}}},
+  abstract = {Wired field buses have proved their effectiveness to support Cyber-Physical Systems (CPS). However, in avionics, for ease of deployment, or for new functionality featuring mobile devices, there is a strong interest for wireless solutions. Low-power wireless protocols have been proposed, but requirements of a large class of CPS applications can still not be satisfied. This paper presents Time-Triggered-Wireless (TTW), a distributed low-power wireless system design that minimizes energy consumption and offers end-to-end timing predictability, adaptability, reliability, low latency. Our evaluation shows a reduction of communication latency by a factor 2x and of energy consumption by 33-40\% compared to state-of-the-art approaches. This validates the suitability of TTW for wireless CPS applications and opens the way for implementation and real-world experience with industry partners.},
+  journal = {arXiv:1711.05581 [cs]},
+  author = {Jacob, Romain and Zhang, Licong and Zimmerling, Marco and Beutel, Jan and Chakraborty, Samarjit and Thiele, Lothar},
+  month = nov,
+  year = {2017},
+  keywords = {Computer Science - Networking and Internet Architecture},
+  file = {/home/romain/Zotero/storage/HEU63TAY/Jacob et al. - 2017 - TTW A Time-Triggered-Wireless Design for CPS [ Ex.pdf;/home/romain/Zotero/storage/IWG5GE3F/1711.html}
+}
+
+@inproceedings{dunkels2004Contiki,
+  title = {Contiki - a Lightweight and Flexible Operating System for Tiny Networked Sensors},
+  doi = {10.1109/LCN.2004.38},
+  abstract = {Wireless sensor networks are composed of large numbers of tiny networked devices that communicate untethered. For large scale networks, it is important to be able to download code into the network dynamically. We present Contiki, a lightweight operating system with support for dynamic loading and replacement of individual programs and services. Contiki is built around an event-driven kernel but provides optional preemptive multithreading that can be applied to individual processes. We show that dynamic loading and unloading is feasible in a resource constrained environment, while keeping the base system lightweight and compact.},
+  booktitle = {29th {{Annual IEEE International Conference}} on {{Local Computer Networks}}},
+  author = {Dunkels, A. and Gronvall, B. and Voigt, T.},
+  month = nov,
+  year = {2004},
+  pages = {455-462},
+  file = {/home/romain/Zotero/storage/9CFNQMM8/Dunkels et al. - 2004 - Contiki - a lightweight and flexible operating sys.pdf;/home/romain/Zotero/storage/TDM353EG/1367266.html}
+}
+
+@article{mohammad2017Improving,
+  title = {Improving {{Performance}} of {{Synchronous Transmission}}-{{Based Protocols Using Capture Effect}} over {{Multichannels}}},
+  volume = {13},
+  issn = {1550-4859},
+  doi = {10.1145/3043790},
+  abstract = {Synchronous transmission has been exploited recently for accelerating fundamental operations of wireless sensor networks like data dissemination, data collection, and network-wide agreement by an order of magnitude. Although these protocols (e.g., Glossy) have shown to be highly reliable for small packet sizes, the use of large packet sizes coupled with an excessive number of simultaneous transmissions can reduce reliability significantly. Our work is motivated by the observation that capture effect can improve the reliability of synchronous transmission. We experimentally study the effect of physical layer capture and identify guidelines in which it can be exploited to enhance reliability. Based on these observations, we propose Syncast, a data dissemination protocol that improves over Glossy by exploiting capture effect over multichannels. The evaluation shows that Syncast provides a robust, reliable, and scalable data dissemination of large packets with lower end-to-end delay and up to 92\% reduced radio-on-time.},
+  number = {2},
+  journal = {ACM Trans. Sen. Netw.},
+  author = {Mohammad, Mobashir and Doddavenkatappa, Manjunath and Chan, Mun Choon},
+  month = apr,
+  year = {2017},
+  pages = {10:1--10:26},
+  file = {/home/romain/Zotero/storage/W6TG3V2R/Mohammad et al. - 2017 - Improving Performance of Synchronous Transmission-.pdf}
+}
+
+@inproceedings{dunkels2006Protothreads,
+  address = {New York, NY, USA},
+  series = {{{SenSys}} '06},
+  title = {Protothreads: {{Simplifying Event}}-Driven {{Programming}} of {{Memory}}-Constrained {{Embedded Systems}}},
+  isbn = {978-1-59593-343-0},
+  shorttitle = {Protothreads},
+  doi = {10.1145/1182807.1182811},
+  abstract = {Event-driven programming is a popular model for writing programs for tiny embedded systems and sensor network nodes. While event-driven programming can keep the memory overhead down, it enforces a state machine programming style which makes many programs difficult to write, maintain, and debug. We present a novel programming abstraction called protothreads that makes it possible to write event-driven programs in a thread-like style, with a memory overhead of only two bytes per protothread. We show that protothreads significantly reduce the complexity of a number of widely used programs previously written with event-driven state machines. For the examined programs the majority of the state machines could be entirely removed. In the other cases the number of states and transitions was drastically decreased. With protothreads the number of lines of code was reduced by one third. The execution time overhead of protothreads is on the order of a few processor cycles.},
+  booktitle = {Proceedings of the 4th {{International Conference}} on {{Embedded Networked Sensor Systems}}},
+  publisher = {{ACM}},
+  author = {Dunkels, Adam and Schmidt, Oliver and Voigt, Thiemo and Ali, Muneeb},
+  year = {2006},
+  pages = {29--42},
+  file = {/home/romain/Zotero/storage/TSE6FR2N/Dunkels et al. - 2006 - Protothreads Simplifying Event-driven Programming.pdf}
+}
+
+@article{mottola2012Middleware,
+  title = {Middleware for Wireless Sensor Networks: An Outlook},
+  volume = {3},
+  issn = {1867-4828, 1869-0238},
+  shorttitle = {Middleware for Wireless Sensor Networks},
+  doi = {10.1007/s13174-011-0046-7},
+  abstract = {In modern distributed computing, applications are rarely built directly atop operating system facilities, e.g., sockets. Higher-level middleware abstractions and systems are often employed to simplify the programmer's chore or to achieve interoperability. In contrast, real-world wireless sensor network (WSN) applications are almost always developed by relying directly on the operating system.Why is this the case? Does it make sense to include a middleware layer in the design of WSNs? And, if so, is it the same kind of software system as in traditional distributed computing? What are the fundamental concepts, reasonable assumptions, and key criteria guiding its design? What are the main open research challenges, and the potential pitfalls? Most importantly, is it worth pursuing research in this field?This paper provides a (biased) answer to these and other research questions, preceded by a brief account on the state of the art in the field.},
+  language = {en},
+  number = {1},
+  journal = {Journal of Internet Services and Applications},
+  author = {Mottola, Luca and Picco, Gian Pietro},
+  month = may,
+  year = {2012},
+  pages = {31-39},
+  file = {/home/romain/Zotero/storage/V4DMDFDY/Mottola and Picco - 2012 - Middleware for wireless sensor networks an outloo.pdf;/home/romain/Zotero/storage/7WDDZSMA/s13174-011-0046-7.html}
+}
+
+@misc{Code_LWB,
+  title = {Low-{{Power Wireless Bus}} ({{LWB}})},
+  copyright = {BSD-3-Clause},
+  howpublished = {https://github.com/ETHZ-TEC/LWB},
+  month = sep,
+  year = {2017},
+  file = {/home/romain/Zotero/storage/BDADS3V2/LWB.html}
+}
+
+@inproceedings{sarkar2016Sleeping,
+  title = {Sleeping {{Beauty}}: {{Efficient Communication}} for {{Node Scheduling}}},
+  shorttitle = {Sleeping {{Beauty}}},
+  doi = {10.1109/MASS.2016.018},
+  abstract = {Typical Wireless Sensor Networks (WSN) deployments use more nodes than needed to accurately sense the phenomena of interest. This redundancy can be leveraged by switching-on only a subset of nodes at any time instant (node-scheduling) and putting the remaining nodes sleep. This effectively extends the network lifetime. In addition to sensing coverage, node-scheduling schemes must also ensure that (i) the network stays connected, and (ii) the time needed to wake-up the complete protocol stack after sleeping is minimized. We present Sleeping Beauty, a highly-efficient data collection protocol that aids node-scheduling schemes in both aspects. Sleeping Beauty uses a slotted and tightly synchronized communication primitive, where a node keeps its radio off for most of the time, except in the slots when it needs to participate for successful communication. Further, an efficient neighbor-discovery mechanism is included that provides partial, but sufficient topology information (potential parents) to avoid network partitions. Furthermore, Sleeping Beauty employs a novel, yet simple clock-offset estimation technique that maintains highly-accurate time synchronization over long radio-off periods (i.e., less than 500 us deviation even after 45, min of sleeping). This minimizes time wasted in resynchronizing the network in between data collection rounds. Through experiments on two different testbeds, we verified that Sleeping Beauty decreases the duty cycle up to a factor of 3 compared to state-of-the-art techniques, while achieving similar delivery ratios.},
+  booktitle = {2016 {{IEEE}} 13th {{International Conference}} on {{Mobile Ad Hoc}} and {{Sensor Systems}} ({{MASS}})},
+  author = {Sarkar, C. and Prasad, R. V. and Rajan, R. T. and Langendoen, K.},
+  month = oct,
+  year = {2016},
+  keywords = {wireless sensor networks,Wireless sensor networks,protocols,Protocols,Synchronization,Routing,clock-offset estimation technique,Data collection,data collection protocol,estimation theory,neighbor-discovery mechanism,network lifetime,network partitions,node-scheduling schemes,protocol stack,radio-off periods,sensing coverage,sensor placement,Sensors,Sleeping Beauty,Switching circuits,synchronisation,telecommunication scheduling,time 45 min,time synchronization,topology information,wireless sensor networks deployments,WSN deployments},
+  pages = {56-64},
+  file = {/home/romain/Zotero/storage/7GU2ZM45/7815012.html}
+}
+
+@inproceedings{schuss2017Competition,
+  address = {USA},
+  series = {{{EWSN}} '17},
+  title = {A {{Competition}} to {{Push}} the {{Dependability}} of {{Low}}-{{Power Wireless Protocols}} to the {{Edge}}},
+  isbn = {978-0-9949886-1-4},
+  abstract = {A large number of low-power wireless communication protocols has been proposed in the last decade by both academia and industry in an attempt to deliver information in an increasingly reliable, timely, and energy-efficient manner. However, their level of dependability has rarely been benchmarked under the same settings and environmental conditions. In this paper we present the execution and results of a competition aimed to evaluate the dependability of state-of-the-art low-power wireless protocols under the same settings, and push their performance to the limit. We define a scenario emulating the operation of a wireless sensor network in industrial environments rich with radio interference and compare the end-to-end dependability of systems based on protocol strategies ranging from adaptive and time-slotted frequency-hopping to multi-modal routing and flooding. To increase fairness and realism, we allow the developers of the competing protocols to interact with the benchmarking infrastructure and optimize the protocol parameters for the scenario at hand. We achieve this by designing, implementing, and employing D-Cube, a low-cost tool that allows to accurately measure key dependability metrics such as end-to-end delay, reliability, and power consumption, as well as to graphically visualize their evolution in real-time. This interaction with the benchmarking infrastructure and the competitiveness of the event have incited the developers to push the performance of their protocols to the limit and reach impressive results.},
+  booktitle = {Proceedings of the 2017 {{International Conference}} on {{Embedded Wireless Systems}} and {{Networks}}},
+  publisher = {{Junction Publishing}},
+  author = {Schu\ss, Markus and Boano, Carlo Alberto and Weber, Manuel and R\"omer, Kay},
+  year = {2017},
+  keywords = {Competition,Dependability,Performance,Testbeds},
+  pages = {54--65}
+}
+
+@inproceedings{sutton2017eLWB,
+  address = {USA},
+  series = {{{EWSN}} '17},
+  title = {The {{Design}} of a {{Responsive}} and {{Energy}}-Efficient {{Event}}-Triggered {{Wireless Sensing System}}},
+  isbn = {978-0-9949886-1-4},
+  abstract = {We present the design, implementation and experimental evaluation of an efficient event-triggered wireless sensing system. We propose an event-triggered logical component model, which encapsulates adaptability, responsiveness and energy efficiency design constraints. We then design a wireless sensing system for monitoring acoustic emissions through the composition of event-triggered logical components. We present the integration of these components onto a novel dual-processor wireless sensing platform, and extensively evaluate the developed prototype with respect to responsiveness and energy efficiency using real-world acoustic emission traces.},
+  booktitle = {Proceedings of the 2017 {{International Conference}} on {{Embedded Wireless Systems}} and {{Networks}}},
+  publisher = {{Junction Publishing}},
+  author = {Sutton, Felix and Da Forno, Reto and Gschwend, David and Gsell, Tonio and Lim, Roman and Beutel, Jan and Thiele, Lothar},
+  year = {2017},
+  keywords = {wireless sensor networks,acoustic emission sensing,cyber-physical systems,Event-triggered wireless sensing},
+  pages = {144--155}
+}
+
+@inproceedings{costa2005RUNES,
+  title = {The {{RUNES}} Middleware: A Reconfigurable Component-Based Approach to Networked Embedded Systems},
+  volume = {2},
+  shorttitle = {The {{RUNES}} Middleware},
+  doi = {10.1109/PIMRC.2005.1651554},
+  abstract = {In this paper the RUNES approach to the development of software for networked embedded systems is described. There is a need for a program platform with abstractions that are able to span the full range of heterogeneous embedded systems, and which also offers consistent mechanisms with which to configure, deploy, and dynamically reconfigure networked embedded systems software. This paper discusses the need of such a programming platform. The work is being carried out in the context of the RUNES project (reconfigurable, ubiquitous, and networked embedded systems) which has the general goal of developing an architecture for networked embedded systems that encompasses dedicated radio layers, networks},
+  booktitle = {2005 {{IEEE}} 16th {{International Symposium}} on {{Personal}}, {{Indoor}} and {{Mobile Radio Communications}}},
+  author = {Costa, P. and Coulson, G. and Mascolo, C. and Picco, G. P. and Zachariadis, S.},
+  month = sep,
+  year = {2005},
+  keywords = {Wireless sensor networks,abstraction,computer networks,Computer networks,Embedded computing,Embedded software,Embedded system,embedded systems,Home appliances,Home computing,middleware,Middleware,network embedded system,programming platform,reconfigurable component-based approach,RUNES middleware,Runtime,Surges,system software},
+  pages = {806-810 Vol. 2},
+  file = {/home/romain/Zotero/storage/EPIGCJHC/Costa et al. - 2005 - The RUNES middleware a reconfigurable component-b.pdf;/home/romain/Zotero/storage/23KYT4N3/1651554.html}
+}
+
+@article{onderwater2016overview,
+  title = {An Overview of Centralised Middleware Components for Sensor Networks},
+  volume = {21},
+  issn = {1743-8225},
+  doi = {10.1504/IJAHUC.2016.075378},
+  abstract = {Sensors are increasingly becoming part of our daily lives: lighting control, environmental monitoring, and keeping track of energy consumption all rely on sensors. Access to these sensors and their networks is, unfortunately, often provided via proprietary protocols and data formats. To overcome such issues, middleware components have been employed to provide a universal interface to the sensor networks, hiding vendor-specific details. Recently, much attention in literature is aimed at what we define as 'centralised' middleware components, which consider sensor networks that have no capacity to run middleware components on the sensor nodes. In this paper we introduce the term 'centralised' for these middleware components, and illustrate their relevance using a literature review of existing middleware components. After an overview of their general architectural setup, we describe and discuss four important centralised middleware components. Finally, we identify directions of further research that will impact centralised middleware components in the near future.},
+  number = {3},
+  journal = {International Journal of Ad Hoc and Ubiquitous Computing},
+  author = {Onderwater, Martijn},
+  month = jan,
+  year = {2016},
+  pages = {180-193},
+  file = {/home/romain/Zotero/storage/SI8CYK3D/Onderwater - 2016 - An overview of centralised middleware components f.pdf;/home/romain/Zotero/storage/9SXLRLPE/IJAHUC.2016.html}
+}
+
+@inproceedings{boano2018IoTBench,
+  title = {{{IoTBench}}: {{Towards}} a {{Benchmark}} for {{Low}}-Power {{Wireless Networking}}},
+  copyright = {http://rightsstatements.org/page/InC-NC/1.0/},
+  shorttitle = {{{IoTBench}}},
+  doi = {10.3929/ethz-b-000256517},
+  abstract = {Unlike other fields of computing and communications, low-power wireless networking is plagued by one major issue: the absence of a well-defined, agreed-upon yardstick to compare the performance of systems, namely, a benchmark. We argue that this situation may eventually represent a hampering factor for a technology expected to be key in the Internet of Things (IoT) and Cyber-physical Systems (CPS). This paper describes a recent initiative to remedy this situation, seeking to enlarge the participation from the community.},
+  language = {en},
+  booktitle = {1st {{Workshop}} on {{Benchmarking Cyber}}-{{Physical Networks}} and {{Systems}} ({{CPSBench}} 2018)},
+  author = {Boano, Carlo A. and Duquennoy, Simon and F\"orster, Anna and Gnawali, Omprakash and Jacob, Romain and Kim, Hyung-Sin and Landsiedel, Olaf and Marfievici, Ramona and Mottola, Luca and Picco, Gian Pietro and Vilajosana, Xavier and Watteyne, Thomas and Zimmerling, Marco},
+  month = apr,
+  year = {2018},
+  pages = {6},
+  file = {/home/romain/Zotero/storage/MECLR7TQ/Boano et al. - 2018 - IoTBench Towards a Benchmark for Low-power Wirele.pdf;/home/romain/Zotero/storage/ZL5XQ6S8/256517.html}
+}
+
+@misc{acmBadges,
+  title = {Artifact {{Review}} and {{Badging}}},
+  abstract = {Result and Artifact Review and Badging},
+  language = {en},
+  howpublished = {https://www.acm.org/publications/policies/artifact-review-badging},
+  author = {ACM},
+  month = apr,
+  year = {2018},
+  file = {/home/romain/Zotero/storage/XTEM6F34/artifact-review-badging.html}
+}
+
+@article{wang2008Middleware,
+  title = {Middleware for {{Wireless Sensor Networks}}: {{A Survey}}},
+  volume = {23},
+  issn = {1000-9000, 1860-4749},
+  shorttitle = {Middleware for {{Wireless Sensor Networks}}},
+  doi = {10.1007/s11390-008-9135-x},
+  abstract = {Wireless Sensor Networks (WSNs) have found more and more applications in a variety of pervasive computing environments. However, how to support the development, maintenance, deployment and execution of applications over WSNs remains to be a nontrivial and challenging task, mainly because of the gap between the high level requirements from pervasive computing applications and the underlying operation of WSNs. Middleware for WSN can help bridge the gap and remove impediments. In recent years, research has been carried out on WSN middleware from different aspects and for different purposes. In this paper, we provide a comprehensive review of the existing work on WSN middleware, seeking for a better understanding of the current issues and future directions in this field. We propose a reference framework to analyze the functionalities of WSN middleware in terms of the system abstractions and the services provided. We review the approaches and techniques for implementing the services. On the basis of the analysis and by using a feature tree, we provide taxonomy of the features of WSN middleware and their relationships, and use the taxonomy to classify and evaluate existing work. We also discuss open problems in this important area of research.},
+  language = {en},
+  number = {3},
+  journal = {Journal of Computer Science and Technology},
+  author = {Wang, Miao-Miao and Cao, Jian-Nong and Li, Jing and Dasi, Sajal K.},
+  month = may,
+  year = {2008},
+  pages = {305-326},
+  file = {/home/romain/Zotero/storage/NJBKFYNV/Wang et al. - 2008 - Middleware for Wireless Sensor Networks A Survey.pdf}
+}
+
+@inproceedings{chatzigiannakis200750,
+  title = {50 Ways to Build Your Application: {{A}} Survey of Middleware and Systems for {{Wireless Sensor Networks}}},
+  shorttitle = {50 Ways to Build Your Application},
+  doi = {10.1109/EFTA.2007.4416805},
+  abstract = {In this paper, we survey the current state-of-the-art in middleware and systems for Wireless Sensor Networks (WSN). We provide a discussion on the definition ofWSN middleware, design issues associated with it, and the taxonomies commonly used to categorize it. We also present a categorization of a number of such middleware platforms, using middleware functionalities and challenges which we think will play a crucial role in developing software for WSN in the near future. Finally, we provide a short discussion on WSN middleware trends.},
+  booktitle = {2007 {{IEEE Conference}} on {{Emerging Technologies}} and {{Factory Automation}} ({{EFTA}} 2007)},
+  author = {Chatzigiannakis, I. and Mylonas, G. and Nikoletseas, S.},
+  month = sep,
+  year = {2007},
+  keywords = {wireless sensor networks,Wireless sensor networks,Computer networks,middleware,Middleware,Sensor phenomena and characterization,Taxonomy,Internet,IP networks,Application software,Earth,system categorization,Target tracking,WSN middleware},
+  pages = {466-473}
+}
+
+@inproceedings{istomin2018Interferenceresilient,
+  address = {Piscataway, NJ, USA},
+  series = {{{IPSN}} '18},
+  title = {Interference-Resilient {{Ultra}}-Low {{Power Aperiodic Data Collection}}},
+  isbn = {978-1-5386-5298-5},
+  doi = {10.1109/IPSN.2018.00015},
+  abstract = {Aperiodic data collection received little attention in wireless sensor networks, compared to its periodic counterpart. The recent Crystal system uses synchronous transmissions to support aperiodic traffic with near-perfect reliability, low latency, and ultra-low power consumption. However, its performance is known under mild interference---a concern, as Crystal relies heavily on the (noise-sensitive) capture effect and targets aperiodic traffic where "every packet counts". We exploit a 49-node indoor testbed where, in contrast to existing evaluations using only naturally present interference to evaluate synchronous systems, we rely on JamLab to generate noise patterns that are not only more disruptive and extensive, but also reproducible. We show that a properly configured, unmodified Crystal yields perfect reliability (unlike Glossy) in several noise scenarios, but cannot sustain extreme ones (e.g., an emulated microwave oven near the sink) that instead are handled by routing-based approaches. We extend Crystal with techniques known to mitigate interference---channel hopping and noise detection---and demonstrate that these allow Crystal to achieve performance akin to the original even under multiple sources of strong interference.},
+  booktitle = {Proceedings of the 17th {{ACM}}/{{IEEE International Conference}} on {{Information Processing}} in {{Sensor Networks}}},
+  publisher = {{IEEE Press}},
+  author = {Istomin, Timofei and Trobinger, Matteo and Murphy, Amy L. and Picco, Gian Pietro},
+  year = {2018},
+  keywords = {wireless sensor networks,energy efficiency,channel hopping,interference resilience,synchronous transmissions},
+  pages = {84--95},
+  file = {/home/romain/Zotero/storage/4F8A8GED/Istomin et al. - 2018 - Interference-resilient Ultra-low Power Aperiodic D.pdf}
+}
+
+@phdthesis{muller2019Lowpower,
+  type = {Semester {{Thesis}}},
+  title = {Low-Power Network Design: Work Hard, Play Hard},
+  language = {en},
+  school = {ETH Zurich},
+  author = {M\"uller, Jan and Schaper, Anna-Brit},
+  month = jan,
+  year = {2019},
+  file = {/home/romain/Zotero/storage/ZALQXP4X/Bächli - 2018 - Creating a Flexible Middleware for Low-Power Flood.pdf;/home/romain/Zotero/storage/PDK2CPXF/270388.html}
+}
+
+@inproceedings{ferrari2011Glossy,
+  title = {Efficient Network Flooding and Time Synchronization with {{Glossy}}},
+  abstract = {This paper presents Glossy, a novel flooding architecture for wireless sensor networks. Glossy exploits constructive interference of IEEE 802.15.4 symbols for fast network flooding and implicit time synchronization. We derive a timing requirement to make concurrent transmissions of the same packet interfere constructively, allowing a receiver to decode the packet even in the absence of capture effects. To satisfy this requirement, our design temporally decouples flooding from other network activities. We analyze Glossy using a mixture of statistical and worst-case models, and evaluate it through experiments under controlled settings and on three wireless sensor testbeds. Our results show that Glossy floods packets within a few milliseconds and achieves an average time synchronization error below one microsecond. In most cases, a node receives the flooding packet with a probability higher than 99.99\%, while having its radio turned on for only a few milliseconds during a flood. Moreover, unlike existing flooding schemes, Glossy's performance exhibits no noticeable dependency on node density, which facilitates its application in diverse real-world settings.},
+  booktitle = {Proceedings of the 10th {{ACM}}/{{IEEE International Conference}} on {{Information Processing}} in {{Sensor Networks}}},
+  author = {Ferrari, F. and Zimmerling, M. and Thiele, L. and Saukh, O.},
+  month = apr,
+  year = {2011},
+  keywords = {constructive interference,wireless sensor networks,Wireless sensor networks,Synchronization,Interference,network flooding,synchronisation,time synchronization,Zigbee,Receivers,Concurrent Transmissions,Constructive Interference,flooding architecture,Glossy,IEEE 802.15.4 symbols,Network Flooding,Radiation detectors,Relays,Software,statistical models,telecommunication network planning,telecommunication standards,Time Synchronization,Wireless Sensor Networks,wireless sensor testbeds,worst-case models},
+  pages = {73-84},
+  file = {/home/romain/Zotero/storage/P5P79VQH/Ferrari et al. - 2011 - Efficient network flooding and time synchronizatio.pdf;/home/romain/Zotero/storage/N7WLE3PH/5779066.html}
+}
+
+@inproceedings{ferrari2012LWB,
+  address = {New York, NY, USA},
+  series = {{{SenSys}} '12},
+  title = {Low-Power {{Wireless Bus}}},
+  isbn = {978-1-4503-1169-4},
+  doi = {10.1145/2426656.2426658},
+  abstract = {Loading...},
+  booktitle = {Proceedings of the 10th {{ACM Conference}} on {{Embedded Network Sensor Systems}}},
+  publisher = {{ACM}},
+  author = {Ferrari, Federico and Zimmerling, Marco and Mottola, Luca and Thiele, Lothar},
+  year = {2012},
+  keywords = {wireless sensor networks,network flooding,mobility,centralized scheduling,shared bus,time-triggered protocols},
+  pages = {1--14},
+  file = {/home/romain/Zotero/storage/9NZY2SZ6/Ferrari et al. - 2012 - Low-power Wireless Bus.pdf}
+}
+
+@inproceedings{escobar2018Competition,
+  address = {USA},
+  series = {{{EWSN}} '18},
+  title = {Competition: {{BigBangBus}}},
+  isbn = {978-0-9949886-2-1},
+  shorttitle = {Competition},
+  abstract = {A wireless bus based on flooding and the capture effect is proposed to achieve highly reliable broadcast communication in a Wireless Sensor Network (WSN) working in harsh environments in a multi-source-to-multi-sink topology where multiple hops are required (Fig. 1). Different sources access the medium without colliding using network-wide predefined time slots and frequency channels. Frequency-, spatial- and time-diversity is exploited using redundant retransmissions.},
+  booktitle = {Proceedings of the 2018 {{International Conference}} on {{Embedded Wireless Systems}} and {{Networks}}},
+  publisher = {{Junction Publishing}},
+  author = {Escobar, Antonio and Moreno, Fernando and Cabrera, Antonio J. and {Garcia-Jimenez}, Javier and Cruz, Francisco J. and Ruiz, Unami and Klaue, Jirka and Corona, Angel and Tati, Divya and Meyerhoff, Thomas},
+  year = {2018},
+  keywords = {Networks,Sensor,Wireless},
+  pages = {213--214}
+}
+
+@inproceedings{sommer2016Competition,
+  address = {USA},
+  series = {{{EWSN}} '16},
+  title = {Competition: {{Dependable Network Flooding Using Glossy}} with {{Channel}}-{{Hopping}}},
+  isbn = {978-0-9949886-0-7},
+  shorttitle = {Competition},
+  abstract = {We present a communication protocol for fast and reliable dissemination of events in short-range wireless networks. Our approach combines Glossy network flooding with a channel-hopping scheme to increase its robustness against external interference. We further describe our strategy to tackle the challenges of the test scenario and how to adapt the protocol for energy-efficient operation.},
+  booktitle = {Proceedings of the 2016 {{International Conference}} on {{Embedded Wireless Systems}} and {{Networks}}},
+  publisher = {{Junction Publishing}},
+  author = {Sommer, Philipp and Pignolet, Yvonne-Anne},
+  year = {2016},
+  pages = {303--303},
+  file = {/home/romain/Zotero/storage/DCFGLD9N/EWSN (Conference) et al. - 2016 - International Conference on Embedded Wireless Syst.pdf}
+}
+
+@inproceedings{lim2017Competition,
+  address = {USA},
+  series = {{{EWSN}} '17},
+  title = {Competition: {{Robust Flooding Using Back}}-to-{{Back Synchronous Transmissions}} with {{Channel}}-{{Hopping}}},
+  isbn = {978-0-9949886-1-4},
+  shorttitle = {Competition},
+  abstract = {We present a new protocol that is based on consecutive, synchronous transmissions. By aligning transmissions based on timeouts, the protocol becomes more resilient to interference. We propose two methods to mitigate the effect of less accurate temporal packet alignment, namely time synchronization and random transmit powers.},
+  booktitle = {Proceedings of the 2017 {{International Conference}} on {{Embedded Wireless Systems}} and {{Networks}}},
+  publisher = {{Junction Publishing}},
+  author = {Lim, Roman and Da Forno, Reto and Sutton, Felix and Thiele, Lothar},
+  year = {2017},
+  pages = {270--271}
+}
+
+@inproceedings{escobar2016RedFixHop,
+  title = {{{RedFixHop}} with Channel Hopping: {{Reliable}} Ultra-Low-Latency Network Flooding},
+  shorttitle = {{{RedFixHop}} with Channel Hopping},
+  doi = {10.1109/DCIS.2016.7845367},
+  abstract = {A constructive interference (CI) based flooding mechanism, using hardware-generated acknowledgments (ACKs), is proposed to achieve highly reliable source-to-sink communication of very short critical packets within a wireless sensor network (WSN) working in harsh environments. CI is only achieved if the senders synchronize their packet transmissions with sub-microsecond precision. In order to achieve the required synchronization accuracy, the packet retransmissions at the relay nodes are triggered by using hardware ACKs. To further increase packet reception probability, channel diversity is exploited using a predefined hopping sequence. The protocol performance is experimentally evaluated by implementing it using IEEE 802.15.4 radio transceivers.},
+  booktitle = {2016 {{Conference}} on {{Design}} of {{Circuits}} and {{Integrated Systems}} ({{DCIS}})},
+  author = {Escobar, A. and Cruz, F. J. and {Garcia-Jimenez}, J. and Klaue, J. and Corona, A.},
+  month = nov,
+  year = {2016},
+  keywords = {constructive interference,Wireless sensor networks,Protocols,Synchronization,wireless sensor network,Hardware,IEEE 802.15 Standard,channel hopping,Software,synchronization accuracy,channel diversity,channel-hopping,constructive interference based flooding mechanism,flooding mechanism,frequency-hopping,hardware acknowledgement,hardware-generated acknowledgments,IEEE 802.15.4 radio transceivers,low-latency,packet reception probability,packet transmissions,predefined hopping sequence,Radio transceivers,RedFixHop,relay nodes,reliable ultra-low-latency network flooding,source-to-sink communication,synchronous radio duty-cycling,Wireless sensor network},
+  pages = {1-4},
+  file = {/home/romain/Zotero/storage/QEZFT7A3/7845367.html}
+}
+
+@misc{ContikiNG,
+  title = {Contiki-{{NG}}},
+  howpublished = {http://contiki-ng.org/},
+  month = nov,
+  year = {2018},
+  file = {/home/romain/Zotero/storage/V8L6ZWNP/contiki-ng.org.html}
+}
+
+@inproceedings{alnahas2017a2,
+  address = {New York, NY, USA},
+  series = {{{SenSys}} '17},
+  title = {Network-Wide {{Consensus Utilizing}} the {{Capture Effect}} in {{Low}}-Power {{Wireless Networks}}},
+  isbn = {978-1-4503-5459-2},
+  doi = {10.1145/3131672.3131685},
+  abstract = {In low-power wireless networking, new applications such as cooperative robots or industrial closed-loop control demand for network-wide consensus at low-latency and high reliability. Distributed consensus protocols is a mature field of research in a wired context, but has received little attention in low-power wireless settings. In this paper, we present A2: Agreement in the Air, a system that brings distributed consensus to low-power multi-hop networks. A2 introduces Synchrotron, a synchronous transmissions kernel that builds a robust mesh by exploiting the capture effect, frequency hopping with parallel channels, and link-layer security. A2 builds on top of this reliable base layer and enables the two- and three-phase commit protocols, as well as network services such as group membership, hopping sequence distribution and re-keying. We evaluate A2 on four public testbeds with different deployment densities and sizes. A2 requires only 475 ms to complete a two-phase commit over 180 nodes. The resulting duty cycle is 0.5\% for 1-minute intervals. We show that A2 achieves zero losses end-to-end over long experiments, representing millions of data points. When adding controlled failures, we show that two-phase commit ensures transaction consistency in A2 while three-phase commit provides liveness at the expense of inconsistency under specific failure scenarios.},
+  booktitle = {Proceedings of the 15th {{ACM Conference}} on {{Embedded Network Sensor Systems}}},
+  publisher = {{ACM}},
+  author = {Al Nahas, Beshr and Duquennoy, Simon and Landsiedel, Olaf},
+  year = {2017},
+  keywords = {Synchronous transmissions,Capture effect,Consensus,Group membership,IoT,Three-phase commit,Two-phase commit,WSN},
+  pages = {1:1--1:14},
+  file = {/home/romain/Zotero/storage/TY3LTGPP/Al Nahas et al. - 2017 - Network-wide Consensus Utilizing the Capture Effec.pdf}
+}
+
+@inproceedings{yuan2013LetTalkTogether,
+  title = {Let's Talk Together: {{Understanding}} Concurrent Transmission in Wireless Sensor Networks},
+  shorttitle = {Let's Talk Together},
+  doi = {10.1109/LCN.2013.6761237},
+  abstract = {Wireless sensor networks (WSNs) are increasingly being applied to scenarios that simultaneously demand for high packet reliability and short delay. A promising technique to achieve this goal is concurrent transmission, i.e. multiple nodes transmit identical or different packets in parallel. Practical implementations of concurrent transmission exist, yet its performance is not well understood due to the lack of expressive models that accurately predict the success of packet reception. We experimentally investigate the two phenomena that can occur during concurrent transmission depending on the transmission timing and signal strength, i.e. constructive interference and capture effect. Equipped with the thorough understanding of these two phenomena, we propose an accurate prediction model for the reception of concurrent transmission. The extensive measurements carried out with varying number of transmitters, packet length and signal strength verify the excellent quality of our model, which provides a valuable tool for protocol design and simulation of concurrent transmission in WSNs.},
+  booktitle = {38th {{Annual IEEE Conference}} on {{Local Computer Networks}}},
+  author = {Yuan, D. and Hollick, M.},
+  month = oct,
+  year = {2013},
+  keywords = {constructive interference,wireless sensor networks,Wireless sensor networks,Synchronization,Interference,Reliability,measurement,Delays,Software,WSN,capture effect,concurrent transmission,packet reception,packet reliability,protocol design,radio transmitters,radiofrequency interference,signal strength,Signal to noise ratio,SINR/SER model,transmission timing,transmitters},
+  pages = {219-227},
+  file = {/home/romain/Zotero/storage/6DTQPXTP/Yuan and Hollick - 2013 - Let's talk together Understanding concurrent tran.pdf;/home/romain/Zotero/storage/AWDVUY3D/6761237.html}
+}
+
+@inproceedings{du2015Pando,
+  address = {New York, NY, USA},
+  series = {{{SenSys}} '15},
+  title = {When {{Pipelines Meet Fountain}}: {{Fast Data Dissemination}} in {{Wireless Sensor Networks}}},
+  isbn = {978-1-4503-3631-4},
+  shorttitle = {When {{Pipelines Meet Fountain}}},
+  doi = {10.1145/2809695.2809721},
+  abstract = {This paper presents Pando, a completely contention-free data dissemination protocol for wireless sensor networks. Pando encodes data by Fountain codes and disseminates the rateless stream of encoded packets along the fast and parallel pipelines built on constructive interference and channel diversity. Since every encoded packet contains innovative information to the original data object, Pando avoids duplicate retransmissions and fully exploits the wireless broadcast effect in data dissemination. To transform Pando into a practical system, we devise several techniques, including the integration of Fountain coding with the timing-critical operations of constructive interference and pipelining, a silence based feedback scheme for the one-way pipelined dissemination, and packet-level adaptation of network density and channel diversity. Based on these techniques, Pando can accomplish the data dissemination process entirely over the fast and parallel pipelines. We implement Pando in Contiki and for TelosB sensor motes. We evaluate Pando's performance with various settings on two large-scale open testbeds, Indriya and Flocklab. Our experimental results show that Pando can provide 100\% reliability and reduce the dissemination time of the state-of-the-art by 3.5.},
+  booktitle = {Proceedings of the 13th {{ACM Conference}} on {{Embedded Networked Sensor Systems}}},
+  publisher = {{ACM}},
+  author = {Du, Wan and Liando, Jansen Christian and Zhang, Huanle and Li, Mo},
+  year = {2015},
+  keywords = {constructive interference,data dissemination,fountain codes,wireless sensor networks},
+  pages = {365--378},
+  file = {/home/romain/Zotero/storage/7JF32ZSF/Du et al. - 2015 - When Pipelines Meet Fountain Fast Data Disseminat.pdf}
+}
+
+@inproceedings{brachmann2016LaneFlood,
+  title = {Concurrent {{Transmissions}} for {{Communication Protocols}} in the {{Internet}} of {{Things}}},
+  doi = {10.1109/LCN.2016.69},
+  abstract = {Standard Internet communication protocols are key enablers for the Internet of Things (IoT). Recent technological advances have made it possible to run such protocols on resource-constrained devices. Yet these devices often use energy-efficient, low-level communication technologies, like IEEE 802.15.4, which suffer from low-reliability and high latency. These drawbacks can be significantly reduced if communication occurs using concurrent transmissions - a novel communication paradigm for resource-constrained devices. In this paper, we show that Internet protocols like TCP/UDP and CoAP can run efficiently on top of a routing substrate based on concurrent transmissions. We call this substrate LaneFlood and demonstrate its effectiveness through extensive experiments on Flocklab, a publicly available testbed. Our results show that LaneFlood improves upon CXFS - a representative competitor - in terms of both duty cycle and reliability. Furthermore, LaneFlood can transport IoT traffic with an end-to-end latency of less than 300 ms over several hops.},
+  booktitle = {2016 {{IEEE}} 41st {{Conference}} on {{Local Computer Networks}} ({{LCN}})},
+  author = {Brachmann, M. and Landsiedel, O. and Santini, S.},
+  month = nov,
+  year = {2016},
+  keywords = {Internet of Things,telecommunication traffic,CoAP,routing protocols,transport protocols,Concurrent Transmissions,Wireless Sensor Networks,communication protocols,concurrent transmissions,CXFS,duty cycle,Flocklab,IoT traffic transport,LaneFlood,publicly available testbed,reliability analysis,resource-constrained devices,routing substrate,standard Internet communication protocols,TCP/UDP},
+  pages = {406-414},
+  file = {/home/romain/Zotero/storage/WCJFL2EP/Brachmann et al. - 2016 - Concurrent Transmissions for Communication Protoco.pdf;/home/romain/Zotero/storage/H63N6I6V/7796815.html}
+}
+
+@misc{Code_SleepingBeauty,
+  title = {Sleeping {{Beauty}}},
+  howpublished = {https://github.com/csarkar/sleeping-beauty},
+  month = aug,
+  year = {2016}
+}
+
+@misc{Code_Crystal,
+  title = {Crystal},
+  copyright = {BSD-3-Clause},
+  shorttitle = {Crystal Is an Interference-Resilient Ultra-Low Power Data Collection Protocol for Wireless Sensor Networks},
+  howpublished = {https://github.com/d3s-trento/crystal},
+  month = jul,
+  year = {2018}
+}
+
+@misc{CC430F6137,
+  title = {{{CC430F6137}} 16-{{Bit Ultra}}-{{Low}}-{{Power MCU}}},
+  howpublished = {http://www.ti.com/product/CC430F6137},
+  author = {Texas Instruments},
+  file = {/home/romain/Zotero/storage/AUAJBGEW/CC430F6137.html}
+}
+
+@misc{TelosB,
+  title = {{{MTM}}-{{CM5000}}-{{MSP}} 802.15.4 {{TelosB}} Mote {{Module}}},
+  howpublished = {https://www.advanticsys.com/shop/mtmcm5000msp-p-14.html},
+  author = {Advanticsys},
+  file = {/home/romain/Zotero/storage/BGLLWTTX/mtmcm5000msp-p-14.html}
+}
+
+@article{white2017IoTQoS,
+  title = {Quality of Service Approaches in {{IoT}}: {{A}} Systematic Mapping},
+  volume = {132},
+  issn = {0164-1212},
+  shorttitle = {Quality of Service Approaches in {{IoT}}},
+  doi = {10.1016/j.jss.2017.05.125},
+  abstract = {In an Internet of Things (IoT) environment, the existence of a huge number of heterogeneous devices, which are potentially resource-constrained and/or mobile has led to quality of service (QoS) concerns. Quality approaches have been proposed at various layers of the IoT architecture and take into consideration a number of different QoS factors. This paper evaluates the current state of the art of proposed QoS approaches in the IoT, specifically: (1) What layers of the IoT architecture have had the most research on QoS? (2) What quality factors do the quality approaches take into account when measuring performance? (3) What types of research have been conducted in this area? We have conducted a systematic mapping using a number of automated searches from the most relevant academic databases to address these questions. This mapping has identified a number of state of the art approaches which provides a good reference for researchers. The paper also identifies a number of gaps in the research literature at specific layers of the IoT architecture. It identifies which quality factors, research and contribution facets have been underutilised in the state of the art.},
+  journal = {Journal of Systems and Software},
+  author = {White, Gary and Nallur, Vivek and Clarke, Siobh\'an},
+  month = oct,
+  year = {2017},
+  keywords = {Internet of things (IoT),Monitoring,Quality model,Quality of service (QoS),Systematic mapping},
+  pages = {186-203},
+  file = {/home/romain/Zotero/storage/LBPN7TXF/White et al. - 2017 - Quality of service approaches in IoT A systematic.pdf;/home/romain/Zotero/storage/ZGSISUAN/S016412121730105X.html}
+}
+
+@article{romer2004Programming,
+  title = {Programming Paradigms and Middleware for Sensor Networks},
+  abstract = {Programming sensor networks is currently a cumbersome
+and error-prone task since it requires programming individual sensor nodes, using low-level programming languages,
+interfacing to the hardware and the network,
+only supported by primitive operating system abstractions.
+There is a strong need for programming abstractions
+that simplify tasking sensor networks, and for middleware
+that supports such programming abstractions. We
+outline challenges in the design of such abstractions and
+middleware. Also, we present and discuss currently examined approaches to sensor network programmability.},
+  journal = {GI/ITG Workshop on Sensor Networks},
+  author = {R\"omer, Kay},
+  year = {2004},
+  keywords = {middleware,programming_paradigm,wsn},
+  pages = {49-54}
+}
+
+@inproceedings{costa2007Programming,
+  series = {Lecture {{Notes}} in {{Computer Science}}},
+  title = {Programming {{Wireless Sensor Networks}} with the {{TeenyLime Middleware}}},
+  isbn = {978-3-540-76778-7},
+  abstract = {Wireless sensor networks (WSNs) are evolving to support sense-and-react applications, where actuators are physically interspersed with the sensors that trigger them. This solution maximizes localized interactions, improving resource utilization and reducing latency w.r.t. solutions with a centralized sink. Nevertheless, application development becomes more complex: the control logic must be embedded in the network, and coordination among multiple tasks is needed to achieve the application goals.This paper presents TeenyLime, a WSN middleware designed to address the above challenges. TeenyLime provides programmers with the high-level abstraction of a tuple space, enabling data sharing among neighboring devices. These and other WSN-specific constructs simplify the development of a wide range of applications, including sense-and-react ones. TeenyLime yields simpler, cleaner, and more reusable implementations, at the cost of only a very limited decrease in performance. We support these claims through a source-level, quantitative comparison between implementations based on TeenyLime and on mainstream approaches, and by analyzing measures of processing overhead and power consumption obtained through cycle-accurate emulation.},
+  language = {en},
+  booktitle = {Middleware 2007},
+  publisher = {{Springer Berlin Heidelberg}},
+  author = {Costa, Paolo and Mottola, Luca and Murphy, Amy L. and Picco, Gian Pietro},
+  editor = {Cerqueira, Renato and Campbell, Roy H.},
+  year = {2007},
+  keywords = {middleware,tuple spaces,Wireless sensor and actuator networks},
+  pages = {429-449},
+  file = {/home/romain/Zotero/storage/XVGDRZCC/Costa et al. - 2007 - Programming Wireless Sensor Networks with the Teen.pdf}
+}
+
+@article{patel2015Enabling,
+  title = {Enabling High-Level Application Development for the {{Internet}} of {{Things}}},
+  volume = {103},
+  issn = {0164-1212},
+  doi = {10.1016/j.jss.2015.01.027},
+  abstract = {Application development in the Internet of Things (IoT) is challenging because it involves dealing with a wide range of related issues such as lack of separation of concerns, and lack of high-level of abstractions to address both the large scale and heterogeneity. Moreover, stakeholders involved in the application development have to address issues that can be attributed to different life-cycles phases. when developing applications. First, the application logic has to be analyzed and then separated into a set of distributed tasks for an underlying network. Then, the tasks have to be implemented for the specific hardware. Apart from handling these issues, they have to deal with other aspects of life-cycle such as changes in application requirements and deployed devices. Several approaches have been proposed in the closely related fields of wireless sensor network, ubiquitous and pervasive computing, and software engineering in general to address the above challenges. However, existing approaches only cover limited subsets of the above mentioned challenges when applied to the IoT. This paper proposes an integrated approach for addressing the above mentioned challenges. The main contributions of this paper are: (1) a development methodology that separates IoT application development into different concerns and provides a conceptual framework to develop an application, (2) a development framework that implements the development methodology to support actions of stakeholders. The development framework provides a set of modeling languages to specify each development concern and abstracts the scale and heterogeneity related complexity. It integrates code generation, task-mapping, and linking techniques to provide automation. Code generation supports the application development phase by producing a programming framework that allows stakeholders to focus on the application logic, while our mapping and linking techniques together support the deployment phase by producing device-specific code to result in a distributed system collaboratively hosted by individual devices. Our evaluation based on two realistic scenarios shows that the use of our approach improves the productivity of stakeholders involved in the application development.},
+  journal = {Journal of Systems and Software},
+  author = {Patel, Pankesh and Cassou, Damien},
+  month = may,
+  year = {2015},
+  keywords = {Internet of Things,Development life-cycle,Domain-specific languages},
+  pages = {62-84},
+  file = {/home/romain/Zotero/storage/C8JF4SVU/Patel and Cassou - 2015 - Enabling high-level application development for th.pdf;/home/romain/Zotero/storage/6M7YAL89/S0164121215000187.html}
+}
+
+@inproceedings{lim2013FlockLab,
+  address = {New York, NY, USA},
+  series = {{{IPSN}} '13},
+  title = {{{FlockLab}}: {{A Testbed}} for {{Distributed}}, {{Synchronized Tracing}} and {{Profiling}} of {{Wireless Embedded Systems}}},
+  isbn = {978-1-4503-1959-1},
+  shorttitle = {{{FlockLab}}},
+  doi = {10.1145/2461381.2461402},
+  abstract = {Testbeds are indispensable for debugging and evaluating wireless embedded systems. While existing testbeds provide ample opportunities for realistic, large-scale experiments, they are limited in their ability to closely observe and control the distributed operation of resource-constrained nodes - access to the nodes is restricted to the serial port. This paper presents FlockLab, a testbed that overcomes this limitation by allowing multiple services to run simultaneously and synchronously against all nodes under test in addition to the traditional serial port service: tracing of GPIO pins to record logical events occurring on a node, actuation of GPIO pins to trigger actions on a node, and high-resolution power profiling. FlockLab's accurate timing information in the low microsecond range enables logical events to be correlated with power samples, thus providing a previously unattained level of visibility into the distributed behavior of wireless embedded systems. In this paper, we describe FlockLab's design, benchmark its performance, and demonstrate its capabilities through several real-world test cases.},
+  booktitle = {Proceedings of the 12th {{International Conference}} on {{Information Processing}} in {{Sensor Networks}}},
+  publisher = {{ACM}},
+  author = {Lim, Roman and Ferrari, Federico and Zimmerling, Marco and Walser, Christoph and Sommer, Philipp and Beutel, Jan},
+  year = {2013},
+  keywords = {testbed,wireless sensor network,adjustable power supply,GPIO actuation,GPIO tracing,power profiling},
+  pages = {153--166},
+  file = {/home/romain/Zotero/storage/JNNFXKA8/Lim et al. - 2013 - FlockLab A Testbed for Distributed, Synchronized .pdf}
+}
+
+@inproceedings{liu2003Impala,
+  address = {New York, NY, USA},
+  series = {{{PPoPP}} '03},
+  title = {Impala: {{A Middleware System}} for {{Managing Autonomic}}, {{Parallel Sensor Systems}}},
+  isbn = {978-1-58113-588-6},
+  shorttitle = {Impala},
+  doi = {10.1145/781498.781516},
+  abstract = {Sensor networks are long-running computer systems with many sensing/compute nodes working to gather information about their environment, process and fuse that information, and in some cases, actuate control mechanisms in response. Like traditional parallel systems, communication between nodes is of fundamental importance, but is typically accomplished via wireless transceivers. One further key attribute of sensor networks is that they are almost always long running systems, intended to operate in situ, with minimal direct human intervention, for months or years. This requirement for long-running autonomy mandates careful design of the runtime system that manages applications on each node, to ensure reliability and ease of upgrades over the life of the system.This paper describes Impala, a middleware architecture that enables application modularity, adaptivity, and repair-ability in wireless sensor networks. Impala allows software updates to be received via the node's wireless transceiver and to be applied to the running system dynamically. In addition, Impala also provides an interface for on-the-fly application adaptation in order to improve the performance, energy-efficiency, and reliability of the software system. Impala has been designed to be a part of the ZebraNet mobile sensor network, but we are also prototyping it within HP/Compaq iPAQ Pocket PC handhelds. We present performance data for both real system measurements of the Pocket PC version as well as simulations of a full mobile sensor system deployment. Overall, Impala is a lightweight runtime system that can greatly improve system reliability, performance, and energy-efficiency. The ideas introduced here for sensor networks have applicability more broadly in other long-running autonomous parallel systems as well.},
+  booktitle = {Proceedings of the {{Ninth ACM SIGPLAN Symposium}} on {{Principles}} and {{Practice}} of {{Parallel Programming}}},
+  publisher = {{ACM}},
+  author = {Liu, Ting and Martonosi, Margaret},
+  year = {2003},
+  keywords = {sensor networks,middleware system,software adaptation,software update},
+  pages = {107--118},
+  file = {/home/romain/Zotero/storage/3AYRH95J/Liu and Martonosi - 2003 - Impala A Middleware System for Managing Autonomic.pdf}
+}
+
+@article{razzaque2016Middleware,
+  title = {Middleware for {{Internet}} of {{Things}}: {{A Survey}}},
+  volume = {3},
+  issn = {2327-4662},
+  shorttitle = {Middleware for {{Internet}} of {{Things}}},
+  doi = {10.1109/JIOT.2015.2498900},
+  abstract = {The Internet of Things (IoT) envisages a future in which digital and physical things or objects (e.g., smartphones, TVs, cars) can be connected by means of suitable information and communication technologies, to enable a range of applications and services. The IoT's characteristics, including an ultra-large-scale network of things, device and network level heterogeneity, and large numbers of events generated spontaneously by these things, will make development of the diverse applications and services a very challenging task. In general, middleware can ease a development process by integrating heterogeneous computing and communications devices, and supporting interoperability within the diverse applications and services. Recently, there have been a number of proposals for IoT middleware. These proposals mostly addressed wireless sensor networks (WSNs), a key component of IoT, but do not consider RF identification (RFID), machine-to-machine (M2M) communications, and supervisory control and data acquisition (SCADA), other three core elements in the IoT vision. In this paper, we outline a set of requirements for IoT middleware, and present a comprehensive review of the existing middleware solutions against those requirements. In addition, open research issues, challenges, and future research directions are highlighted.},
+  number = {1},
+  journal = {IEEE Internet of Things Journal},
+  author = {Razzaque, M. A. and {Milojevic-Jevric}, M. and Palade, A. and Clarke, S.},
+  month = feb,
+  year = {2016},
+  keywords = {wireless sensor networks,Internet of Things,Wireless sensor networks,Security,Real-time systems,middleware,Middleware,wireless sensor networks (WSNs),WSN,communications devices,digital things,heterogeneous computing,information and communication technologies,Internet of things,Internet of Things (IoT) characteristics,interoperability,IoT Characteristics,IoT middleware,M2M Communication,machine-to-machine (M2M) communication,middleware requirements,Middleware Requirements,network level heterogeneity,physical things,Radiofrequency identification,RF identification (RFID),RFID,SCADA,supervisory control and data acquisition (SCADA),ultra-large-scale network of things,WSNs},
+  pages = {70-95},
+  file = {/home/romain/Zotero/storage/M6W4FJCU/Razzaque et al. - 2016 - Middleware for Internet of Things A Survey.pdf;/home/romain/Zotero/storage/JNDVUIQ5/7322178.html}
+}
+
+@article{madden2005TinyDB,
+  title = {{{TinyDB}}: {{An Acquisitional Query Processing System}} for {{Sensor Networks}}},
+  volume = {30},
+  issn = {0362-5915},
+  shorttitle = {{{TinyDB}}},
+  doi = {10.1145/1061318.1061322},
+  abstract = {We discuss the design of an acquisitional query processor for data collection in sensor networks. Acquisitional issues are those that pertain to where, when, and how often data is physically acquired (sampled) and delivered to query processing operators. By focusing on the locations and costs of acquiring data, we are able to significantly reduce power consumption over traditional passive systems that assume the a priori existence of data. We discuss simple extensions to SQL for controlling data acquisition, and show how acquisitional issues influence query optimization, dissemination, and execution. We evaluate these issues in the context of TinyDB, a distributed query processor for smart sensor devices, and show how acquisitional techniques can provide significant reductions in power consumption on our sensor devices.},
+  number = {1},
+  journal = {ACM Trans. Database Syst.},
+  author = {Madden, Samuel R. and Franklin, Michael J. and Hellerstein, Joseph M. and Hong, Wei},
+  month = mar,
+  year = {2005},
+  keywords = {sensor networks,data acquisition,Query processing},
+  pages = {122--173},
+  file = {/home/romain/Zotero/storage/RDYNZY6H/Madden et al. - 2005 - TinyDB An Acquisitional Query Processing System f.pdf}
+}
+
+@inproceedings{mager2017One,
+  address = {New York, NY, USA},
+  series = {{{HotWireless}} '17},
+  title = {One for {{All}}, {{All}} for {{One}}: {{Toward Efficient Many}}-to-{{Many Broadcast}} in {{Dynamic Wireless Networks}}},
+  isbn = {978-1-4503-5140-9},
+  shorttitle = {One for {{All}}, {{All}} for {{One}}},
+  doi = {10.1145/3127882.3127884},
+  abstract = {Many applications such as autonomous swarming drones and system services like data replication need to exchange data among many or all nodes in a network. However, wireless many-to-many broadcast has thus far only been studied theoretically or in simulation, and practical solutions hardly meet the requirements of emerging applications, especially in terms of latency. This paper presents Mixer, a communication primitive that provides fast and reliable many-to-many broadcast in dynamic wireless multi-hop networks. Mixer integrates random linear network coding with synchronous transmissions to simultaneously disseminate all messages in the network. To deliver the performance gains our approach enables, we design Mixer's protocol logic in response to the physical-layer characteristics and the theory of network coding. First results from testbed experiments demonstrate that, compared with the state of the art, Mixer is up to 65\% faster and reduces radio-on time by up to 50\%, while providing a message delivery rate above 99.9\%.},
+  booktitle = {Proceedings of the 4th {{ACM Workshop}} on {{Hot Topics}} in {{Wireless}}},
+  publisher = {{ACM}},
+  author = {Mager, Fabian and Herrmann, Carsten and Zimmerling, Marco},
+  year = {2017},
+  keywords = {synchronous transmissions,many-to-many broadcast,multi-hop communication,random linear network coding,time-varying topology,wireless networks},
+  pages = {19--23},
+  file = {/home/romain/Zotero/storage/WNYRUEH6/Mager et al. - 2017 - One for All, All for One Toward Efficient Many-to.pdf}
+}
+
+@misc{hewage2018Lowpower,
+  title = {Low-Power {{Wireless Bus}} ({{LWB}}) for {{TI}}'s {{CC2538 Soc}} for {{Contiki OS}}.: Kasunch/Lwb-Cc2538},
+  copyright = {BSD-3-Clause},
+  shorttitle = {Low-Power {{Wireless Bus}} ({{LWB}}) for {{TI}}'s {{CC2538 Soc}} for {{Contiki OS}}.},
+  howpublished = {https://github.com/kasunch/lwb-cc2538},
+  author = {Hewage, Kasun},
+  month = jul,
+  year = {2018}
+}
+
+@article{parker2010lambda,
+  title = {The \$$\backslash$lambda\${{MAC Framework}}: {{Redefining MAC Protocols}} for {{Wireless Sensor Networks}}},
+  volume = {16},
+  issn = {1022-0038},
+  shorttitle = {The \$$\backslash$lambda\${{MAC Framework}}},
+  doi = {10.1007/s11276-010-0241-7},
+  abstract = {Most current WSN MAC protocol implementations have multiple tasks to perform--deciding on correct timing, sending of packets, sending of acknowledgements, etc. However, as much of this is common to all MAC protocols, there is duplication of functionality, which leads to larger MAC protocol code size and therefore increasing numbers of bugs. Additionally, extensions to the basic functionality must be separately implemented in each MAC protocol. In this paper, we look at a different way to design a MAC protocol, focusing on the providing of interfaces which can be used to implement the common functionality separately. This leaves the core of the MAC protocol, determining only when to send, which is substantially different for each protocol. We also look at some examples of MAC extensions that this approach enables. We demonstrate a working implementation of these principles as an implementation of B-MAC for TinyOS, and compare it with the standard TinyOS B-MAC implementation. We show a 35\% smaller code size, with the same overall functionality but increased extensibility, and while maintaining similar performance. We also present results and experiences from using the same framework to implement T-MAC, LMAC, and Crankshaft. All are demonstrated with data from real-world experience using our 24 node testbed.},
+  number = {7},
+  journal = {Wirel. Netw.},
+  author = {Parker, Tom and Halkes, Gertjan and Bezemer, Maarten and Langendoen, Koen},
+  month = oct,
+  year = {2010},
+  keywords = {Wireless sensor networks,MAC protocols,Protocol architecture},
+  pages = {2013--2029},
+  file = {/home/romain/Zotero/storage/44L8U353/Parker et al. - 2010 - The $lambda$MAC Framework Redefining MAC Protoco.pdf}
+}
+
+@inproceedings{flury2010Slotted,
+  address = {New York, NY, USA},
+  series = {{{IPSN}} '10},
+  title = {Slotted {{Programming}} for {{Sensor Networks}}},
+  isbn = {978-1-60558-988-6},
+  doi = {10.1145/1791212.1791216},
+  abstract = {We advocate a novel programming approach we call slotted programming that not only addresses the specific hardware capabilities of sensor nodes, but also facilitates coding through a truly modular design. The approach is based on the temporal decoupling of the different tasks of a sensor node such that at any time at most one task is active. In contrast to traditional sensor network programming, slotted programming guarantees that each of these tasks can be implemented as an independent software module, simplifying not only the coding and testing phase, but also the code reuse in a different context. In addition, we believe that the proposed approach is highly qualified for energy efficient and real time applications. To substantiate our claims, we have implemented slotos, an extension to TinyOS that supports slotted programming. Within this framework, we demonstrate the advantages of the slotted programming paradigm.},
+  booktitle = {Proceedings of the 9th {{ACM}}/{{IEEE International Conference}} on {{Information Processing}} in {{Sensor Networks}}},
+  publisher = {{ACM}},
+  author = {Flury, Roland and Wattenhofer, Roger},
+  year = {2010},
+  keywords = {context-free programming,modularity,time slicing},
+  pages = {24--34},
+  file = {/home/romain/Zotero/storage/JI9NV7FW/Flury and Wattenhofer - 2010 - Slotted Programming for Sensor Networks.pdf}
+}
+
+@misc{acmCoNEXT2018,
+  title = {{{ACM CoNEXT}} 2018},
+  howpublished = {https://conferences2.sigcomm.org/co-next/2018/\#!/program},
+  month = oct,
+  year = {2018},
+  file = {/home/romain/Zotero/storage/X8Z24ZU3/2018.html}
+}
+
+@misc{nRF52840,
+  title = {{{nRF52840}}},
+  abstract = {High-end nRF52 Series multiprotocol SoC for high-performance, feature-rich applications with best-in-class security.},
+  language = {en},
+  howpublished = {https://www.nordicsemi.com/Products/Low-power-short-range-wireless/nRF52840},
+  author = {Nordic Semiconductors},
+  file = {/home/romain/Zotero/storage/WCYBWQCN/nRF52840.html}
+}
+
+@inproceedings{alnahasToappearConcurent,
+  title = {Concurent {{Transmisions}} for {{Multi}}-Hop {{Bluetooth}} 5},
+  booktitle = {Proceedings of the 2019 {{International Conference}} on {{Embedded Wireless Systems}} and {{Networks}}},
+  author = {Al Nahas, Beshr and Duquennoy, Simon and Landsiedel, Olaf},
+  year = {To appear}
+}
+
+@misc{OpenMoteB,
+  title = {{{OpenMote B}}},
+  language = {en-US},
+  howpublished = {http://www.openmote.com/product/openmote-b-single/},
+  author = {OpenMote},
+  file = {/home/romain/Zotero/storage/9JHM5GBP/openmote-b-single.html}
+}
+
+@misc{DepComp2019,
+  title = {{{EWSN}} 2019 {{Dependability Competition}}},
+  abstract = {International Conference on Embedded Wireless Systems and Networks (EWSN 2019)},
+  journal = {EWSN 2019 :: Beijing, China},
+  howpublished = {http://ewsn2019.thss.tsinghua.edu.cn/competition-scenario.html},
+  month = feb,
+  year = {2019},
+  file = {/home/romain/Zotero/storage/ZV56J5EL/competition-scenario.html}
+}
+
+@inproceedings{schuss2019JamLabNG,
+  address = {Beijing, China},
+  title = {{{JamLab}}-{{NG}}: {{Benchmarking Low}}-{{Power Wireless Protocols}} under {{Controlable}} and {{Repeatable Wi}}-{{Fi Interference}}},
+  booktitle = {Proceedings of the 2019 {{International Conference}} on {{Embedded Wireless Systems}} and {{Networks}}},
+  publisher = {{Junction Publishing}},
+  author = {Schu\ss, Markus and Boano, Carlo Alberto and Weber, Manuel and Schulz, Matthias and Hollick, Matthias and R\"omer, Kay},
+  year = {2019},
+  pages = {12}
+}
+
+@inproceedings{osterlind2006Cooja,
+  title = {Cross-{{Level Sensor Network Simulation}} with {{COOJA}}},
+  doi = {10.1109/LCN.2006.322172},
+  abstract = {Simulators for wireless sensor networks are a valuable tool for system development. However, current simulators can only simulate a single level of a system at once. This makes system development and evolution difficult since developers cannot use the same simulator for both high-level algorithm development and low-level development such as device-driver implementations. We propose cross-level simulation, a novel type of wireless sensor network simulation that enables holistic simultaneous simulation at different levels. We present an implementation of such a simulator, COOJA, a simulator for the Contiki sensor node operating system. COOJA allows for simultaneous simulation at the network level, the operating system level, and the machine code instruction set level. With COOJA, we show the feasibility of the cross-level simulation approach},
+  booktitle = {Proceedings. 2006 31st {{IEEE Conference}} on {{Local Computer Networks}}},
+  author = {Osterlind, F. and Dunkels, A. and Eriksson, J. and Finne, N. and Voigt, T.},
+  month = nov,
+  year = {2006},
+  keywords = {wireless sensor networks,Wireless sensor networks,Operating systems,digital simulation,telecommunication computing,Hardware,Computational modeling,Computer science,Computer simulation,Contiki sensor node operating system,COOJA simulator,cross-level sensor network simulation,holistic simultaneous simulation,Java,Programming,Sensor systems,Software systems,wireless sensor network simulation},
+  pages = {641-648},
+  file = {/home/romain/Zotero/storage/EQPXBSJN/Osterlind et al. - 2006 - Cross-Level Sensor Network Simulation with COOJA.pdf;/home/romain/Zotero/storage/C4VQTLSX/4116633.html}
+}
+
+@inproceedings{mohammad2018Codecast,
+  address = {Piscataway, NJ, USA},
+  series = {{{IPSN}} '18},
+  title = {Codecast: {{Supporting Data Driven In}}-Network {{Processing}} for {{Low}}-Power {{Wireless Sensor Networks}}},
+  isbn = {978-1-5386-5298-5},
+  shorttitle = {Codecast},
+  doi = {10.1109/IPSN.2018.00014},
+  abstract = {This paper presents Codecast, a many-to-many communication protocol for low-power sensor networks that provide high throughput and reliable data sharing from multiple sources to multiple destinations of a network. Codecast uses physical layer capture on concurrent transmissions for high spatial reuse and a network-assisted network coding for high throughput as the core techniques. Our extensive evaluation in two large-scale testbed deployments (Indriya and Flocklab) shows that Codecast provides up to 4x the throughput of Chaos and 1.8x the throughput of LWB for many-to-many data communication. Finally, we demonstrate the utility of Codecast through a distributed channel selection mechanism and a link state based routing protocol.},
+  booktitle = {Proceedings of the 17th {{ACM}}/{{IEEE International Conference}} on {{Information Processing}} in {{Sensor Networks}}},
+  publisher = {{IEEE Press}},
+  author = {Mohammad, Mobashir and Chan, Mun Choon},
+  year = {2018},
+  keywords = {wireless sensor networks,capture effect,network coding,synchronous transmission},
+  pages = {72--83},
+  file = {/home/romain/Zotero/storage/PGFBU8Z3/Mohammad and Chan - 2018 - Codecast Supporting Data Driven In-network Proces.pdf}
+}
+
+@inproceedings{klues2007MLA,
+  address = {New York, NY, USA},
+  series = {{{SenSys}} '07},
+  title = {A {{Component}}-Based {{Architecture}} for {{Power}}-Efficient {{Media Access Control}} in {{Wireless Sensor Networks}}},
+  isbn = {978-1-59593-763-6},
+  doi = {10.1145/1322263.1322270},
+  abstract = {The diverse requirements of wireless sensor network applications necessitate the development of multiple media access control (MAC) protocols to meet their varying throughput, latency, and network lifetime needs. Building new MAC protocols has proven to be extremely difficult, however, given the monolithic nature of existing protocol implementations as well as their dependence on a particular radio or processor platform. To address these issues, we propose the MAC Layer Architecture (MLA), a component-based architecture for power-efficient MAC protocol development in wireless sensor networks. MLA consists of optimized, reusable components that implement a common set of features shared by existing MAC protocols, as well as abstractions that encapsulate the intricacies of the hardware platforms they run on. Through an instantiation of MLA in TinyOS 2.0.1, we have implemented five representative MAC protocols. Empirical results show that MLA results in significant code reuse among different protocols, while achieving comparative performance and memory footprints to monolithic implementations of the same protocols.},
+  booktitle = {Proceedings of the 5th {{International Conference}} on {{Embedded Networked Sensor Systems}}},
+  publisher = {{ACM}},
+  author = {Klues, Kevin and Hackmann, Gregory and Chipara, Octav and Lu, Chenyang},
+  year = {2007},
+  keywords = {media access architecture,power management,TinyOS},
+  pages = {59--72},
+  file = {/home/romain/Zotero/storage/WAVRCXE8/Klues et al. - 2007 - A Component-based Architecture for Power-efficient.pdf}
+}
+
+@inproceedings{suzuki2013Choco,
+  title = {Low-{{Power}}, {{End}}-to-{{End Reliable Collection Using Glossy}} for {{Wireless Sensor Networks}}},
+  doi = {10.1109/VTCSpring.2013.6692624},
+  abstract = {We present a design and evaluation of Choco, a low-power, end- to-end reliable collection protocol for wireless sensor networks. We construct Choco on Glossy, which is a recently presented efficient flooding scheme exploiting constructive-interference phenomena. Although Glossy is originally developed for flooding, it can be regarded as a networking primitive which provides low-power, low- delay, any-to-any communication reachability. In Choco, all packet transmissions are based on Glossy. A sink node explicitly schedules each node operation in a centralized and fine-grained manner with Glossy, and controls retransmission and power saving mode of each node. Each sensor node transmits data packets to the sink node with Glossy according to the request from the sink node. Although Choco is very simple mechanism, we reveal that Choco has considerable merits over current data collection protocols through two different testbed evaluations. Testbed evaluations demonstrate that Choco provides 14.7 times more energy-efficient collection than the state-of-the-art, while achieving end-to-end reliability for every node.},
+  booktitle = {2013 {{IEEE}} 77th {{Vehicular Technology Conference}} ({{VTC Spring}})},
+  author = {Suzuki, M. and Yamashita, Y. and Morikawa, H.},
+  month = jun,
+  year = {2013},
+  keywords = {wireless sensor networks,Wireless sensor networks,protocols,Protocols,Synchronization,Reliability,Schedules,Data collection,Wireless communication,telecommunication network reliability,Glossy,packet transmissions,any-to-any communication reachability,Choco,constructive-interference phenomena,data collection protocols,data communication,end-to-end reliability,energy-efficient collection,low-power end-to-end reliable collection protocol,networking,power saving mode,sensor node,sink node},
+  pages = {1-5},
+  file = {/home/romain/Zotero/storage/CCAUMQD5/Suzuki et al. - 2013 - Low-Power, End-to-End Reliable Collection Using Gl.pdf;/home/romain/Zotero/storage/3JCZYGTL/6692624.html}
+}
+
+@article{teleshermeto2017Scheduling,
+  title = {Scheduling for {{IEEE802}}.15.4-{{TSCH}} and Slow Channel Hopping {{MAC}} in Low Power Industrial Wireless Networks: {{A}} Survey},
+  volume = {114},
+  issn = {0140-3664},
+  shorttitle = {Scheduling for {{IEEE802}}.15.4-{{TSCH}} and Slow Channel Hopping {{MAC}} in Low Power Industrial Wireless Networks},
+  doi = {10.1016/j.comcom.2017.10.004},
+  abstract = {The so-called Industrial Internet of Things (IIoT) is expected to transform our world, and in depth modernize very different domains such as manufacturing, energy, agriculture, construction industry, and other industrial sectors. The need for low power radio networks first led to low duty cycle approaches where nodes turn off their radio chipset most of the time to save energy. The medium access control (MAC) has thus been largely investigated over the last fifteen years. Unfortunately, classical contention access methods use a random access and are unable to provide guarantees. In the meantime, some dedicated standards have emerged (e.g. IEEE 802.15.4-2006, IEEE 802.15.4-2015), combining Time Division Multiple Access (TDMA) with slow channel hopping in order to enable reliability and energy efficiency. Slow channel hopping allows each node to use different channels for a frame and its possible retransmissions with a low-cost hardware. To provide high-reliability, these protocols rely on a common schedule in order to prevent simultaneously interfering transmissions. In this context, we clearly observe a strong growth of the number of proposals in the last years, denoting a strong interest of the research community for deterministic slow channel hopping scheduling for the IIoT. We categorize here the numerous existing solutions according to their objectives (e.g. high-reliability, mobility support) and approaches. We also identify some open challenges, expected to attract much attention over the next few years.},
+  journal = {Computer Communications},
+  author = {Teles Hermeto, Rodrigo and Gallais, Antoine and Theoleyre, Fabrice},
+  month = dec,
+  year = {2017},
+  keywords = {Wireless networks,Dedicated transmission opportunities,Deterministic MAC,Industrial Internet of Things (IIoT),Scheduled Medium Access Control (MAC),Slow channel hopping},
+  pages = {84-105}
+}
+
+@article{bartolomeu2016Survey,
+  title = {Survey on Low Power Real-Time Wireless {{MAC}} Protocols},
+  volume = {75},
+  issn = {1084-8045},
+  doi = {10.1016/j.jnca.2016.09.004},
+  abstract = {Wireless low-power technologies have been the focus of a large research effort, for example, in the wireless sensor network and other short range technologies domains. Although bringing extended autonomy to battery powered stations, such technologies are known to be negatively influenced by similar technologies contending for the medium and, especially, by technologies using higher power transmissions over the same frequency bands. A frequency band that is becoming increasingly crowded with competing technologies is the 2.4GHz Industrial, Scientific and Medical band, encompassing, for example, Bluetooth and ZigBee, two low-power communication standards which are the base of several real-time protocols. Although these technologies employ mechanisms to improve their coexistence, they are still vulnerable to transmissions from uncoordinated stations with similar technologies or to higher power technologies such as Wi- Fi, which hinders the support of wireless dependable real-time communications in open environments. Therefore, this survey presents a comprehensive study of the most commonly used wireless low-power technologies operating in the 2.4GHz Industrial, Scientific and Medical (ISM) band and real-time protocols built upon them. The survey of the real-time protocols using these technologies is focused on factory automation applications, due to their more demanding timeliness and reliability requirements.},
+  journal = {Journal of Network and Computer Applications},
+  author = {Bartolomeu, Paulo and Alam, Muhammad and Ferreira, Joaquim and Fonseca, Jos\'e},
+  month = nov,
+  year = {2016},
+  keywords = {2.4GHz ISM Band,Bluetooth,Real-time Wireless protocols,Wireless MAC protocol,ZigBee},
+  pages = {293-316},
+  file = {/home/romain/Zotero/storage/IHUND2R3/S1084804516302016.html}
+}
+
+@article{isolani2018Survey,
+  title = {A {{Survey}} on the {{Programmability}} of {{Wireless MAC Protocols}}},
+  issn = {1553-877X},
+  doi = {10.1109/COMST.2018.2881761},
+  abstract = {Self-organizing networks able to adapt to changes in the environment have already been a longstanding research topic. Given the limited number of license-free Industrial, Scientific, and Medical (ISM) radio bands, wireless technologies end up competing with one another for the wireless spectrum. As such, the proper employment of Medium Access Control (MAC) protocols is essential to guarantee efficient and reliable wireless communication. At the data link level, there has been extensive research towards programmable and more future-proof MAC protocols (e.g., Software-Defined Radios (SDRs), which enable to reconfigure the entire protocol and hence access/control fine-grained radio functionalities). However, actual deployments are so far limited because of performance issues and cost. With the increasing popularity of Software-Defined Networking (SDN), also in the wireless domain, and the increasing performance of SDRs, we are evolving into a fully programmable data link layer. In this survey, we deliver: a landscape of the state-of-the-art on programmable MAC protocols; a coherent terminology that represents scope and level of programmability supported; an in-depth study of their advantages and disadvantages; and a discussion about future research challenges on MAC programmability. Many surveys have investigated the use of specific MAC protocols for a wide range of optimization criteria and application demands. This survey is the first that investigates the scope and the level of programmability that MAC protocols support.},
+  journal = {IEEE Communications Surveys Tutorials},
+  author = {Isolani, P. H. and Claeys, M. and Donato, C. and Granville, L. Z. and Latr\'e, S.},
+  year = {2018},
+  keywords = {Wireless sensor networks,Wireless networks,Media Access Protocol,Ad hoc networks,Terminology},
+  pages = {1-1},
+  file = {/home/romain/Zotero/storage/5TWICFHA/Isolani et al. - 2018 - A Survey on the Programmability of Wireless MAC Pr.pdf;/home/romain/Zotero/storage/86L5UJKK/8537886.html}
+}
+
+@misc{Baloo,
+  title = {Baloo},
+  howpublished = {http://www.romainjacob.net/research/baloo/},
+  month = dec,
+  year = {2018}
+}
+
+@inproceedings{zhang2017Less,
+  address = {New York, NY, USA},
+  series = {{{MobiQuitous}} 2017},
+  title = {Less Is {{More}}: {{Learning More}} with {{Concurrent Transmissions}} for {{Energy}}-{{Efficient Flooding}}},
+  isbn = {978-1-4503-5368-7},
+  shorttitle = {Less Is {{More}}},
+  doi = {10.1145/3144457.3144482},
+  abstract = {Concurrent transmissions, a novel communication paradigm, has been shown to effectively accomplish a reliable and energy-efficient flooding in wireless networks. With multiple nodes exploiting a receive-and-forward scheme in the network, this technique inevitably introduces communication redundancy and consequently raises the energy consumption of the nodes. In this paper, we propose LiM, an energy-efficient flooding protocol for wireless sensor networks. LiM builds on concurrent transmissions, exploiting constructive interference and the capture effect to achieve high reliability and low latency. Moreover, LiM equips itself with a machine learning capability to progressively reduce redundancy while maintaining high reliability. As a result, LiM is able to significantly reduce the radio-on time and therefore the energy consumption. We compare LiM with our baseline protocol Glossy by extensive experiments in the 30-node testbed FlockLab. Experimental results show that LiM highly reduces the broadcast redundancy in flooding. It outperforms the baseline protocol in terms of radio-on time, while attaining a high reliability of over 99.50\%, and an average end-to-end latency around 2 ms in all experimental scenarios.},
+  booktitle = {Proceedings of the 14th {{EAI International Conference}} on {{Mobile}} and {{Ubiquitous Systems}}: {{Computing}}, {{Networking}} and {{Services}}},
+  publisher = {{ACM}},
+  author = {Zhang, Peilin and Gao, Alex Yuan and Theel, Oliver},
+  year = {2017},
+  keywords = {Data Dissemination,Exp3,Flooding,Machine Learning,Wireless Sensor Networks},
+  pages = {323--332}
+}
+
+

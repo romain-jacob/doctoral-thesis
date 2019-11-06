@@ -1,0 +1,11 @@
+\begin{tabular}{ @{}c@{\qquad}c@{\qquad}c@{}}
+\toprule
+\textbf{Payload}~[\bytes]&{\bf \opread}~[\us]&{\bf \opwrite}~[\us]\\
+\midrule
+$L$&102+2$\times L$&108+2$\times L$\\
+\midrule
+8&118&124\\
+16&134&140\\
+64&230&236\\
+\bottomrule
+\end{tabular}

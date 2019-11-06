@@ -1,0 +1,9 @@
+ \begin{tabular}{     @{} l  @{\qquad} c @{\qquad} c @{\qquad} c @{\qquad} c @{\qquad} c @{} }
+ \toprule               
+     & \mode{1} & \mode{2} & \mode{3} & \mode{4} & \mode{5} \\ 
+ \midrule               
+   \textbf{No  inheritance   } & 7 &  $\approx$  0  & 184 & 536 &  $\approx$  0  \\ 
+   \textbf{Minimal  inheritance   } & 6 &  $\approx$  0  & 114 & 438 &  $\approx$  0  \\ 
+   \textbf{Full  inheritance   } & 3 & 79 & 65 & 231 & 578 \\ 
+ \bottomrule               
+\end{tabular}                

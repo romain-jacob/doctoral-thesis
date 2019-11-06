@@ -1,0 +1,20 @@
+%  Task  mapping  table                                 
+\begin{tabular} {@{}l     c    c     c     c     c     c  @{} }
+ \toprule                                
+ \textbf{Node}  &  \multicolumn{6}{c@{}}{\bf  Mapped  tasks}                              \\
+ \midrule                                
+  Node    1 & $ T 1 $ & $ T 3 $ & $ T 4 $ & $ T 6 $ & $ T 25 $ & $ T 27 $ \\
+  Node    2 & $ T 7 $ & $ T 9 $ & $ T 10 $ & $ T 12 $ & $   $ & $   $ \\
+  Node    3 & $ T 13 $ & $ T 15 $ & $ T 16 $ & $ T 18 $ & $   $ & $   $ \\
+  Node    4 & $ T 22 $ & $ T 24 $ & $   $ & $   $ & $   $ & $   $ \\
+  Node    5 & $ T 28 $ & $ T 30 $ & $   $ & $   $ & $   $ & $   $ \\
+  Node    6 & $ T 2 $ & $ T 8 $ & $ T 14 $ & $   $ & $   $ & $   $ \\
+  Node    7 & $ T 5 $ & $ T 11 $ & $ T 17 $ & $ T 23 $ & $ T 26 $ & $ T 29 $ \\
+  Node    8 & $ T 31 $ & $ T 33 $ & $ T 34 $ & $ T 36 $ & $   $ & $   $ \\
+  Node    9 & $ T 37 $ & $ T 39 $ & $ T 40 $ & $ T 42 $ & $   $ & $   $ \\
+  Node    10 & $ T 52 $ & $ T 54 $ & $   $ & $   $ & $   $ & $   $ \\
+  Node    11 & $ T 55 $ & $ T 57 $ & $   $ & $   $ & $   $ & $   $ \\
+  Node    12 & $ T 32 $ & $ T 38 $ & $ T 56 $ & $   $ & $   $ & $   $ \\
+  Node    13 & $ T 35 $ & $ T 41 $ & $ T 53 $ & $   $ & $   $ & $   $ \\
+ \bottomrule                                
+\end{tabular}                                 

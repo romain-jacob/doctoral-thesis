@@ -1,0 +1,224 @@
+\paperheight297mm
+\paperwidth210mm
+\oddsidemargin2cm
+\evensidemargin0.4cm
+\textwidth13.5cm
+\topmargin0cm
+%\headheight0.75cm
+\headsep1cm
+\textheight23cm
+
+\marginparsep0pt
+\marginparwidth0pt
+
+
+% === Andreas settings ===
+
+%%\paperheight297mm
+%\paperheight216mm
+%%\paperwidth210mm
+%\paperwidth154mm
+%\hoffset0cm
+%\voffset0cm
+%
+%%\oddsidemargin1cm
+%\oddsidemargin0.875cm
+%%\evensidemargin0.4cm
+%\evensidemargin-0.15cm
+%%\textwidth13.5cm
+%\textwidth9.6cm
+%\topmargin-0.45cm
+%%\headheight0.75cm
+%\headsep0.3cm
+%%\textheight23cm
+%\textheight16.3cm
+%\marginparsep0pt
+%\marginparwidth0pt
+
+% ==== eo Andres settings ===
+
+\newcounter{paracnt}
+\setcounter{paracnt}{0}
+
+\newlength{\twidth}
+\setlength{\twidth}{\textwidth}
+
+\newcommand\vdfdot[1]{\makebox[1mm][r]{\raisebox{-5pt}%
+   {\makebox[#1]{\rule{#1}{.25pt}}}}}
+
+\def\ps@headings{%
+     \let\@oddfoot\@empty
+     \let\@evenfoot\@empty
+     \def\@oddhead{\headsize\hfil\rightmark\makebox[1cm][r]{\bfseries\thepage}%
+       \vdfdot{\textwidth}}
+     \def\@evenhead{\makebox[1mm]{}\headsize\makebox[1cm][l]{\bfseries\thepage}%
+        \leftmark\hfil\vdfdot{\textwidth}}
+%     \def\@oddhead{\headsize\rightmark%
+%       \hfil\bfseries\thepage}
+%     \def\@evenhead{\headsize%
+%        {\bfseries\thepage}\makebox[0.5cm][l]{}\leftmark\hfil\vdfdot{\textwidth}}
+      \let\@mkboth\markboth
+    \def\chaptermark##1{%
+      \markboth {{\MakeUppercase{%
+        \ifnum \c@secnumdepth >\m@ne
+          \if@mainmatter
+            \@chapapp\ \thechapter. \ %
+          \fi
+        \fi
+        ##1}}}{}}%
+    \def\sectionmark##1{%
+      \markright {{\MakeUppercase{%
+        \ifnum \c@secnumdepth >\z@
+           \thesection. \ %
+        \fi
+          ##1}}}}}
+
+\def\ps@plain{\let\@mkboth\@gobbletwo
+      \let\@oddhead\@empty\let\@oddfoot\empty%
+      \def\@evenhead{\headsize{\bfseries\thepage}}\let\@evenfoot\@oddfoot}
+%     \let\@oddhead\@empty\let\@oddfoot\empty%
+%     \let\@evenhead\@empty\let\@evenfoot\@oddfoot}
+
+\def\headsize{\footnotesize}
+
+%OLD NUMBERS: {140}{10}
+\def\HUGE{\@setfontsize\HUGE{90}{10}}
+\DeclareFontShape{OT1}{cmr}{bx}{n}
+   {
+      <5> <6> <7> <8> <9> gen * cmbx
+      <10><10.95> cmbx10
+      <13.5> sfixed * [13.5] cmbx12
+      <140> sfixed * [140] cmbx12
+      <12><14.4><17.28><20.74><24.88>cmbx12
+      }{}
+
+\def\vdffonts{12pt}
+
+\renewenvironment{quote}{%
+    \list{}{%
+          \leftmargin0.6cm   % this is the adjusting screw
+                \rightmargin\leftmargin
+                  }
+      \item\relax
+}
+{\endlist}
+
+\def\figurename{Fig.}
+\def\tablename{Tab.}
+
+%\newcounter{vdf@figure}
+%\newcounter{vdf@table}
+\def\thefigure{\@arabic\c@figure}
+\def\thetable{\@arabic\c@table}
+
+\def\vdfcap#1{{\makebox[0pt][r]{\makebox[1.31cm][l]{#1}}}}
+\def\vdfcapp#1{{\makebox[0pt][r]{\makebox[1.51cm][l]{#1}}}}
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip          % voellig veraendert !
+  %%OLD: \small
+  {\footnotesize{\footnotesize\bfseries #1:\ }  #2}\par
+  \vskip\belowcaptionskip%
+  %\setcounter{vdf@figure}{\value{figure}}%
+  %\setcounter{vdf@table}{\value{table}}%
+}
+%OLD NUMBERS: {24}{28}
+\def\CHAPHUGE{\@setfontsize\CHAPHUGE{20}{28}}
+
+\def\@makechapterhead#1{%
+  \setcounter{paracnt}{0}%
+  \thispagestyle{empty}%
+  \vspace*{1.0cm}%
+   {\raggedleft%
+   \normalfont%
+   \ifnum \c@secnumdepth >\m@ne
+     \if@mainmatter
+       \bfseries\HUGE\hfill\thechapter\\[2.3cm] % chapter no
+     \else
+       \raggedright
+     \fi
+   \fi
+   \interlinepenalty\@M
+   \CHAPHUGE\bfseries #1\\[8mm]%
+   %\setcounter{figure}{\value{vdf@figure}}%
+   %\setcounter{table}{\value{vdf@table}}%
+  }}
+
+\def\section{\@startsection {section}{1}{\z@}%
+                            {-30pt \@plus -5pt \@minus -1pt}%
+                            {8pt \@plus2pt}%
+                                                    %old:\Large
+                            {\setcounter{paracnt}{0}\large\bfseries}}
+\def\subsection{\@startsection{subsection}{2}{\z@}%
+                            {-20pt\@plus -1pt \@minus -.2pt}%
+                            {4pt \@plus 1pt}%
+                                                    %old: \large
+                            {\setcounter{paracnt}{0}\normalsize\bfseries}}%
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                            {-20pt \@plus -1pt}%
+                            {5pt \@plus .2ex}%
+                            {\normalsize\bfseries}}%
+\def\paragraph{\@startsection{paragraph}{4}{\z@}%
+                            {-20pt}%
+                            {5pt}%
+                            {\normalsize\bfseries}}%
+
+\setcounter{secnumdepth}{3}
+
+\def\vdfvor#1{{\makebox[0pt][r]{\makebox[1.51cm][l]{#1}}}}
+\def\vdfnum#1#2{\ifnum #2<4 \vdfvor{{\csname the#1\endcsname}}\else{}\fi}
+
+\def\MakeUppercase#1{#1}
+\DeclareRobustCommand{\MakeUpperCase}[1]{{%
+      \def\i{I}\def\j{J}%
+      \def\reserved@a##1##2{\let##1##2\reserved@a}%
+      \expandafter\reserved@a\@uclclist\reserved@b{\reserved@b\@gobble}%
+      \protected@edef\reserved@a{\uppercase{#1}}%
+      \reserved@a
+   }}
+\protected@edef\MakeUpperCase#1{\MakeUpperCase{#1}}
+
+\newenvironment{disstitle}{\hskip -2.16cm\begin{minipage}[t][\textheight][s]{14.86cm}}%
+  {\end{minipage}\newpage\thispagestyle{empty}\mbox{}\clearpage\newpage}
+
+\newenvironment{finaldisstitle}{\hskip -2.16cm\begin{minipage}[t][\textheight][s]{14.86cm}}%
+  {\end{minipage}}
+
+\newcommand\setboxparams{\setlength{\fboxrule}{0.3pt}%
+  \setlength{\fboxsep}{10.85pt}%
+  \setlength{\shadowsize}{3pt}}
+
+\newcommand\setnobox{\setlength{\fboxrule}{0pt}%
+  \setlength{\fboxsep}{0pt}%
+  \setlength{\shadowsize}{0pt}}
+
+\newcommand\wide[1]{\makebox[\textwidth][r]{\setboxparams\shadowbox{%
+    \begin{minipage}{13.9825cm}\setlength{\twidth}{13.9825cm}#1%
+    \end{minipage}}}\setlength{\twidth}{\textwidth}}
+
+\newcommand\normal[1]{\makebox[\textwidth][r]{\setboxparams\shadowbox{%
+    \begin{minipage}{12.4725cm}\setlength{\twidth}{12.4725cm}#1%
+    \end{minipage}}\setlength{\twidth}{\textwidth}}}
+
+\newcommand\widething[1]{\makebox[\textwidth][r]{\setnobox\shadowbox{%
+    \begin{minipage}{14.86cm}\setlength{\twidth}{14.86cm}#1%
+    \end{minipage}}}\setlength{\twidth}{\textwidth}}
+
+\newcommand{\para}[1]{\addtocounter{paracnt}{1}\paragraph{\textsc{\roman{paracnt}}\small{)}\thinspace\thinspace #1}}
+
+\renewcommand{\cfttoctitlefont}{\bfseries\CHAPHUGE}
+\renewcommand{\cftdot}{\ensuremath{.}}
+\renewcommand{\cftloftitlefont}{\CHAPHUGE\bfseries}
+\renewcommand{\cftlottitlefont}{\CHAPHUGE\bfseries}
+\renewcommand{\cftchapfont}{\small\bfseries}
+\renewcommand{\cftsecfont}{\small}
+\renewcommand{\cftsubsecfont}{\small}
+\renewcommand{\cftsubsubsecfont}{\small}
+\renewcommand{\cftparafont}{\small}
+\renewcommand{\cftchappagefont}{\small\bfseries}
+\renewcommand{\cftsecpagefont}{\small}
+\renewcommand{\cftsubsecpagefont}{\small}
+\setlength{\cftaftertoctitleskip}{0.5cm}
+\renewcommand{\cftfigfont}{\small}
+\renewcommand{\cftfigpagefont}{\small}
+\renewcommand{\cfttabfont}{\small}
+\renewcommand{\cfttabpagefont}{\small}

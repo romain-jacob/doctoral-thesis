@@ -1,0 +1,16 @@
+% !TEX root = ../00_thesis.tex
+
+\section{Summary}
+
+%What we presented
+In this chapter, we presented the \DRPLong (\DRP), a global system design that provides end-to-end real-time guarantees between interfaces of distributed applications in wireless \CPS.
+\DRP meets the requirements of \feature{Timeliness}, \feature{Reliability}, \feature{Adaptability}, and \feature{Composability}.
+However, since \DRP guarantees relies on worst-case analysis, the system's \feature{Efficiency} is inherently limited; still, we demonstrated that our analysis is tight~(\cref{sec:drp_evaluation}) which shows that \DRP is not overly pessimistic.
+
+% Key concept/novel idea
+The key concept of \DRP is to (i)~physically decouple the communication protocol from the application tasks (each running on dedicated communication and application processors), and (ii)~guarantee the timeliness of message transmissions throughout the system using minimally restrictive contracts between the different entities.
+
+% Take aways
+We implemented and ran a proof-of-concept implementation of \DRP on embedded hardware.
+The firmware source code as well as our \DRP simulation framework are openly available~(\cref{append:drp_artifacts}).
+\DRP appears to be a promising solution for low-rate applications, such as smart homes, where  coexists multiple context-specific ``applications'' (\eg fridge, air-conditioning, lightning) which would particularly benefit from being scheduled independently from each other while being able to communicate in real-time.

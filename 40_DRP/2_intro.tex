@@ -1,0 +1,97 @@
+% !TEX root = ../00_thesis.tex
+
+\section{Problem Setting}
+\label{sec:drp_intro}
+
+Cyber-physical systems~(\CPS) tightly integrate components for sensing, actuating, and computing into distributed feedback loops to directly control physical processes~\cite{rajkumar2010CPS}. The successful deployment of \CPS technology is widely recognized as a grand challenge to solving a number of societal problems in domains ranging from healthcare to industrial automation. To reach into new areas and realize systems with unprecedented capabilities, there is a trend toward increasingly smaller and autonomously powered \CPS devices that exchange data through a low-power wireless communication substrate. As many \CPS applications are mission-critical and physical processes evolve as a function of time, the communication among the sensing, actuating, and computing elements is often subject to real-time requirements, for example, to guarantee stability of the feedback loops~\cite{stankovic2005Opportunities}.
+
+These real-time requirements are often specified from an end-to-end application perspective. For example, a control engineer may require that sensor readings taken at time $t$ are available for computing the control law at $t + D$, where the relative deadline~$D$ is derived from
+the application requirements; \eg the maximum tolerable delay between a sensing and a control task, where these tasks are typically executed on physically distributed devices.
+
+Meeting end-to-end deadlines is non-trivial because data transfers between application tasks involves multiple other tasks (\eg operating system, networking protocols) and shared resources (\eg memories, system buses, wireless medium).
+The entire transmission chain of the data throughout the system must be taken into account to enable end-to-end real-time guarantees.
+
+\begin{research_questions}
+  \begin{description}
+    \item[Question 1]
+    Can we provide end-to-end real-time guarantees between distributed applications in a wireless \CPS?
+
+    \item[Question 2]
+    Can we do so while preserving runtime adaptability and flexibility in the timing of task executions?
+  \end{description}
+\end{research_questions}
+
+\fakepar{The problem}
+Enabling real-time communication {between network interfaces} of sources and destinations in a low-power wireless network has been studied for more than a decade~\cite{lu2002RAP,stankovic2003Realtime,he2003SPEED}. Today, standards such as WirelessHART~\cite{wirelessHART} and ISA100.11a~\cite{isa100} for control applications in the process industries already exist~\cite{watteyne2017Teaching}, and considerable progress in real-time transmission scheduling and end-to-end delay analysis for WirelessHART networks has been made~\cite{saifullah2010RealTime,saifullah2015EndtoEnd}.
+
+Unfortunately, wireless real-time protocols such as WirelessHART~\cite{wirelessHART} or \blink~\cite{zimmerling2017Blink} only provide guarantees for message transmissions between \emph{network interfaces}. These protocols do not handle the application schedules; at the source, the message release is typically assumed periodic; at the destination, nothing guarantees that the application will actually process the message in time.
+
+Providing end-to-end guarantees between \emph{distributed application} (\textbf{Question~1}) demands to combine a wireless real-time protocol with the rest of the system; \ie accounting for the application schedules and handling interference on shared resources.
+
+\fakepar{The challenge}
+To support a broad spectrum of \CPS applications, a solution to this problem should fulfill the following requirements.
+\begin{features}
+
+  \item[Timeliness]
+  All messages received by the destination application meet their end-to-end deadlines.
+
+  \item[Reliability]
+  All messages received at the wireless network interface are {successfully delivered} to their destination application (\ie no buffer overflows).
+
+  \item[Adaptability]
+  The system adapts to dynamic changes in traffic requirements at runtime.
+
+  \item[Composability]
+  Existing hardware and software components can be freely composed to satisfy specific application's needs, without altering the properties of the integrated parts.
+
+  \item[Efficiency] The solution scales to large system sizes and operates efficiently with regard to limited resources such as energy, wireless bandwidth, computing capacity, and memory.
+
+\end{features}
+
+A major challenge in meeting these requirements is to funnel messages in real-time through tasks that run concurrently and access shared resources.
+Interference on such resources can delay tasks and communication arbitrarily, therefore hampering
+\feature{Timeliness}, \feature{Reliability}, and \feature{Composability}.
+
+\fakepar{Our solution}
+In this chapter, we present a real-time wireless CPS that tackles interference on shared resources by defining (minimal) constraints on the application schedules.
+This is achieved by combining a predictable device architecture with a real-time scheduler for the entire system.
+\begin{description}
+  \item[Predictable device architecture]
+  We use the Dual-Processor Platform (\DPP) concept, presented in Introduction (\cref{ch:introduction}). The \DPP dedicates a communication processor (\cp) exclusively to the real-time network protocol and executes all other tasks on an application processor (\ap).
+  The \DPP is based on the \bolt interconnect~\cite{sutton2015Bolt}, which decouples two processors in the time, power, and clock domains, while allowing them to asynchronously exchange messages within predictable time bounds.%
+  \footnote{Refer to the Introduction~ (\cref{sec:dpp}) for more details.}
+
+  Thus, on each device, we decouple the communication and application tasks, which can be independently invoked in an event- or time-triggered fashion.
+  The \DPP concept guarantees the faithfulness of the network interface (\feature{Reliability}), supports \feature{Composability}, and leverages the recent trend toward ultra low-power multi-processor architectures, which can be chosen individually to match the needs of the application and the networking protocol respectively (\feature{Efficiency}).
+
+  \item[Real-time scheduler]
+  We design the \DRPLong (\DRP), a scheduler that provably guarantees that all messages received at the application interfaces meet their end-to-end deadlines (\feature{Timeliness}) and that message buffers along the data transfers do not overflow~(\feature{Reliability}).
+
+  To accomplish this while being adaptive to unpredictable changes~(\feature{Adaptability}), \DRP dynamically establishes at runtime a set of {contracts} based on the current traffic demands in the system. A contract determines the mutual obligations in terms of
+  % \begin{itemize}
+    % \item
+    (i)~minimum service provided, and
+    % \item
+    (ii)~maximum demand generated
+  % \end{itemize}
+  between the networking protocol and an application.
+  \DRP contracts define time bounds that can be analyzed to ensure that end-to-end deadlines are met, while
+  preserving flexibility in the timing of distributed task executions (\textbf{Question 2}).
+
+\end{description}
+
+The contributions of this chapter are summarized below.
+\begin{itemize}
+  \item
+  We design \DRP, a wireless \CPS system that provably provides end-to-end real-time guarantees between distributed applications. \DRP does so by harnessing the benefits of synchronous transmissions~(\cref{sec:ST}) and building upon the \blink real-time scheduler~\cite{zimmerling2017Blink} and the Dual-Processor Platform architecture~(\cref{sec:dpp}).
+
+  \item
+  We simulate \DRP execution to demonstrate that the provided bounds are both safe and tight.
+
+  \item
+  We implement \DRP on embedded hardware and showcase that the protocol works as expected.
+
+  \item
+  We make our implementation of \DRP publicly available, which includes the \blink scheduler for LWB~\cite{ferrari2012LWB}.
+
+\end{itemize}

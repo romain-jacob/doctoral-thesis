@@ -1,0 +1,9 @@
+\begin{tabularx}{\linewidth}{@{}Xc@{\qquad}c@{\qquad}cc@{\qquad}cc@{}}\toprule
+&\multicolumn{6}{c}{\textbf{Evaluation Objectives}}\\\cmidrule(l){2-7}
+\textbf{Performance dimension}&Metric&Convergence&\multicolumn{2}{c@{\qquad}}{KPI}&\multicolumn{2}{c}{Var.Score}\\%\cmidrule(r{\quad}l){2-2}\cmidrule(rl){3-3}\cmidrule(l{\,}r{\,}){4-5}\cmidrule(l){6-7}
+%&Measure&Exp.&Perc.&Conf.&Perc.&Conf.\\\midrule
+\midrule
+Round length~--~\Tround&max&False&95th&95\%&median&75\%\\
+Energy savings~--~$E$&median&False&5th&95\%&median&75\%\\\bottomrule
+
+\end{tabularx}

@@ -1,0 +1,13 @@
+ %  LoC 
+
+\begin{tabularx}{\linewidth}{@{}lXc@{\hspace{1cm}}c@{\hspace{1cm}}c}
+\toprule
+
+&&Crystal& Sleeping  Beauty &LWB\\
+\toprule
+ Native  code &&$931$&$751$&$1881$\\
+Baloo&&$539$&$797$&$1029$\\
+\toprule
+\textit{ratio}&&$0.58$&$1.06$&$0.55$\\
+\bottomrule
+\end{tabularx}

@@ -1,0 +1,23 @@
+%1test failed
+%2not enough samples
+
+
+\begin{tabular}{@{}cc@{\qquad}c@{\quad}c@{\quad}c@{\qquad}c@{}c@{\qquad}c@{\quad}c@{\quad}c@{\qquad}c@{}}
+\toprule
+&&\multicolumn{4}{c}{\textbf{Round length}}&&\multicolumn{4}{c}{\textbf{Energy savings}}\\
+\textbf{Payload}&\textbf{Slots per round}&\multicolumn{4}{c}{\Tround [\ms]}&&\multicolumn{4}{c}{$E$ [\%]}\\\cmidrule(){3-6}\cmidrule(){8-11}
+$L$ [\bytes]&\nslots [ . ]&Series 1&Series 2&Series 3&Model&&Series 1&Series 2&Series 3&Model\\
+\toprule
+&5&42.3{\ssymbol{1}}&42.3{\ssymbol{0}}&42.3{\ssymbol{2}}&42.52&&25{\ssymbol{0}}&30{\ssymbol{0}}&29{\ssymbol{2}}&34\\
+8&10&\textbf{77.85}{\ssymbol{0}}&77.24{\ssymbol{0}}&77.24{\ssymbol{2}}&77.52&&34{\ssymbol{0}}&36{\ssymbol{0}}&36{\ssymbol{2}}&38\\
+&30&217.01{\ssymbol{1}}&217.01{\ssymbol{0}}&217.01{\ssymbol{1}}&217.52&&37{\ssymbol{0}}&40{\ssymbol{1}}&39{\ssymbol{1}}&41\\
+\midrule
+&5&55.22{\ssymbol{0}}&52.22{\ssymbol{0}}&52.22{\ssymbol{2}}&52.52&&25{\ssymbol{1}}&24{\ssymbol{0}}&22{\ssymbol{2}}&28\\
+16&10&97.05{\ssymbol{1}}&97.08{\ssymbol{1}}&97.08{\ssymbol{2}}&97.52&&28{\ssymbol{0}}&29{\ssymbol{1}}&30{\ssymbol{2}}&32\\
+&30&276.52{\ssymbol{1}}&276.52{\ssymbol{1}}&276.49{\ssymbol{2}}&277.52&&31{\ssymbol{0}}&32{\ssymbol{1}}&32{\ssymbol{2}}&34\\
+\midrule
+&5&104.77{\ssymbol{0}}&104.74{\ssymbol{0}}&104.74{\ssymbol{2}}&105.02&&8{\ssymbol{1}}&8{\ssymbol{1}}&9{\ssymbol{2}}&14\\
+64&10&202.09{\ssymbol{1}}&202.12{\ssymbol{0}}&202.09{\ssymbol{0}}&202.52&&8{\ssymbol{0}}&12{\ssymbol{0}}&12{\ssymbol{0}}&16\\
+&30&591.49{\ssymbol{0}}&591.52{\ssymbol{0}}&591.49{\ssymbol{2}}&592.52&&13{\ssymbol{1}}&13{\ssymbol{1}}&14{\ssymbol{2}}&17\\
+\bottomrule
+\end{tabular}

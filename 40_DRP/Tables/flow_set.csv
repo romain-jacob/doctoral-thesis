@@ -1,0 +1,14 @@
+
+\begin{tabularx}{\linewidth}{@{}l@{\qquad}c@{\qquad}X@{}}
+%\begin{tabular}{@{}l@{\qquad}c@{\qquad}l@{}}
+\toprule
+\textbf{Flow}&\textbf{Blink}&\textbf{Flow set}\\
+\textbf{label}&\textbf{utilization}&\textbf{(period, deadline)}\\
+\midrule
+Control flows&na&20 $\times$ (15, 60)\\
+\midrule
+Low&41\%&Control flows; (10,~58); (10,~58); (11,~59); (14,~52); (15,~53); (16,~54); (16,~54); (19,~57)\\[5pt]
+Medium&60\%&Control flows; (5,~53);  (5,~54);  (6,~54);  (7,~50);  (7,~55);  (8,~56);  (9,~57);  (9,~58)\\[5pt]
+High&92\%&Control flows; (3,~55);  (3,~56);  (3,~56);  (3,~56);  (3,~59);  (3,~59);  (4,~51);  (4,~53); (4,~55); (4,~57)\\
+\bottomrule
+\end{tabularx}

@@ -1,0 +1,247 @@
+% !TEX root = ../00_thesis.tex
+
+\section{Concrete Realization of \DRP}
+\label{sec:concrete_realization}
+
+This section discusses how to concretely implement \DRP's concepts. In particular, one needs to define
+% \begin{itemize}
+  % \item
+(i)~the fixed flushing interval $T_f^s$ of the \CPs~(\cref{subsec:CP_schedule}), and
+  % \item
+(ii)~how to dynamically compute the network deadline \ndeadlinei of a flow \flowi and the flushing interval $T_f^d$ of each \ap (\cref{subsec:D_Tfd_computation}).
+% \end{itemize}
+
+Then, a worst-case buffer analysis (\cref{subsec:WC_buffer}) will allow to formulate admission tests (\cref{subsec:admission}), one for {\ap}s and one for {\cp}s.
+The success of all admission tests guarantees that both contracts \textbf{Source}~$\boldsymbol{\leftrightarrow}$~\textbf{Blink} and \textbf{Blink}~$\boldsymbol{\leftrightarrow}$~\textbf{Destination} can be satisfied by \DRP.
+
+\subsection{Setting \CPs' Flushing Interval}\label{subsec:CP_schedule}
+
+To guarantee that all \CPs fulfill their share of the contracts (\ie prevent buffer overflows), we conceive a time-triggered approach to schedule all tasks of \CPs. It consists of (\emph{i}) setting the flushing interval $T_f^s$ of all \CPs to the same constant value, and (\emph{ii}) letting the round interval $T_{net}$ be a multiple of $T_f^s$.
+As discussed in \cref{sec:designDetailed}, $T_f^s$ should not to constrain the achievable deadline: thus, we aim to set it as short as possible.
+\CPs have three tasks to perform
+\begin{itemize}
+ \item flushing \bolt before each communication round,
+ \item participating in the communication during the rounds,
+ \item writing all received messages into \bolt after the rounds.
+\end{itemize}
+Performing those tasks altogether takes $C_{CP} + C_{net}$ time units, where $C_{CP} = C_f + \nslotsmax * C_w$, and \nslotsmax denotes the number of time slots in one round.
+Hence, $C_{CP} + C_{net}$ is the smallest admissible round interval (otherwise \CPs' task set is not schedulable). Thus we set for all \CPs in the system,
+\begin{align}
+\label{eq:design_flush_period_source}
+	& T_f^s = C_{CP} + C_{net} \\
+\intertext{and we let the round interval be a multiple of $T_f^s$. In other words, for $k \in \mathbb{N}$, $k > 0$,}
+\label{eq:design_round_period}
+	& T_{net} = k * T_f^s
+\end{align}
+For a given $C_{net}$, a larger $k$ entails less available bandwidth but also lower energy consumption.
+\blink is designed to dynamically adjust $k$ to match the bandwidth requirements and save energy~\cite{zimmerling2017Blink}.
+
+\subsection{\mbox{Computing Network Deadlines \& \APs ' Flushing Interval}}
+\label{subsec:D_Tfd_computation}
+
+Having fixed \CPs' flushing interval, we now turn to the problem of dynamically computing the network deadline \ndeadlinei of flow \flowi and the flushing interval $T_f^d$ of \flowi's destination \apdst, such that the end-to-end deadline \deadlinei is met.
+To this end, we need to define expressions for the functions $f$ and $g$ (introduced in \cref{sec:designDetailed}), and derive values for \ndeadlinei and $T_f^d$ such that equations \eqref{eq:function_f} and \eqref{eq:function_g} are satisfied.
+
+\begin{theorem}
+  \label{thm:delta}
+  For any flow \flowi = (\flowsrci,\flowdsti,\periodi,\jitteri,\deadlinei), and given the duration of communication rounds $C_{net}$, functions $f$ and $g$ are upper-bounded as follows
+  \begin{align}
+  f(T_f^s ,  \ndeadlinei)
+  	& \; \leq \;
+  	T_i + D_i + \overline{\jitteri}  + \delta_f^{const} \label{eq:expression_f}\\
+  g(T_f^d)
+  	& \; \leq  \;
+  	T_f^d(\flowdsti) + \delta_g^{const} \label{eq:expression_g}
+  \end{align}
+  where $ \delta_f^{const}$ and $\delta_f^{const}$ are constant delays that depend on the WCETs of the \bolt API functions, on the maximum number of messages \nslotsmax that can be %inside a \bolt queue at the end of a round
+  served by \blink in one round, and on the fixed flushing interval $T_f^s$ of \CPs,
+  \begin{align}
+  \delta_f^{const} &\;= \;\; C_w + C_f + T_f^s \\
+  \delta_g^{const} &\;= \;\;\nslotsmax*C_w - (\nslotsmax-1)* C_r + C_f\\
+  \label{eq:jitter_bar}
+  \overline{\jitteri}  &\;= \;\; \floor*{(\jitteri + C_f - C_r)/{T_f^s}}\cdot T_f^s
+  \end{align}
+\end{theorem}
+
+\begin{proof}%
+Function $f$ is the time between when a message is written into \bolt by the source \apsrc and when the communication round in which the message is sent by \blink ends (\ie when the message is available at the destination \cpdst).
+This is the sum of two delays: $\delta_{source}$, the time until the message is available for communication at the source \cpsrc; and $\delta_{network}$, the time until the message is shipped over the network to \cpdst.
+
+Similarly, function $g$ is the time between when a packet is available at the destination \cpdst and the end of the \opflush operation that reads the message out of \bolt at the destination \apdst (\ie when the message can be processed by the destination application).
+We refer to this delay as $\delta_{dest}$.
+
+Hence, the expressions for functions $f$ and $g$ in \eqref{eq:expression_f} and \eqref{eq:expression_g} directly follow from the delays expression derived in Lemmas~\ref{lem:delta_source}, \ref{lem:delta_network}, and \ref{lem:delta_destination}~(\cref{append:drp_WCanalysis}).
+\
+\end{proof}
+
+We use Theorem~\ref{thm:delta} to express conditions on \ndeadlinei and $T_f^d$ such that \eqref{eq:function_f} and \eqref{eq:function_g} are satisfied.
+In particular, it is sufficient that for any flow $\flowi = (\flowsrci,\flowdsti,\periodi,\jitteri,\deadlinei) \in \flowset$
+\begin{align}
+\nonumber
+ T_i + D_i + \overline{\jitteri} \;
+	& \leq  \;\; r * \deadlinei - \delta_f^{const} \\
+\label{eq:ndeadline_constraint_latency}
+\Rightarrow \qquad T_i \;
+	& \leq  \;\; r * \deadlinei - \delta_f^{const} - D_i - \overline{\jitteri} \\
+\intertext{and}
+\label{eq:APflush_constraint_base}
+T_f^d(\flowdsti) \;
+	& \leq \, (1-r)*\deadlinei -  \delta_g^{const}
+\end{align}
+
+As low-power wireless networks typically feature limited bandwidth,%
+\footnote{Low-power radio bit rates are often limited to 256\kbps; the latest version of Bluetooth (Bluetooth~5) supports up to 2\Mbps.}
+%
+it makes sense to choose the network deadline \ndeadlinei as large as possible in order to increase the schedulability of flows in the network.
+However, \blink only supports constrained deadlines ($\ndeadlineany \leq \periodany$) and deadlines must be multiples of the round length ($\ndeadlineany = 0 \mod \rperiod $).
+Furthermore, a network deadline cannot be smaller than \rperiodmin (see \cref{subsec:details_blink}).
+%
+Hence, for any flow \flowi, it must hold that
+\begin{align}
+  \label{eq:ndeadline_constraint_period}
+  \rperiodmin \; &\leq \; \ndeadlinei \; \leq \; \periodi \\
+  \ndeadlinei \; &= \; 0 \mod \rperiod
+\end{align}
+
+Finally, to satisfy all contracts in the system, \eqref{eq:ndeadline_constraint_latency}, \eqref{eq:APflush_constraint_base} and \eqref{eq:ndeadline_constraint_period} must hold for all flows $\flowi \in \flowset$.
+Hence, the values for \ndeadlinei and $T_f^d$ computed dynamically at runtime must satisfy for any flow $\flowi = (\flowsrci,\flowdsti,\periodi,\jitteri,\deadlinei) \in \flowset$ and any $n \in \mathcal{N}$
+\begin{align}
+\label{eq:design_ndeadline}
+\ndeadlinei \;
+	& = \; \min \left(\; \periodi \;\, , \,  r*\deadlinei - \delta_f^{const} - \periodi - \overline{\jitteri} \right) - (\ndeadlinei \mod \rperiod) \\
+\label{eq:design_delay_destination}
+T_f^d(n) \;
+	& \leq \; \min_{F_j\in \mathcal{F}, n = \flowdstj}
+	\left( (1-r)*\deadlinej - \delta_g^{const} \right)
+\end{align}
+If using \eqref{eq:design_ndeadline} leads to a violation of the constraint in \eqref{eq:ndeadline_constraint_period} or if $T_f^d$ results in a load that \ap at node $n$ cannot handle, \DRP rejects the flow since the two contracts cannot be guaranteed.
+
+
+\subsection{Worst-case Buffer Analysis}
+\label{subsec:WC_buffer}
+
+Satisfying all contracts entails preventing overflows of message buffers in the system.
+Specifically, as shown in \cref{fig:design_overview},
+\begin{itemize}
+	\item \APs are responsible for ensuring that the incoming \bolt queues do not overflow, and
+	\item \CPs are responsible for ensuring that their local message buffers and the outgoing \bolt queues do not overflow.
+\end{itemize}
+
+To formulate the admission tests for {\ap}s and {\cp}s, we first need the worst-case buffer sizes (\ie maximum number of messages in a buffer) induced by a given flow set \flowset.
+For ease of exposition, we make the following hypothesis.
+\begin{hypothesis}\label{hyp:f_max}
+For a given flow set \flowset, an \ap (resp. \cp) never writes more messages into \bolt than can be flushed by \cp (resp. \ap) in one \emph{\opflush} operation in the time span between two \emph{\opflush}.
+\end{hypothesis}
+This hypothesis implies that the \bolt queues are always empty at the end of a \opflush operation.
+We prove at the end of this section that our admission tests effectively guarantee that Hypothesis~\ref{hyp:f_max} is always verified.
+
+\begin{lemma} \label{lem:buffer_bolt_out}
+Given a flow set \flowset, the buffer size of the outgoing \bolt queue of node $n \in \nodeset$, $B_{\bolt,out}(n)$, is upper-bounded,
+\begin{equation}
+\label{eq:bolt_out_buffer_stress}
+	B_{\bolt, out}(n) \; \leq \;
+	\sum_{\substack{F_i\in \mathcal{F},\, n = \flowsrci}} \ceil*{\frac{T_f^s + C_w + C_r + \jitteri}{T_i}}
+\end{equation}
+\end{lemma}
+
+\begin{proof}%
+According to the \textbf{Source} $\boldsymbol{\leftrightarrow}$ \textbf{Blink} contract, \apsrc at node $n$ does not write more than one message every \periodi with jitter \jitteri into the outgoing \bolt queue.
+Based on Hypothesis~\ref{hyp:f_max}, the buffer size is bounded by the number of messages that can be written by \apsrc during the maximum time a message can stay inside the queue, which is $\Delta = T_f^s + C_w + C_r$ (see \cref{fig:delta_source_time_graph}).
+The maximum number of messages that can be written by \apsrc within any time interval $\Delta$ is $\ceil*{(\Delta + J_i)/{T_i}}$ for each flow \flowi sourced by~$n$. \
+\end{proof}
+
+
+The worst-case buffer size of a \cp depends on (i) the maximum time a message can stay in \cp's local memory awaiting to be served by \blink, and (ii) the number of messages that can be sent within one round to a node.
+
+\begin{lemma} \label{lem:buffer_CP}
+Given a flow set \flowset, the buffer size of {\cp}'s internal memory of node $n \in \nodeset$, $B_{CP}(n)$, is upper-bounded,
+\begin{equation}
+\label{eq:CP_memory_stress}
+	B_{CP}(n) \leq
+	\sum_{\substack{F_i\in \mathcal{F},\\ n = \flowsrci}}
+	1 + \ceil*{\frac{\ndeadlinei + \overline{\jitteri} + C_f}{T_i}} +
+	\sum_{\substack{F_i\in \mathcal{F},\\ n = \flowdsti}} 1
+\end{equation}
+\end{lemma}
+
+\begin{proof}%
+On the source side, we make the conservative assumption that all messages read out during a \emph{\opflush} occupy memory in \cpsrc from the beginning of the \emph{\opflush}. Hence, the maximum waiting time in \cpsrc for a message until it is served by \blink is $\delta_{network} + C_f$ (see Lemma~\ref{lem:delta_network} -- \cref{append:drp_WCanalysis}). The number of messages in \cpsrc due to the source is upper-bounded by the maximum number of messages \apsrc can write during this time interval, given by
+$\ceil*{\delta_{network} + C_f)/T_i}$.
+Using Lemma~\ref{lem:delta_network}, this is at most
+$1 + \ceil*{( \ndeadlinei + \overline{\jitteri} + C_f)/\periodi }$  per outgoing flow.
+
+
+
+One the destination side, during a round, \cpdst may receive several messages, which it immediately writes into \bolt after the round.
+However, \blink expects one packet every \periodi from each flow, which it serves within \ndeadlinei. As $\ndeadlinei \leq \periodi$, \blink never schedules more than one packet per round for each flow.
+Thus, the maximum number of messages in \cpdst due to the destination is 1 packet per incoming flow.
+\
+\end{proof}
+
+\begin{lemma} \label{lem:buffer_bolt_in}
+Given a flow set \flowset, the buffer size of the incoming \bolt queue of node $n \in \nodeset$, $B_{\bolt,in}(n)$, is upper-bounded,
+\begin{equation}
+\label{eq:bolt_in_buffer_stress}
+	B_{\bolt, in}(n)\;  \leq \;
+	\sum_{\substack{F_i\in \mathcal{F},\\ n = \flowdsti}} \ceil*{\frac{T_f^d(n) + C_w + C_r + D_i}{T_i}}
+\end{equation}
+\end{lemma}
+
+\begin{proof}%
+As specified in the \textbf{Source} $\boldsymbol{\leftrightarrow}$ \textbf{Blink} contract, \blink delivers packets from any flow \flowi before the network deadline \ndeadlinei~(\cref{sec:designDetailed}). Therefore, \blink delivers at most one packet every \periodi time units, with a jitter equal to \ndeadlinei, which are written into \bolt immediately after the round.
+
+Based on Hypothesis~\ref{hyp:f_max},
+the buffer constraint of the incoming \bolt queue is bounded by the number of packets that can be written by \cpdst during the maximum elapsed time before a packet is read out by \apdst. As in the proof of Lemma~\ref{lem:buffer_bolt_out}, there are at most $\ceil*{(T_f^d(n) + C_w + C_r + D_i)/{T_i}}$ such messages from each flow \flowi that has node $n$ as destination.
+\end{proof}
+
+
+\subsection{Admission Tests}
+\label{subsec:admission}
+
+We now combine the above results and formulate the admission tests for \CPs and \APs, which form the cornerstone of \DRP's registration mechanism described in \cref{sec:designDetailed}.
+We further show that the computation complexity of the admission tests is not only small but \emph{constant}, and hence supports the requirements of \feature{Adaptability} and \feature{Efficiency}.
+
+Let $F_j$ be the flow for which a request has been issued, and $\mathcal{F}_{new} = \mathcal{F} \cup \{F_j\}$.
+The \cp of node $n$ is responsible for preventing overflows of its local memory (of size $S_{CP}$) and of the outgoing \bolt queue of node $n$ (of size $S_{\bolt}$).
+
+\begin{theorem}[{Admission Test of \cp}]\label{thm:CP}
+If
+\begin{align*}
+S_{\bolt} \;
+	 & \geq \sum_{\substack{\flowi \in \mathcal{F}_{new}, \\ n = \flowsrci}}
+	 	\ceil*{\frac{T_f^s + C_w + C_r + \jitteri}{T_i}} \\
+\textup{and}\qquad
+S_{CP} \;
+ 	& \geq
+	\sum_{\substack{\flowi \in \mathcal{F}_{new}, \\ n = \flowsrci}}
+		1 + \ceil*{\frac{\ndeadlinei + \overline{\jitteri} + C_f}{T_i}}
+	+ \sum_{\substack{\flowi \in \mathcal{F}_{new}, \\ n = \flowdsti}}
+		1
+\end{align*}
+then the requested flow \flowj can be safely admitted by $\cp$.
+\end{theorem}
+
+\begin{proof}Immediate from Lemmas~\ref{lem:buffer_bolt_out} and \ref{lem:buffer_CP}. \
+\end{proof}
+
+
+The \ap of node $n$ is responsible for preventing overflows of the incoming \bolt queue (of size $S_{\bolt}$) and for guaranteeing its share of the end-to-end deadline.
+
+\begin{theorem}[{Admission Test of \ap}]
+\label{thm:AP}
+  If there exists $T_f^d(n)$ such that
+  \begin{align*}
+    T_f^d(n) \;
+    & \leq \, \min_{\substack{F_i\in \mathcal{F}_{new}, \\  n = \flowdsti}}
+    \left( (1-r)*\deadlinei - \delta_g^{const} \right)\\
+\textup{and}\qquad
+    S_{\bolt} \;
+    & \geq \sum_{\substack{\flowi \in \mathcal{F}_{new}, \\ n = \flowdsti}} \ceil*{\frac{T_f^d(n) + C_w + C_r + D_i}{T_i}}
+  \end{align*}
+  then the requested flow \flowj can be safely admitted by $\ap$.
+\end{theorem}
+\begin{proof}
+Immediate from Lemma~\ref{lem:buffer_bolt_in} and equation \eqref{eq:design_delay_destination}.
+\end{proof}
+
+Finally, we verify that Hypothesis~\ref{hyp:f_max} holds, showing the validity of our buffer analysis. From \eqref{eq:f_max=M} we have $f_{max} = S_{\bolt}$. Thus, by performing the admission tests at runtime, it follows from Theorems~\ref{thm:CP} and \ref{thm:AP} and Lemmas~\ref{lem:buffer_bolt_out} and \ref{lem:buffer_bolt_in} that $f_{max}$ is always bigger than the filling level of any \bolt queue, which entails Hypothesis~\ref{hyp:f_max} is true.

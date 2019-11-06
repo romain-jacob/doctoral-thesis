@@ -1,0 +1,105 @@
+% !TEX root = ../00_thesis.tex
+
+\section{Problem Setting}
+\label{sec:ttw_intro}
+
+%State-of-the-art achievements of wired CPS [attention getter]
+
+\cps are understood as systems where \emph{``physical and software components are deeply intertwined, each operating on different spatial and temporal scales, exhibiting multiple and distinct behavioral modalities, and interacting with each other in a myriad of ways that change with context''}~\cite{nsf2010Cyber}.
+Application domains include, \eg robotics, distributed monitoring, process control, power-grid management.
+\cps combine physical processes, sensing, online computation, communication, and actuation in a single distributed control system.
+
+To support \cps, industry has been widely relying on wired field buses such as CAN, FlexRay, ARINC 429, AFDX, with good reasons. They combine functional and non-functional predictability with appropriate bandwidth, message delay, and fault-tolerance.
+Yet, several of the above application domains would benefit from wireless communication for its ease of installation, logical and spatial reconfigurability, and flexibility; in other domains, such as mobile scenarios, wireless is simply the only viable option.
+
+\pagebreak
+
+One major obstacle in using wireless communication for \CPS has been the reliability of packet transmission.
+However, in the last decade, several low-power protocols featuring very low packet loss rate have been proposed and standardized (\eg TSCH~\cite{watteyne2017Teaching}).
+Another technique, called synchronous transmissions (\ST -- \cref{sec:ST}), has been proven to be highly reliable and energy efficient.
+The most striking evidence of \ST benefits has been the EWSN Dependability Competition~\cite{schuss2017Competition}, where wireless protocols are tested in high-interference environments: all wining solutions in the last four years (2016 to 2019) were based on \ST~\cite{escobar2018Competition,sommer2016Competition,lim2017Competition, escobar2019RedNodeBus, ma2019DeCoT}.
+
+Despite these achievements, wireless \CPS solutions capable of providing end-to-end guarantees for distributed applications are still missing.
+It is challenging to concurrently meet all the requirements of typical industrial applications~\cite{akerberg2011Future}: reliability, timing predictability, low end-to-end latency at the application level,%
+%
+\footnote{Range of 10-500 \ms delay for a distributed closed-loop control system~\cite{akerberg2011Future}.}
+%
+energy efficiency, and quick runtime adaptability to different modes of operation.
+
+\begin{research_questions}
+  \begin{description}
+    \item[Question 1]
+    Can we provide end-to-end real-time guarantees between distributed applications in wireless \CPS?
+
+    \item[Question 2]
+    How can we minimize latency and jitter in the application execution while retaining some level of runtime adaptability?
+  \end{description}
+\end{research_questions}
+
+
+\fakepar{The problem}
+To understand the challenges of wireless CPS, it is helpful to highlight the fundamental difference between a field bus and a wireless network. In a field bus, whenever a node is not transmitting, it can idly listen for incoming messages. Upon request from a central host, each node can {wake-up and react quickly}. For a low-power wireless node, the major part of the energy is consumed by its radio. Therefore, energy efficiency requires to turn the radio off whenever possible to support long autonomous operation without an external power source.
+Since nodes are unreachable until they wake up, they require overlapping wake-up time intervals to communicate.
+
+This observation often results in wireless system designs that minimize energy consumption by using communication rounds, \ie time intervals where all nodes wake-up, exchange messages, then turn off their radio~\cite{wirelessHART,watteyne2017Teaching,ferrari2012LWB,jacob2019Baloo}. Scheduling policies define when the rounds take place (\ie when to wake up) and which nodes are allowed to send messages during the round.
+Moreover, \cps do not only exchange messages, they also execute tasks (\eg sensing or actuation).
+Typically, the system requirements are specified end-to-end, \ie between distributed tasks exchanging messages.
+One option to meet such end-to-end requirements (\textbf{Question~1}) is to co-schedule the execution of tasks and the transmission of messages, as proposed in the literature for wired architectures~\cite{abdelzaher1999combined, craciunas2016Combined, ashjaei2017Designing}.
+However, these schedules result from complex optimization problems which are difficult to solve online, even more so in a low-power setting.
+Thus, schedules are often pre-computed offline, which restricts the runtime adaptability of the resulting system (\textbf{Question~2}).
+
+\fakepar{The challenge}
+To support wireless \CPS applications in an industrial context, a solution to this problem should fulfill the following requirements.
+\begin{features}[labelwidth=65pt, leftmargin=(\labelwidth+\labelsep)]
+
+  \item[Timeliness]
+  All distributed applications meet their end-to-end deadlines.
+
+  \item[Reliability]
+  A large ratio of messages are successfully transmitted over wireless and conflict-free communication is guaranteed between the system's nodes.
+
+  \item[Adaptability]
+  The system adapts to dynamic changes at runtime.
+
+  \item[Mobility]
+  The system supports mobile devices.
+
+  \item[Efficiency]
+  The system
+  supports short end-to-end latency (in the \ms range),
+  scales to medium-to-large system sizes,
+  and
+  optimizes its energy consumption and bandwidth utilization.
+
+\end{features}
+
+\fakepar{Our solution}
+In this chapter, we propose a solution to the industrial wireless \CPS problem that fulfill these requirements.
+We do so by combining co-scheduling techniques, inspired from the wired literature, with a \ST-based wireless system design using communication rounds.
+
+\ST provides highly reliable wireless communication~(\feature{Reliability}) and inherent support for \feature{Mobility}.
+A round-based design allows to minimize the energy consumed for communication, which is a large part of the total energy budget of a low-power system~(\feature{Efficiency}).
+The co-scheduling approach results in highly optimized schedules~(\feature{Efficiency}) which guarantee to meet the application deadlines~(\feature{Timeliness}).
+Our system provides some runtime \feature{Adaptability} by switching between multiple pre-computed operation modes, a well-known concept in the wired literature~\cite{fohler1993changing}.
+
+The main challenge in realizing such a system is to integrate the allocation of messages to communication rounds (which is similar to a bin-packing problem~\cite{wikipedia2019BinPacking}) with a co-scheduling approach (which typically solves a MILP~\cite{azim2014Scheduling} or a SMT~\cite{steiner2010evaluation,craciunas2014SMTbased,huang2012Static} formulation).
+
+The contributions of this chapter are summarized below.
+\begin{itemize}
+
+  \item
+  We present Time-Triggered Wireless (\TTW), a low-power wireless \CPS that meets the common requirements of industrial applications.
+
+  \item
+  We formulate a joint optimization problem for co-scheduling distributed tasks, messages, and communication rounds that guarantees to meet application deadlines, minimize the energy consumed for wireless communication, and ensures safety in terms of conflict-free communication, even under packet loss.
+
+  \item
+  We provide a methodology that efficiently solves this optimization problem, known to be NP-hard~\cite{jeffay1991nonpreemptive}.
+
+  \item
+  Using time and energy models, we quantify the benefits of rounds to minimize energy, and we derive the minimum end-to-end latency achievable.
+
+  \item
+  We implement \TTW on embedded hardware and demonstrate that the system is suited for fast feedback control applications.
+
+\end{itemize}

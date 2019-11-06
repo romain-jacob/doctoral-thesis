@@ -1,0 +1,12 @@
+ %  Binary  size 
+
+\begin{tabularx}{\linewidth}{@{}lXc@{\hspace{1cm}}c@{\hspace{1cm}}c}
+\toprule
+
+&&Crystal& Sleeping  Beauty &LWB\\
+\toprule
+ Native  code &&$16.87$&$17.47$&$19.11$\\
+ Baloo  on  TelosB &&$16.36$&$20.71$&$19.7$\\
+ Baloo  on  CC430 &&$16.38$&$19.3$&$19.18$\\
+\bottomrule
+\end{tabularx}

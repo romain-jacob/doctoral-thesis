@@ -1,0 +1,21 @@
+% !TEX root = ../00_thesis.tex
+
+\section{Related Work}
+\label{sec:relWork}
+
+Providing end-to-end guarantees in distributed networked systems has a long history in the context of the Internet. Notable developments are the resource reservation protocol (RSVP) that combines flow specification, resource reservation, admission control, and packet scheduling to achieve end-to-end quality of service~(QoS) \cite{zhang1993rsvp}. Network calculus \cite{cruz1991calculus} provides some of the necessary theoretical concepts to determine bounds on buffer sizes and delay in communication networks.
+Extension toward hard real-time computing and communication systems is known as real-time calculus \cite{thiele2000Realtime}.
+The analysis of distributed hard real-time systems also has a long history~\cite{tindell1994Holistic}, and so do compositional analysis frameworks, such as MAST \cite{gonzalezharbour2001MAST}, SymTA/S \cite{henia2005System} and MPA \cite{wandeler2006System}.
+
+Early works on real-time communication in sensor networks consider classical non-deterministic routing protocols~\cite{lu2002RAP,stankovic2003Realtime,he2003SPEED}, thus providing only soft guarantees.
+Stankovic et al. \cite{stankovic2003Realtime} even argue that specific message delivery orderings, such as those useful to apply established dependability techniques~\cite{ferrari2013Virtus}, are impossible to guarantee in a multi-hop low-power wireless network.
+More recently, standards like WirelessHART~\cite{wirelessHART} have been analyzed to provide communication guarantees~\cite{saifullah2015EndtoEnd,saifullah2010RealTime}.
+But~\cite{saifullah2010RealTime} is based on NP-hard multiprocessor scheduling and requires a global network view, which limits its adaptability to dynamic changes in the system~\cite{akerberg2011Measurements}.
+It is however possible to integrate the wireless protocol with the rest of the system to avoid interference by jointly schedule transmissions in the network and all other tasks in the system, as we demonstrate in \cref{ch:ttw}.
+Other wireless real-time protocols have been described recently~\cite{odonovan2013GINSENG,watteyne2017Teaching}. However, the integration of these protocols into a methodology to provide end-to-end real-time guarantees between \emph{application interfaces} is unsolved.
+
+Recently, a game-changing approach to wireless multi-hop communication using synchronous transmissions has been described~\cite{ferrari2011Glossy,ferrari2012LWB,zimmerling2013modeling}.
+It avoids the computation of multi-hop routing paths and per-node communication schedules based on, for example, neighbor lists and link qualities, because the protocol logic is independent of such volatile network state.
+Experiments on several large-scale testbeds show that the approach is highly adaptive and achieves an end-to-end packet reliability higher than 99.9\,\%~\cite{ferrari2011Glossy,ferrari2012LWB}.
+Furthermore, the few packet losses can be considered statistically independent~\cite{zimmerling2013modeling}, which eases the design of \CPS controllers that can deal with intermittent observations~\cite{sinopoli2004Kalman}.
+% Although our approach can be adapted to other types of communication protocols, the chapter is based on this concept of synchronous transmissions.

@@ -1,0 +1,198 @@
+% !TEX root = ../00_thesis.tex
+
+\section{Performance Evaluation}
+\label{sec:baloo_eval}
+
+% We presented \baloo, a flexible design framework for low-power network stacks based on \ST; we now evaluate our proposal.
+This section presents an evaluation of \baloo.
+We look first into qualitative aspects. We argue that \baloo is indeed usable and validate the premise that it makes it easy to design a network stack based on \ST.
+We then discuss quantitative aspects by looking at the performance overhead of using \baloo compared to original implementations.
+
+\subsection{Qualitative Evaluation}
+\label{subsec:usability}
+
+%Evaluating the usability of a software or tool is complex.
+The evaluation of software usability is a challenging task that suffers from almost unavoidable bias.
+To support our claim that \baloo is indeed easy to use, we used it ourselves to perform one of the most time consuming task in experimental research: the re-implementation of someone else's protocol.
+%We chose three: SB, Crystal and LWB. Why?
+%- They are well-known solutions
+%- They cover most of the features offered by \baloo
+%- The original code is available
+We re-implemented the protocol logic of three network stacks: Crystal~\cite{istomin2018Interferenceresilient}, Sleeping Beauty~\cite{sarkar2016Sleeping}, and LWB~\cite{ferrari2012LWB}. We chose these protocols because:
+\begin{itemize}
+
+	\item They are well-known solutions from the literature, considering different types of scenario.
+
+	\item Together, they use most of the features offered by \baloo.
+
+	\item The authors' source code is publicly available.
+
+\end{itemize}
+
+
+It is fair to say that the fact that {we} can use {our} own software brings only little evidence of the usability of \baloo.
+Indeed, its usability will be ultimately demonstrated if and when other people start using it to implement their own protocols.
+%To support that:
+%- code is available, with an extensive documentation of the various features and how to use them
+%- our re-implementations of known protocols are provided
+%- test applications showcasing the various features
+To facilitate this, the code of \baloo is openly available, including demo applications, and is accompanied by a detailed documentation of its features and how to use them.
+Naturally, our re-implementations of Crystal, Sleeping Beauty, and LWB are also available~(\cref{append:baloo_artifacts}).
+
+In addition, we used the 2019 EWSN Dependability Competition~\cite{DepComp2019} as a case study.
+In this competition, networking solutions must perform well across a wide range of input parameters (\eg data rates or payload sizes), which demands the network stack to be adaptive.
+This is a perfect application for \baloo: by design, the middleware takes care of adjusting the timing of operations (\ie when the \ST primitives should be executed) based on the application parameters (\eg the payload size).
+%
+Furthermore, one can leverage the availability of different primitives. For example, after a data packet has been sent using Glossy~\cite{ferrari2011Glossy}, one can efficiently collect acknowledgements from all destinations using Chaos~\cite{landsiedel2013Chaos}.
+
+We tested the \feature{Usability} of \baloo by having master students (who did not have any prior knowledge of \baloo, nor \ST) competing using the framework~\cite{mueller2019Competition}.
+Naturally, they did not beat teams of experienced researchers, but they did perform well.
+As they put it themselves in their report:
+\begin{quote}
+	``We had not much prior experience in WSN protocol design. While the result is not perfect, we managed implement our protocol within 8 weeks of part-time work. We would not have been able to do that without \baloo.''~\cite{schaper2019LowPower,mueller2019Lowpower}
+\end{quote}
+
+
+
+Finally, another important qualitative aspect of \baloo is its portability. The underlying middleware has been designed to minimize the software parts that are platform-dependent, and those have been isolated as much as possible.
+Essentially, the platform-dependent part is limited to the hardware timer interface and the radio drivers (further discussed in \cref{sec:requirements}).
+%
+\baloo is readily available on two platforms, the CC430 SoC~\cite{CC430F6137} and the TelosB mote~\cite{TelosB}.
+Thanks to the abstraction provided by the middleware, the network layer protocol implementations using \baloo are \textsl{platform agnostic}. In other words, the same network layer implementation can be used to compile binaries for any platform supported by \baloo.
+%
+We argue that these elements, altogether, show the usability of \baloo.
+
+\subsection{Quantitative Evaluation}
+\label{subsec:overhead}
+
+Abstraction and flexibility usually impact quantitative performance metrics.
+In this section, we evaluate the performance overhead of \baloo along four metrics: the packet reception rate (PRR), the radio duty cycle (DC), the binary size, and the number of lines of code.
+
+%Description of the objective: validate that \baloo `works', and quantifying the overhead. Not about the performance evaluation of the network layer protocols themselves.
+%$->$ thus only limited tests on a single testbed.
+We performed this evaluation using our three re-implementations of Crystal~\cite{istomin2018Interferenceresilient}, Sleeping Beauty~\cite{sarkar2016Sleeping}, and LWB~\cite{ferrari2012LWB}.
+It is important to clarify the objective of the experiments we conducted: the goal is to evaluate the \textsl{performance overhead} of using \baloo compared to native implementations; not to evaluate the actual protocol performances.
+
+\fakepar{Experimental Setup} All our experiments were conducted on Flocklab~\cite{lim2013FlockLab} as it is the only public testbed featuring both CC430 SoC~\cite{CC430F6137} and TelosB motes~\cite{TelosB}, the two platforms for which \baloo is available.
+All tests ran for one hour on 26 nodes, leading to tens of thousand data packets exchanged for each protocol.
+As much as possible, we designed the experiments to match those from the original protocol papers~\cite{istomin2018Interferenceresilient,sarkar2016Sleeping,ferrari2012LWB}.
+\begin{description}
+
+	\item[Crystal]
+	We ran tests varying the number of source nodes $U$ that have a packet to transmit in each round.
+	We used $U = \{0,1,20\}$. All other parameters were set according to the author's paper (first row of Table 2 in ~\cite{istomin2018Interferenceresilient}).
+
+	\item[Sleeping Beauty]
+	We ran tests varying the percentage of nodes that that have a packet to transmit in each round.
+	We used $12.5\%$, $25\%$, and $50\%$ of the available nodes.
+	All other parameters were set according to the author's paper~\cite{sarkar2016Sleeping}.
+
+	\item[LWB]
+	We ran tests varying the inter-packet interval $IPI$ of the data stream registered by each node in the network.
+	We used $IPI = \{4\s, 30\s\}$ and the dynamic scheduler aiming to minimize energy consumption.
+
+\end{description}
+
+
+In each case, we compared: \emph{(i)} the results reported in the original papers, \emph{(ii)} the results we obtained by running the publicly available code, and \emph{(iii)} our re-implementations using \baloo on both the TelosB motes and \emph{(iv)} the CC430 SoC.
+All results are summarized in Tables \ref{table:PRR} to \ref{table:LoC}. Before discussing each metrics in details, some comments are useful.
+\begin{itemize}
+
+	\item
+	Although the original code of Sleeping Beauty is openly available~\cite{Code_SleepingBeauty}, we failed to run the protocol successfully. More precisely, the observed behaviour was quite different from the paper description and led to inexplicably poor results.
+	It did not seem fair to present these as a truthful measure of the protocol performance.
+	Thus, we do not report any results for the native code for Sleeping Beauty.
+
+	\item
+	The original Sleeping Beauty paper does not report exact values for PRR and duty cycle. The values from Table \ref{table:PRR} and \ref{table:DC} were read from Fig.~9 in ~\cite{sarkar2016Sleeping}.
+
+	\item
+	The original LWB paper presents results from an implementation on TelosB, but the available code from the authors is for the CC430 SoC~\cite{Code_LWB}.
+	Thus, we compare our re-implementations with the native code, but not with the original paper results.
+
+\end{itemize}
+
+\afterpage{
+	\begin{landscape}
+		\begin{table*}
+			\centering
+			\caption{\raggedright End-to-end packet reception rate (PRR), expressed in percentage (\%)}
+			{\smaller\input{\PathTab/PRR.csv}}
+			\label{table:PRR}
+		\end{table*}
+		\vfill
+		\begin{table*}
+			\centering
+			\caption{Average radio duty cycle (DC) across all nodes but the data sink, expressed in percentages (\%)\newline
+			\capt{For Sleeping Beauty, the reported values exclude the bootstrapping phase.}}
+			{\smaller\input{\PathTab/DC.csv}}
+			\label{table:DC}
+		\end{table*}
+		\vfill
+		\begin{table}
+			\parbox{.45\linewidth}{%
+				\caption{Estimate of the binary size of the network layer protocol code (in\kb)}
+				{\smaller\input{\PathTab/Binary.csv}}
+				\label{table:Binary}
+			}
+			\hfill
+			\parbox{.45\linewidth}{%
+				\caption{Estimate of the number of lines of code in the implementation of the network layer protocol}
+				{\smaller\input{\PathTab/LoC.csv}}
+				\label{table:LoC}
+			}
+		\end{table}
+	\end{landscape}
+}
+
+\fakepar{Packet Reception Rate (PRR)}
+We consider the end-to-end PRR: the percentage of the packets generated by the application at the source nodes that have reached their intended destination.
+We count a packet as lost \textsl{only if none of its transmissions} has been successfully received at the destination. In Crystal~\cite{istomin2018Interferenceresilient} for example, data packets may be lost and successfully received later; that does not impact the PRR.
+
+We do not expect any overhead in term of reliability from using \baloo, as this metric essentially depends on the underlying \ST primitive and the network layer protocol logic; two elements not modified by the framework.
+This metric mostly verifies that our re-implementations ``work''.
+The results in Table~\ref{table:PRR} indeed show similiar PRR for all implementations, with one notable exception.
+
+\baloo on CC430 for Crystal with $U=20$ performs poorly. After closer investigation, it appears that the success rate of the capture effect on the CC430 SoC is much lower than on the TelosB (presumably due to the different modulation schemes used by the radio: 2-FSK and O-QPSK respectively).
+When $U=20$, it is highly probable that all the one-hop neighbours of the sink are selected source nodes that generate a packet in a round (20 out of 25 nodes available on Flocklab).
+As Crystal transmits all its data packets using contention slots,%
+\footnote{Successful contention slots rely on capture effect, see \cref{sec:adv_features}}
+the sink only rarely receives packets in these rounds, thus resulting in poor PRR.
+
+\fakepar{Radio Duty Cycle (DC)}
+The radio duty cycle (DC) is expected to reveal more of the actual overhead induced by \baloo. Our results are summarized in Table~\ref{table:DC}.
+
+The LWB experiment perfectly matches our expectations: the DC are comparable, with a slight increase for \baloo (5 to 15\% more compared to the native code), which is due to the cost of sending more information in the control packet.
+
+In the original \baloo paper~\cite{jacob2019Baloo}, we reported surprising results regarding Crystal: Our results on the same platform (TelosB) showed significantly higher DC both for the native code and our re-implementation (from 50\% to 100\% increase) whereas on the CC430 SoC, results are more comparable.
+This was due to a misconfiguration of the clear channel assessment (CCA) threshold value: there is an offset of approximately $45dB$ between the value set in the register and the actual sensitivity of the CCA pin.%
+\footnote{\cite{cc2420_datasheet}: RSSI / Energy Detection, page 48}
+%
+Consequently, when setting $-60\dBm$ (the value suggested by the Crystal authors~\cite{istomin2018Interferenceresilient}), we actually obtained a CCA sensitivity of about $-105\dBm$, which is lower than the noise floor. Hence, Crystal consistently detected possible interference and (often needlessly) prolonged the communication rounds, thus artificially increasing the DC.
+We have re-run these experiments with the correct CCA setting (\ie $-60\dBm$) and validate that, as expected, the DC is slightly increased by \baloo~(\cref{table:DC}).
+
+The results for Sleeping Beauty are more surprising. In spite of the overhead induced by \baloo, our re-implementation achieves about $2.5$x reduction in DC. It is unclear what can be the source of such difference.
+As we based our re-implementation only on the original paper description~\cite{sarkar2016Sleeping}, one possible explanation is that we might lack some of the original protocol features, that would induce more radio on time.
+However, the good results we obtain with our re-implementation would question the usefulness of such features.
+% This remains an open question.
+
+\fakepar{Binary size}
+The binary file size is another metric where we expect \baloo to induce some overhead, as the middleware introduces additional files, types and features that are not always necessary for all protocols.
+
+Since the protocol implementations we looked at are based on different versions of the Contiki OS, we tried to evaluate the actual size of the \textsl{network layer protocol} only by deducing the memory required for the OS. The OS memory requirements were obtained by looking at the size of a minimal ``hello-world'' application. Table~\ref{table:Binary} reports the difference between the total and ``hello-world'' binary sizes, a rough \textsl{estimate} of the memory required by the network layer protocol implementation.%
+\footnote{%
+More advanced metrics could be used, \eg summing the size of relevant functions in the object file. We chose to used a very simple approach because our goal is only to give an estimate of the impact of \baloo on the memory requirements.}
+
+Actually, the memory size of our re-implementations is comparable to that of the native codes. Likely, t	his is due to the configurable nature of the framework. Many features are available, but the protocol designer flexibly selects which are required, thus limiting the size of the compiled code.
+Furthermore, the structure imposed by the framework may lead to a more concise implementation, as discussed next.
+
+\fakepar{Lines of Code}
+The last metric we considered is the number of lines of code that is part of the \emph{network layer protocol} (\ie for the \baloo re-implementations, only the callbacks and custom functions; not the middleware code).
+This is arguably a rough metric, for at least two reasons: \emph{(i)} none of the implementations aimed to minimise its code size; \emph{(ii)} in the original implementations, it is not easy to isolate the code implementing the protocol logic from the interface with the lower layers (precisely, this is one of the differences with \baloo).
+Still, the number of lines of code provides some insights on the potential benefits of \baloo in terms of usability.
+
+The results in Table~\ref{table:LoC} show that using \baloo can significantly reduce the amount of code required to implement some network layer protocol logic (up to 45\% reduction for LWB).
+More importantly, the protocol implementations in \baloo \textsl{do not contain} any timer setting or register accesses, as these are handled directly by the middleware.
+
+\fakepar{Summary}
+Ultimately, our quantitative evaluation shows through a few examples that implementations using \baloo perform well and that the framework induces only limited (if any) overhead in terms of radio duty cycle and binary size.

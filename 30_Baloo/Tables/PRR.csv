@@ -1,0 +1,13 @@
+ %  PRR  table 
+
+\begin{tabularx}{\linewidth}{@{}lXcccp{5em}cccp{5em}cc@{}}
+\toprule
+&&\multicolumn{3}{c}{Crystal}&& \multicolumn{3}{c}{Sleeping  Beauty} &&\multicolumn{2}{c}{LWB}\\
+&&$U=0$&$U=1$&$U=20$&&$12.5\%$&$25\%$&$50\%$&&$IPI=30s$&$IPI=4s$\\
+\toprule
+ Original  paper &&na&100&$100$&& $\approx  99$ & $\approx  99$ & $\approx  99$ &&na&na\\
+ Native  code &&na&100&$99.91$&&x&x&x&&$99.79$&$99.56$\\
+ Baloo  on  TelosB &&na&100&$100$&&$99.43$&$99.75$&$99.04$&&$100$&$99.92$\\
+ Baloo  on  CC430 &&na&100&$81.36$&&$99.48$&$97.39$&$98.72$&&$99.81$&$99.85$\\
+\bottomrule
+\end{tabularx}

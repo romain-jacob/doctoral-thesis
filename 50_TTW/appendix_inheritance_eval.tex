@@ -1,0 +1,26 @@
+% !TEX root = ../00_thesis.tex
+
+\section{System Configuration -- Scheduler Evaluation}
+\label{append:inheritance_eval}
+
+This appendix details the system configuration used for the performance evaluation of \TTW's scheduler~(\cref{sec:ttw_evaluation_sched}).
+The configuration consists of 15 different applications involving 45 tasks and 30 messages, executing in 5 different modes~(\cref{table:modes}).
+All applications are considered persistent, and the precedence graphs always contain a single chain.
+The tasks are mapped to 13 different nodes~(\cref{table:mapping}), with a WCET set to 1\ms.
+The mode graph is shown in~\cref{fig:modeGraph_eval}.
+% All other inputs are set as reported in \cref{tab:ILPvar}.
+
+
+\begin{table}[b]
+  \centering
+  \caption{Task mapping for \TTW's scheduler evaluation~(\cref{sec:ttw_evaluation_sched}).}
+  \label{table:mapping}
+  {\smaller \input{\TablePath/mapping.csv}}
+\end{table}
+
+\begin{table}[b]
+  \centering
+  \caption{System configuration for \TTW's scheduler evaluation~(\cref{sec:ttw_evaluation_sched}).}
+  \label{table:modes}
+  {\smaller \input{\TablePath/modes.csv}}
+\end{table}

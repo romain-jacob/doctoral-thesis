@@ -1,0 +1,71 @@
+% !TEX root = ../00_thesis.tex
+
+\section{Discussion and Limitations}
+\label{sec:requirements}
+
+We argued that \baloo is a usable, flexible, and performant design framework (\cref{sec:baloo_eval}).
+To complete the description, we now detail hardware and software requirements and discuss the portability and limitations of the framework.
+
+\subsection{Requirements}
+\label{subsec:requirements}
+\fakepar{Hardware requirements}
+The only strict hardware requirement of \baloo is one dedicated Capture Compare Register (as required by any time-triggered protocol). The actual timer frequency is not important; a standard 32\kHz clock is already fast enough.
+This timer is used to schedule the communication slots, wake-up times, and callback executions.
+
+Both supported platforms feature an MSP430 CPU, but this is not a constraint. An ARM core like the ones embedded on the nRF52840~\cite{nRF52840} or the OpenMoteB~\cite{OpenMoteB} platforms would work as well. It would eventually be even more flexible given the support for interrupt priorities.
+
+\fakepar{Software requirements}
+\baloo requires a software-extended timer implementation to enable the scheduling of firing epochs further than one roll-over of the timer. This is (surprisingly) not part of Contiki by default, but it is a rather minor extension.
+%
+Some features of \baloo rely on radio functions (\eg the noise detection); these features are obviously platform-dependent.
+%
+The rest of the platform-dependent software in \baloo is a mapping between \ST primitive functions and generic macros used by the middleware.
+
+\subsection{Portability}
+\baloo itself has limited hardware and software requirements (\cref{subsec:requirements}). The main constraint comes from the availability of \ST primitives, which are notoriously difficult to implement; but this is independent of the framework.
+Assuming \ST primitives are available, the requirements and efforts to port \baloo to a new platform are limited.
+%A guide on ``how-to-port'' \baloo is included in the documentation ~\cite{Baloo}.
+
+We implemented \baloo using Contiki (see \cref{sec:baloo_implementation}), which turned out having pros and cons. On the one hand, it facilitates the port of \baloo to other platforms \emph{that already run Contiki}.
+On the other hands, it makes \baloo harder to port to \emph{other platforms}, as it requires to port the Contiki OS first. It has been a limitation in some later projects (see \cref{sec:outcomes}).
+
+Furthermore, \baloo does not require much of the complex machinery of a full-fledge operating system. Thus, a bare-metal implementation of \baloo could bring multiple benefits: increased reliability (as there is no interference from the OS), lighter weight, and simpler to port on any platform (as there is no need to port an entire OS first).
+
+At the time of writing, the only known publicly available implementation of \baloo uses Contiki. Ongoing development efforts are discussed in \cref{sec:outcomes}.
+
+\subsection{Limitations}
+
+\baloo is a framework that facilitates the design of \ST-based network stacks by providing some level of abstraction.
+We showed in \cref{sec:baloo_eval} that this abstraction has only a moderate impact on performance.
+However, abstraction also limits the design freedom, and this also applies to \baloo. We honestly tried to think of sensible design concepts that are incompatible with the framework, while they would be technically possible to implement:
+\begin{itemize}
+	\item \baloo does not support multiple hosts (\eg for redundancy purposes).
+	\item \baloo cannot start primitives at different times on different nodes (\eg to save energy).
+	\item \baloo cannot execute different \ST primitives on different nodes during the same data slots.
+\end{itemize}
+% Arguably, this is a rather short list.
+
+\cref{sec:adv_features} presented a set of features offered by the \baloo framework. The feature set may not be complete, but (i)~it already offers a lot of options, and (ii)~it can be extended in the future, if necessary.
+To the best of our knowledge, to date,
+there is no \ST-based network layer protocol in the literature that is incompatible with \baloo. Likely, this is because what \baloo cannot do is either hard to do in general (\eg supporting redundant hosts) or are complex optimizations with uncertain benefits (\eg starting primitives with time offsets).
+
+\subsection{Lessons Learned}
+\label{sec:lessonsLearned}
+
+During this work, we have learned a few lessons that might be worth sharing.
+\begin{description}
+
+	\item[Re-implementing protocols.] Re-implementing a complete protocol (solely) based on the description from a research paper is very difficult, if not impossible. Many implementation details and design choices are omitted, for good reasons: research papers rather focus on novel concepts and ideas.
+	Without a detailed technical documentation, a large part of the engineering is lost, and it becomes very hard to fairly compare two implementations of the same protocol.
+
+	\item[Running protocols.] Publishing code does not mean it is (re)usable. Our experience with Sleeping Beauty has been a perfect example of that: even with the code freely available and quite some experience with testbed experiments, we were not able to successfully run the protocol on Flocklab.
+	More generally usefulness of publishing code is greatly reduced (if not voided) without proper instructions and documentation.
+
+\end{description}
+
+The point here is not to say that every research work \emph{must} openly release code together with an extensive documentation.
+However, \emph{if} one claims his or her research is providing practical solutions to concrete problems, then these solutions must be made available.
+When such a solution is a piece of software (\eg a network stack for low-power wireless), the (re)usability of the software is at least as important as the research paper presenting the underlying concepts.
+
+% The availability and reusability of research artefacts is an increasingly important topic. Scientific societies start to incentivize reusable research; the ACM introduced in 2018 a badging system~\cite{acmBadges} which starts being used in leading conferences like CoNEXT 2018~\cite{acmCoNEXT2018}.
+% We believe this is really important to keep in mind: if we want to see our research being used and impactful beyond academia, we must strive to make it more accessible. This is why \baloo is open source and accompanied by an extensive documentation of the code and how to use it~\cite{Baloo}.

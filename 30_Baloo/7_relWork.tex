@@ -1,0 +1,32 @@
+% !TEX root = ../00_thesis.tex
+
+\section{Related Work}
+\label{sec:relwork}
+
+As mentioned in the introduction, the idea of middleware for Wireless Sensor Networks (WSN) has been around for more than a decade~\cite{romer2004Programming,chatzigiannakis200750,wang2008Middleware,mottola2012Middleware}.
+These papers generally agree on the needs and challenges for WSN middlewares.
+Yet, there have been relatively few proposals to address these challenges.
+Recent surveys~\cite{razzaque2016Middleware,onderwater2016overview} provide an overview of the middleware literature in the wider context of the Internet of Things, which covers all layers from local devices to cloud services.
+\cite{mottola2012Middleware} reviewed the literature focusing more on WSN:
+proposals include for example Impala~\cite{liu2003Impala} which explicitly address the problem of fault tolerance in mobile networks.
+Programming abstractions like TinyDB~\cite{madden2005TinyDB}, RUNES~\cite{costa2005RUNES}, or TinyLIME~\cite{costa2007Programming} have also been proposed.
+However, in these works, the level of abstraction is either higher or lower than the network layer.
+
+In the past two decades, countless wireless MAC protocols have been proposed (see \eg \cite{teleshermeto2017Scheduling,bartolomeu2016Survey} for recent surveys).
+%
+\cite{isolani2018Survey} surveyed and classified Wireless MAC protocols according to their programmability \emph{scope} (what elements of the MAC layer are programmable) and \emph{level} (the granularity at which the protocol logic can be programmed). The authors classify protocols as either monolithic, parametric or modular.
+In the context of IEEE 802.15.4 networks, modular protocols include \eg the MAC Layer Architecture (MLA)~\cite{klues2007MLA} and $\lambda$-MAC~\cite{parker2010lambda}. In contrast, \baloo would be classified as parametric, as it allows ``parameter tuning through interfaces''.
+Using Synchronous Transmissions (\ST) interestingly changes the way network stacks can or should be designed.
+So far, only few network stacks using \ST have been proposed~\cite{ferrari2012LWB,istomin2018Interferenceresilient,sarkar2016Sleeping,sutton2017eLWB,jacob2017TTW_extended,suzuki2013Choco}, and almost no research has been conducted to propose a flexible design framework (\eg comparable to MLA~\cite{klues2007MLA}) but tailored to \ST.
+Two noteworthy exceptions are A$^2$~\cite{alnahas2017a2} and Atomic-SDN~\cite{baddeley2019AtomicSDN}.
+
+% A$^2$, a work with a very similar approach to ours.
+A$^2$ aims to facilitate the design of \ST-based communication using a middleware component, called Synchrotron. However, A$^2$ is not a network stack, it is a \emph{generic \ST primitive}.
+\baloo and A$^2$ actually complement each other perfectly:
+\baloo facilitates the design of network layer protocols, but it requires to have \ST primitives (\eg Glossy~\cite{ferrari2011Glossy} or Chaos~\cite{landsiedel2013Chaos}) available, which are typically hard to implement.
+In turn, A$^2$ facilitates the design of such \ST primitives.
+The support of A$^2$ within \baloo would be a natural next step towards a fully flexible and configurable network stack based on \ST.
+
+Atomic-SDN~\cite{baddeley2019AtomicSDN} is another work sharing this idea of a fully configurable network stack. \baloo and Atomic-SDN are very similar pieces of software, which have been developed in parallel.
+Compared to \baloo, Atomic-SDN is slightly more specialized: it pre-defines top-level functions (collection, configuration, reaction, and association) with a given implementation, which the user can schedule on-demand. By contrast, \baloo leaves the user  access the various \ST primitives and compose them freely to implement the desired protocol logic.
+Another key difference is precisely that \baloo lets the user pick-choose-and-combine the primitives to use, whereas Atomic-SDN is restricted to only one primitive (in the current implementation). Atomic-SDN uses a back-to-back transmissions schemes (\cite{baddeley2019Competition, lim2017Competition}) instead of traditional Glossy floods~\cite{ferrari2011Glossy}.
