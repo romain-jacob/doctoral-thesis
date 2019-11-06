@@ -1,0 +1,55 @@
+% !TEX root = ../00_thesis.tex
+
+%-------------------------------------------------------------------------------
+\section{Backgrounds on Statistics}
+\label{sec:stats}
+%-------------------------------------------------------------------------------
+
+This section briefly discusses some background on statistics which is relevant to performance evaluation.
+
+\fakepar{Descriptive and predictive statistics}
+A statistic is a number computed from a data set using a mathematical formula.
+A statistic can always be calculated and provides a factual description of the underlying data.
+This is referred to as a \emph{descriptive statistic}.
+However, certain statistics have also some \emph{inference} power; that is, based on the collected data, one may infer the shape of the underlying data distribution, which is unknown. These are referred to as \emph{predictive statistics}.
+
+Predictions are always uncertain and often rely on certain hypotheses. If the hypotheses hold for the collected data, then the statistic estimates some property of the underlying distribution (\eg mean, median, \etc) with a quantifiable level of confidence. One can then predict the expected values of data samples that have not been collected.
+One common hypothesis for predictive statistics is that the collected data is \emph{independent and identically distributed} (\iid); informally, this means that the underlying distribution of the data does not change and that successive data samples are not correlated.
+It is also common to presume the \emph{nature of the data distribution} (\eg a normal or a Poisson distribution), which allows to make ``better'' predictions with less data.
+It is paramount to keep in mind the hypotheses underlying a statistical prediction.
+
+\begin{example}
+  One can compute the mean $\mu$ and standard deviation $\sigma$ of a data sample.
+  {If} the underlying data distribution is normal (the hypothesis), {then} we can infer that about 68\% of all data points (the distribution) will be contained in $\mu \pm \sigma$.
+  However, \textbf{if the distribution is not normal, $\mu$ and $\sigma$ are only descriptive statistics};
+  \ie they do not predict anything about the underlying data distribution.
+\end{example}
+
+\fakepar{Statistical methods}
+Many common statistical methods assume Gaussian distributions (\ie normally distributed data).
+However, literature reports that experimental data is rarely normal~\cite{maricq2018Taming,schmid2014measuring} and hence recommends using \emph{non-parametric statistics}; \ie statistics that do not make any assumption on the nature of probability distributions.
+Furthermore, it is important to consider \emph{robust statistics}, \ie statistics that are not overly skewed by outliers (common in networking data).
+There are two main classes of statistical approaches: hypothesis testing and estimation.
+%
+% \begin{itemize}
+    %
+    % \item
+    \emph{Hypothesis testing} consists in formulating a so-called null hypothesis, that the test aims to reject. Based on the collected data, one computes the probability, called the \mbox{$p$-value}, that the null hypothesis is correct.
+    If the \mbox{$p$-value} is sufficiently low, the null hypothesis is rejected and considered proven incorrect.
+    %
+    % \item
+    \emph{Estimation} consists in computing confidence intervals (CIs) for a given parameter (\eg the median of a distribution).
+    A CI is always associated a confidence level (\eg a 95\%~CI) which is the probability that the interval includes the true value of the parameter.
+    For example, $[a,b]$ is a 95\%~CI for the median if the true median value is between $a$ and $b$ with 95\% probability (or better).
+%
+% \end{itemize}
+
+CIs are more legible than $p$-values: ``\textit{CIs provide a mechanism for making statistical inferences that give information in units with practical meaning}''~\cite{cumming2001CI}.
+Furthermore, the level of confidence of an estimation only depends on the sample size. In other words, estimations can be used to guide the experimental design. By setting the desired level of confidence, one defines the (minimal) number of samples required.
+This is a key property that \triscale leverages.
+
+\fakepar{Reproducibility is a predictive statistic}
+Informally, reproducibility is the principle that the ``same experiment'' leads to the ``same results''. Thus, assessing reproducibility entails predicting that future data (\ie the results of a newly-performed experiment) will be the same as the known data (\ie the results of previously conducted experiments): this is a prediction.
+Thus, assessing reproducibility requires making certain hypotheses on the data.
+It is hence crucial to \emph{(i)~}choose statistics with hypotheses compatible with actual networking data, and to \emph{(ii)~}verify that the hypotheses do hold for the data that one collects.
+To this end, \triscale makes use of non-parametric statistics and verifies that their hypotheses hold for the collected samples.

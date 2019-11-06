@@ -1,0 +1,33 @@
+% !TEX root = ../00_thesis.tex
+%-------------------------------------------------------------------------------
+\section{Discussion, Limitations, and Future Work}
+\label{sec:going_further}
+%-------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------
+% Data collection
+\fakepar{Data collection}
+\triscale is not responsible for the execution of networking experiments, \ie it does not perform the data collection (\cref{sec:triscale_overview}).
+Frameworks specialized in data collection, such as Pantheon~\cite{yan18pantheon}, already exist and \triscale can be integrated into these frameworks to create a fully-automated experimentation chain.
+Other examples include low-power wireless testbeds~\cite{schuss2017Competition, schuss2018DCube, lim2013FlockLab} and networking facilities~\cite{banerjee2015PhantomNet, duplyakin19cloudlab, nussbaum17testbeds}, which could be combined with \triscale to build full-fledged benchmarking infrastructures~\cite{boano2018IoTBench}.
+
+
+%-------------------------------------------------------------------------------
+% Human-in-the-loop
+\fakepar{Human-in-the-loop}
+\triscale automates the data analysis and implements tests that verify whether the required hypotheses hold.
+However, these tests are not perfect: the confidence will never be 100\%. Moreover, the significance of such tests is always low when the sample sizes are small; \eg the independence test may flag correlated data when ``correlation'' is only an unlucky random variation (\Cref{fig:webrtc_autocorr}).
+\triscale raises flags to avoid missing clear issues (\eg \textit{LEDBAT} convergence time -- \Cref{fig:ledbat_convergence}), but the experimenter must always critically assess \triscale results and potentially overrule them; \eg neglecting the correlation of perfect throughput for \emph{TCP~BBR} and \emph{TCP~Cubic}.
+
+%-------------------------------------------------------------------------------
+% Ranking
+\fakepar{Ranking solutions}
+\triscale compares performance, but it does not rank. The results of a networking evaluation are always relative to a specific network and evaluation scenario.
+It is not trivial to generalize and claim that a solution~A is better than a solution~B. This problem relates to benchmarking and multi-objective optimization, which goes beyond the scope of \triscale.
+
+%-------------------------------------------------------------------------------
+% Community guidelines
+\fakepar{Community guidelines}
+\triscale formalizes evaluation objectives (\cref{subsec:parameters}), but it does not dictate which parameters to use.
+Similarly, \triscale quantifies the variability of an experiment~(\cref{subsec:repeatability}), but it does not conclude whether the experiment is reproducible~(\cref{subsec:reproducibility}).
+\triscale provides a framework to describe evaluations and analyze the data in a consistent and statistically sound manner. It is now up to the networking communities to set their own standards, parameters to use, and acceptable requirements; similar to what is already done in other disciplines~\cite{gallen14minimumreq}).

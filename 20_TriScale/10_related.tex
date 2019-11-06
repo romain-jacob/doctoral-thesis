@@ -1,0 +1,41 @@
+% !TEX root = ../00_thesis.tex
+
+%-------------------------------------------------------------------------------
+\section{Related Work}
+\label{sec:relWorks}
+%-------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------
+% The reproducibility crisis
+The reproducibility of experiments and comparability of results are cornerstones of the scientific method.
+In recent years, several studies have highlighted the inability of scientists from various disciplines to reproduce their own experimental results~\cite{baker16reproducibility, peng15crisis}, often due to sloppy research protocols and faulty statistical analysis~\cite{boisvert2016Incentivizing, blackburn2016Truth, schmid2014measuring}.
+This problem has also been recognized within computer science~\cite{collberg15reproducibility, vitek11systems}, where experiments are seldom reproducible and artifacts rarely shared.
+
+
+%-------------------------------------------------------------------------------
+% Promoting reproducibility
+\fakepar{Promoting reproducibility}
+To address this ``\mbox{reproducibility} crisis''~\cite{baker16reproducibility}, several efforts aiming to incentivize a rigorous experimentation have gained momentum in computer science, including \eg ACM's badging system \mbox{for publications}~\cite{acmBadges}.
+Especially in the networking community -- challenged by the need to carry out experiments on dynamic and uncontrollable conditions~\cite{burchfield09rfjungle, matos18reproducible} -- several workshops~\cite{bajpai18dagstuhl_report, cpsbench18cpsweek, reproducibility17sigcomm}, surveys~\cite{flittner2018artifacts_survey}, guidelines~\cite{bajpai19dagstuhl_guide, saucez2018Thoughts, kritsis2018Tutorial, sevenwaystofail}, as well as teaching activities~\cite{yan17learning} have raised awareness on the reproducibility problem and promoted better experimentation practices.
+This large body of work mostly offers \emph{qualitative} statements on how an experiment should be performed and documented.
+Such qualitative statements emphasize for example the need to carefully choose when and how often to sample data~\cite{bajpai19dagstuhl_guide}, or suggest which methodology to adopt during performance evaluations~\cite{kritsis2018Tutorial}.
+However, there is no guarantee that following these recommendations leads to reproducible results, nor is there a concrete way to assess whether an experiment can be considered reproducible.
+
+None of the existing works provide scientists with \emph{quantitative} answers about how to concretely perform an experiment, \eg how many runs should be completed and how long should they be.
+\triscale fills this gap by providing quantitative answers to these questions with an experimental methodology grounded on robust non-parametric statistics.
+\triscale also allows to assess and compare the reproducibility of experimental results by computing unambiguous performance indicators and variability scores.
+
+%-------------------------------------------------------------------------------
+% Tools supporting repeatability while experimenting
+\fakepar{Supporting reproducibility}
+A large number of experimental facilities and tools have been developed in recent years to aid scientists and practitioners in carrying out reproducible networking studies~\cite{nussbaum17testbeds}.
+Testbeds such as EmuLab~\cite{white02emulab} and FlexLab~\cite{ricci07flexlab}, as well as emulation tools such as MiniNet~\cite{handigol12container} and MahiMahi~\cite{netravali2015mahimahi}, enable the creation of artificial network conditions using a given specification or passively-observed traffic.
+Emulated conditions offer a more controlled environment than experiments faced with real-world traffic (\eg by transmitting data over the Internet~\cite{chun03planetlab, berman2014GENI}, cloud~\cite{duplyakin19cloudlab, bolze06grid5000}, or wireless interfaces~\cite{adjih15iotlab, ganu05orbit, massouri14cortexlab}).
+Still, they suffer from performance variability caused by the underlying hardware and software components, which hampers reproducibility~\cite{maricq2018Taming}.
+To overcome these problems, several solutions have been proposed~\cite{edwards15testbeds}: \eg revisiting  operating system libraries~\cite{tazaki13directcode}, using virtualization~\cite{handigol12container, kannan18bnv, koponen14nvp}, adaptable profiles~\cite{ricci2015Apt}, and fault patterns~\cite{angainor_website}.
+Other tools have been developed to support mobility experiments~\cite{cho16phantomnet_repeatability, banerjee2015PhantomNet}, maximize the repeatability of interference generation~\cite{schuss19jamlabng}, and enable researchers to consistently evaluate congestion control schemes or transport protocols~\cite{yan18pantheon}.
+Other works model the execution of experiments, and uses such models to quantify the similarity between different runs~\cite{sharma17framework,ferreira2017MetaAnalysis}.
+
+While all aforementioned tools aim to improve reproducibility \emph{during} the experiments, \triscale assists researchers \emph{before} and \emph{after} their execution.
+It does so by informing about the number and length of runs necessary to obtain a sufficient statistical significance, as well as by computing a score quantifying the variability of the results.
+Hence, \triscale complements the existing body of literature promoting and enhancing reproducibility in networking research.

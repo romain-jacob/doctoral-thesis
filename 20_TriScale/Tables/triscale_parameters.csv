@@ -1,0 +1,14 @@
+\begin{tabularx}{\linewidth}{ @{} X    c @{\quad} c  c  c @{\quad} c  c @{\quad} c  c @{\qquad} c   c  c   @{} }  \toprule            
+    &   \multicolumn{8}{c}{\textbf{Evaluation  Objectives}}                &   \multicolumn{3}{c}{\textbf{Experiment  Design}}         \\  \cmidrule(r{\qquad}l){  2-9 } \cmidrule(l){ 10-12 }      
+ \textbf{  Use  case    } &  Metric & \multicolumn{3}{c@{\quad}}{Convergence}     & \multicolumn{2}{c}{KPI}   & \multicolumn{2}{@{}c@{\quad}}{Var. Score}  &   &  &     \\  \cmidrule(r{\quad}l){  2-2 } \cmidrule(r{\quad}l){ 3-5 } \cmidrule(r{\quad}l){ 6-7 } \cmidrule(r{\qquad}l){ 8-9 }
+    &  Measure & Exp. & Conf. & Tol. & Perc. & Conf. & Perc. & Conf. &  \#runs$^*$ & \#series$^*$ &  runtime\;\;  span     \\  \midrule            
+                                             
+    &   &  &  &  &  &  &  &  &   &  &  \multirow{7}{2.5cm}{\centering  Depend  on  networks  and  protocols}     \\              
+   Latency  of   &   &  &  &  & 95 & 95\% & median & 75\% &  59 & 3 &     \\              
+  real-time  &  max & True & 95\% & 1\% & 95 & 99\% & 75 & 75\% &  90 & 5 &     \\              
+  protocol  &   &  &  &  & 99 & 95\% & median & 90\% &  299 & 5 &     \\[15pt]              
+                                             
+  Average  &  median & \multirow{2}{*}{False} & \multirow{2}{*}{--} & \multirow{2}{*}{--} & 90 & 95\% & median & 90\% &  29 & 5 &     \\              
+  delay  &   90th  perc.  &  &  &  & median & 95\% & median & 90\% &  5 & 5 &     \\              
+    &   &  &  &  &  &  &  &  &   &  &     \\  \bottomrule            
+\end{tabularx}                                             

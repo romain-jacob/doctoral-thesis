@@ -1,0 +1,97 @@
+% !TEX root = ../00_thesis.tex
+
+%-------------------------------------------------------------------------------
+\section{Problem Setting}
+\label{sec:triscale_intro}
+%-------------------------------------------------------------------------------
+% The problem is the variability of the evaluation process
+The ability of reproducing experimental results is broadly considered a prerequisite for establishing a scientific claim.
+In networking research, reproducibility%
+\footnote{
+A variety of terminologies is used to define the different aspects of reproducible research~\cite{plesser18terminology, barba2018Terminologies}.
+In this dissertation, we refer to \emph{reproducibility} as the ability of different scientists to follow the steps described in published work using the \emph{same tools} and obtain the \emph{same results} within the margins of experimental error. This corresponds to ACM's definition of \emph{replicability}~\cite{acmBadges}.}
+is a well-known issue due to the inherent variability of the experimental \mbox{conditions}.
+\mbox{On the one hand}, the uncontrollable dynamics of real-world networks~\cite{matos18reproducible, burchfield09rfjungle} and the unsteady performance of hardware and software components~\cite{maricq2018Taming, blackburn2016Truth} can cause a large variability in the experimental conditions, which makes it hard to quantitatively compare different solutions~\cite{bajpai18dagstuhl_report}.
+\linebreak
+On the other hand, differences in the methodology used to design the experiment, analyze the data, and reason about the results impair the ability to reproduce and critically assess the validity of claims  made by other scientists.
+Without reproducibility, any performance comparison is debatable, at best.
+
+\begin{research_questions}
+  \begin{description}
+
+    \item[Question 1]
+    Can we improve the reproducibility of performance claims of networking experiments?
+
+    \item[Question 2]
+  	Can we compare protocol performance in a statistically sound manner? In particular, how can we account for the inherent variability of the experimental conditions?
+  \end{description}
+\end{research_questions}
+
+% Problem
+\fakepar{The problem}
+The community has relentlessly developed testbeds~\cite{nussbaum17testbeds} and data collection frameworks~\cite{yan18pantheon} to minimize the variability in experimental conditions.
+In comparison, only a few works targeted \mbox{the design of a methodology} for networking evaluations~\cite{kritsis2018Tutorial}.
+In this regard, the literature is limited to best practices and generic guidelines~\cite{bajpai19dagstuhl_guide, saucez2018Thoughts, sevenwaystofail}.
+
+Experimental networking research suffers from the lack of a \emph{systematic methodology} specifying
+% \begin{itemize}
+	% \item
+  (i)~how to concretely design an experiment, and
+	% \item
+  (ii)~how to analyze and report its results.
+% \end{itemize}
+Scientists are left with many open questions \emph{before} carrying out an experiment (\eg How many runs? How long should they be? When should they run?) and \emph{after} the data has been collected (\eg How to analyze and summarize the data in a concise yet accurate way?).
+
+These open questions lead scientists to design similar experiments in different ways, which hinders comparability even when using the same tools~\cite{boano2018IoTBench}.
+Furthermore, the lack of a common methodology for data analysis hampers the ability to recreate results even when all raw data are available (as known as \textit{computational reproducibility}~\cite{liu19computational}), a standard we argue that any scientific contribution should meet.
+Finally, it is unclear how to concretely define reproducibility and assess whether a networking experiment is indeed ``reproducible''. When reproducibility is considered a prerequisite to any scientific claim, this question cannot be left unanswered.
+
+% --------------------------------------
+% Challenges
+% --------------------------------------
+\fakepar{The challenge}
+We identify a set of requirements that an experimental methodology should meet in order to address this reproducibility problem.
+
+\begin{features}
+
+	\item[Generality]
+	The methodology is applicable to a wide range of metrics, evaluation scenarios (both emulated and real-world settings), as well as network types (both wired and wireless).
+
+	\item[Conciseness]
+	The methodology describes the experiment design and data analysis in a concise yet unambiguous way.
+	This enables computational reproducibility while \mbox{minimizing} the use of highly-treasured space in research papers.
+
+	\item[Robustness]
+	The methodology accounts for the intrinsic variability of networking experiments.
+	The uncertainty is quantified and the analysis does not presume the nature of the raw data distribution (\eg no assumption of normality).
+	The uncertainty quantifies the variation in performance that we expect to observe shall the experiments be repeated; in other words, the statistics used are not only descriptive but also predictive.
+
+	\item[Rationality]
+	The methodology rationalizes the experiment design and helps answering questions such as: How many runs? How long should they be? When should they run?
+	This allows to minimize the number of experiments while collecting enough data to meet the desired level of confidence.
+
+\end{features}
+
+\fakepar{Our solution}
+This chapter presents \triscale, a framework that meets all the above requirements for supporting researchers in the design and analysis of networking experiments.
+We make the following contributions:
+
+\begin{itemize}
+	\item
+	We propose a methodology for designing networking experiments and analyze their data.
+	This methodology is grounded on non-parametric statistics~(\cref{sec:stats}), which provides performance reports that are both robust and clear.
+	Our methodology rationalizes the experimental design process and quantifies the reproducibility of an experiment.
+
+	\item
+	We implement this methodology in \triscale, a framework that assists its user in designing experiments and automating data analysis~(\cref{sec:triscale}).
+
+	\item
+	As a case study, we use \triscale to compare congestion-control schemes using the Pantheon data collection framework~\cite{yan18pantheon} and show how \triscale improves on the legibility and confidence in the results~(\cref{sec:triscale_eval}).
+	Additional examples using low-power wireless protocols running on the FlockLab testbed~\cite{lim2013FlockLab} illustrate the generality of the framework.
+	Finally, we showcase the scalability of \triscale: the data analysis completes within seconds for millions of data points~(\cref{sec:triscale_implementation}).
+
+	\item
+	Finally, we make \triscale openly available~(\cref{append:triscale_artifacts}) for the networking community to use, extend, and build upon.
+\end{itemize}
+\triscale does not ``solve'' the entire reproducibility problem; in particular, it does not handle the data collection (see discussion in \cref{sec:going_further}).
+\triscale does however fill a critical gap towards reproducible networking evaluations by providing a consistent methodology for the design of networking experiments and the analysis of their data.

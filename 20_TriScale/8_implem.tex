@@ -1,0 +1,40 @@
+% !TEX root = ../00_thesis.tex
+
+%-------------------------------------------------------------------------------
+\section{Implementation and Scalability of \triscale}
+\label{sec:triscale_implementation}
+%-------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------
+\subsection{Python Package}
+
+We implement \triscale in Python ($\approx$1000 lines of code) and make it open source~(\cref{append:triscale_artifacts}).
+\triscale's API contains one function for each timescale of the data analysis; \ie the computation of metrics, KPIs, and variability scores.
+Docstrings contain detailed information about the functions usage.
+Our implementation relies on standard scientific packages such as NumPy~\cite{numpy}, Pandas~\cite{pandas}, SciPy~\cite{scipy}.
+As the use of non-parametric statistics is not (yet) widespread, we had to implement some of the statistics used by \triscale (in particular the computation of CI using Thompson's method).
+We hope to see these functions integrated in a future release of SciPy.
+
+It is important to produce useful visualizations to support the experimenter.
+Thus, we paid a particular attention to the plotting functions in \triscale.
+\triscale uses Plotly~\cite{plotly} to create interactive plots: one can zoom in and out in the plots, toggle the visibility of individual traces, read data point values on hover, \etc
+All the plots in this chapter are produced using \triscale and are ``clickable'': figures are hyperlinks leading to dynamic versions of the plots.
+
+
+%-------------------------------------------------------------------------------
+\subsection{Scalability of \triscale Data Analysis}
+\label{subsec:scalability}
+
+We evaluate the scalability of \triscale with respect to computation time; \ie how does the data analysis time scales with increasing input sizes.
+We only consider the time required for performing computations; other outputs such as logs and plots (\eg \Cref{fig:analysis_metric}) are excluded.
+The complete scalability evaluation (including data, plots, and discussions) is available as complementary materials~(\cref{append:triscale_artifacts}).
+Generally, the computation time for the data analysis in \triscale scales linearly with the input size~(\Cref{table:scalability}): it is fast (less than 1\s for one million data points on a commodity laptop) and overall negligible compared to the data collection time.
+
+
+\begin{table}
+    \centering
+    \caption{Scalability evaluation.
+    \capt{\triscale data analysis is fast and scales well with increasing input sizes. The most time-consuming element is the convergence test~(\cref{subsec:test_convergence}) which is performed before the computation of metrics. Still, it generally takes less than one second for inputs (\ie the number of raw measurements in a run) of up to one million data points.}}
+    \input{\PathTab/triscale_scalability.csv}
+    \label{table:scalability}
+\end{table}
