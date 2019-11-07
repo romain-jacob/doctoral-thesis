@@ -5,9 +5,6 @@
 
 This repository contains all source files and visualization notebooks of my doctoral thesis.
 
-|  | |
-|-|-|
-| Title| Leveraging Synchronous Transmissions for the Design of Real-time Wireless Cyber-Physical Systems | 
-| Author | Romain Jacob| 
-|Affiliation| ETH Zurich|
-|Date (expected)| December 2019| 
+> _Leveraging Synchronous Transmissions for the   Design of Real-time Wireless Cyber-Physical Systems_  
+Romain Jacob, ETH Zurich.  
+December 2019 (Expected).
