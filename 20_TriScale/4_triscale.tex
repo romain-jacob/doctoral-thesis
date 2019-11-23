@@ -226,15 +226,15 @@ In particular, since the data analysis in \triscale is automated and determinist
 For example, evaluating the latency of a real-time protocol requires high confidence levels for extreme percentiles.
 This very quickly increases the number of runs that one must perform:\\
 \inlineitem
-  at least 90 runs for estimating the 95th percentile with 99\% confidence;\\
+  at least 90 runs for estimating the 95th percentile with 99\% confidence;\linebreak
 \inlineitem
-  at least 299 runs for estimating the 99th percentile with 95\% confidence.\\
+  at least 299 runs for estimating the 99th percentile with 95\% confidence.\linebreak
 This illustrates that it is ``easier'' to increase the confidence level of an estimate than to estimate a more extreme percentile with the same confidence level.
 Note that both \emph{\#runs} and \emph{\#series} are only derived based on the definition of the KPI and variability score; these parameters are not influenced by the runtime or the time span of an experiment.
 
 The second use case in \Cref{table:triscale_param} (bottom rows) illustrates two different perspectives on ``averages'', using delay as an example:\\
 \inlineitem
-  If the metric is the median and the KPI the 90th percentile, one can conclude that 90\% of the runs have a median delay equal or better than the KPI value.\\
+  If the metric is the median and the KPI the 90th percentile, one can conclude that 90\% of the runs have a median delay equal or better than the KPI value.\linebreak
 \inlineitem
   If the metric is the 90th percentile and the KPI the median, one can conclude that, in half of the runs, the 90th percentile of the delay in the run be equal or better than the KPI.\\
 Both are ``averages'' but with different meanings and different requirements in terms of number of runs.

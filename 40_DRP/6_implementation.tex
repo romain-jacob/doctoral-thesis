@@ -15,8 +15,8 @@ The performance evaluation is presented in \cref{sec:drp_evaluation}.
 
 
 
-\DRP extends \blink~\cite{zimmerling2017Blink}, which is a real-time scheduler for LWB~\cite{ferrari2012LWB}. Thus, we start our implementation of \DRP from an existing implementation of LWB~\cite{Code_LWB}. There are two main functionality to implement for running \DRP:
-\begin{itemize}
+\DRP extends \blink~\cite{zimmerling2017Blink}, which is a real-time scheduler for LWB~\cite{ferrari2012LWB}. Thus, we start our implementation of \DRP from an existing implementation of LWB~\cite{Code_LWB}. There are two main functionality to implement for running \DRP
+\begin{itemize}[nosep]
   \item
 % (i)~
 compute \blink schedules, and
@@ -101,11 +101,11 @@ Once the schedule is ready, \AP continues with the processing of \DRP requests. 
 }
 
 \fakepar{Alternating buffers}
-As described above, the host \CP fetches the next round schedule from its \AP, which sends a valid schedule immediately.
+The host \CP fetches the next round schedule from its \AP, which sends a valid schedule immediately.
 However, this conflicts with the admission of new flow requests: the \AP may be processing a request (including the computation of a new schedule) when \CP requests the schedule.
 
 We handle this situation using an alternating buffer for the next round schedule~(\cref{fig:AP_alternatingbuffer}). One buffer is used to store a valid schedule for the next round, which the \AP computes first. After each \DRP request is processed, the newly computed schedule is written into the other buffer. The process repeats until all requests are processed.
-
+%
 Hence, even if \CP fetches while \AP is writing a schedule in one buffer, the other buffer still contains a valid schedule, which can be immediately sent to \CP over \bolt.
 This guarantees a fast transmission of the schedule from \AP to \CP while avoiding memory corruption on the \AP.
 

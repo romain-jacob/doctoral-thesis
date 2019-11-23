@@ -24,9 +24,9 @@ The entire transmission chain of the data throughout the system must be taken in
 \fakepar{The problem}
 Enabling real-time communication {between network interfaces} of sources and destinations in a low-power wireless network has been studied for more than a decade~\cite{lu2002RAP,stankovic2003Realtime,he2003SPEED}. Today, standards such as WirelessHART~\cite{wirelessHART} and ISA100.11a~\cite{isa100} for control applications in the process industries already exist~\cite{watteyne2017Teaching}, and considerable progress in real-time transmission scheduling and end-to-end delay analysis for WirelessHART networks has been made~\cite{saifullah2010RealTime,saifullah2015EndtoEnd}.
 
-Unfortunately, wireless real-time protocols such as WirelessHART~\cite{wirelessHART} or \blink~\cite{zimmerling2017Blink} only provide guarantees for message transmissions between \emph{network interfaces}. These protocols do not handle the application schedules; at the source, the message release is typically assumed periodic; at the destination, nothing guarantees that the application will actually process the message in time.
+Unfortunately, wireless real-time protocols such as WirelessHART~\cite{wirelessHART} or \blink~\cite{zimmerling2017Blink} only provide guarantees for message transmissions between \emph{network interfaces}. These protocols do not handle the application schedules; at the source, the message release is typically assumed periodic; at the destination, nothing guarantees that the application will process the message in time.
 
-Providing end-to-end guarantees between \emph{distributed application} (\textbf{Question~1}) demands to combine a wireless real-time protocol with the rest of the system; \ie accounting for the application schedules and handling interference on shared resources.
+Providing end-to-end guarantees between \emph{distributed application} (\textbf{Question~1}) demands to combine a wireless real-time protocol with the rest of the system; \ie consider application schedules and handle interference on shared resources.
 
 \fakepar{The challenge}
 To support a broad spectrum of \CPS applications, a solution to this problem should fulfill the following requirements.

@@ -4,6 +4,9 @@
 
 %debuging
 %\usepackage{showframe}
+\usepackage{lineno}
+%% Uncomment to display line numbers
+% \linenumbers
 
 \usepackage{xspace}
 \usepackage{tabularx}
@@ -19,12 +22,23 @@
 \definecolor{recapshadowcolour}{rgb}{0.5,0.5,0.5}
 \definecolor{recapbackcolour}{rgb}{0.98,0.98,0.95}
 
+
+\newcommand{\startsquarepar}{%
+    \par\begingroup \parfillskip 0pt \relax}
+\newcommand{\stopsquarepar}{%
+    \par\endgroup}
+\newcommand{\squarepar}[1]{%
+\startsquarepar
+#1
+\stopsquarepar
+}
+
 \usepackage{pifont}
 \usepackage{enumitem}
 \usepackage{fontawesome}
 
 \newcommand{\inlineitem}{{%
-\smaller[1.5]\color{orange}\ding{110}}\xspace}
+\smaller[1.5]\color{orange}\ding{110}}\hspace{1.5ex}}
 
 \setlist[itemize,1]{%
 leftmargin=*,%
@@ -177,6 +191,10 @@ topsep=0pt,%
 
 \renewcommand{\qedsymbol}{\mbox{\rule[0pt]{1.3ex}{1.3ex}}}
 
+\newcommand{\cvbox}{\mbox{\color{lightorange}\rule[0pt]{\widthof{2012--2013}}{1.5ex}}}
+
+
+
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
@@ -219,6 +237,7 @@ topsep=0pt,%
 
 \usepackage{graphicx}
 \graphicspath{{./Figures/}
+{./Figures/Icons/}
 {./20_TriScale/Figures/}{./20_TriScale/}
 {./30_Baloo/Figures/}
 {./40_DRP/Figures/}
@@ -315,9 +334,17 @@ topsep=0pt,%
 
 
 
-
+\usepackage[hyphens]{url}
 %% PDF metadata
-\usepackage[pdftitle={thesis title},pdfauthor={Romain Jacob}]{hyperref}
+\usepackage[pdftitle={\titlestringNOBR},pdfauthor={Romain Jacob},pdfsubject={Doctoral Dissertation},pdfkeywords={synchronous transmissions, low-power communication, wireless, cyber-physical systems}]{hyperref}
+
+% \usepackage[pdftex,%
+%             pdfauthor={Romain Jacob}]{hyperref}%%
+%             pdftitle={The Title},%
+%             pdfsubject={The Subject},%
+%             pdfkeywords={Some Keywords},%
+%             pdfproducer={Latex with hyperref, or other system},%
+%             pdfcreator={pdflatex}]{hyperref}
 
 %% References
 \usepackage[capitalise, noabbrev]{cleveref}
@@ -369,6 +396,7 @@ topsep=0pt,%
 \newcommand{\eg}{\emph{e.g.},\xspace}
 \newcommand{\Eg}{\emph{E.g.},\xspace}
 \newcommand{\ie}{\emph{i.e.},\xspace}
+\newcommand{\cad}{\emph{\mbox{c.-à-d.}}\xspace}
 \newcommand{\etc}{etc.\xspace}
 \newcommand{\capt}[1]{\mdseries{\emph{#1}}}
 \newcommand{\chal}[1]{\textbf{C#1}}
@@ -427,6 +455,19 @@ topsep=0pt,%
 #1\vspace{2pt}
 \end{minipage}}
 
+\newcommand{\creditItem}[3]{%
+\begin{minipage}[t]{0.12\linewidth}%
+  \centering
+  \vspace{0pt}
+  \includegraphics[height=1.2cm]{#1}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.8\linewidth}%
+  ~\\
+  #2\\
+  used in \cref{#3}
+\end{minipage}}
+
 \newcommand{\inlineRef}[3]{%
 \emph{#1}\\
 #2\\
@@ -440,6 +481,9 @@ topsep=0pt,%
 
 \newcommand{\customBox}[1]{%
 \makebox[30pt][l]{#1}}
+
+\newcommand{\smallBox}[1]{%
+\makebox[20pt][l]{#1}}
 
 \newcommand{\credit}{CRediT\xspace}
 \newcommand{\tex}{\TeX\xspace}

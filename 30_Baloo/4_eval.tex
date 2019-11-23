@@ -19,9 +19,9 @@ To support our claim that \baloo is indeed easy to use, we used it ourselves to 
 %- They cover most of the features offered by \baloo
 %- The original code is available
 We re-implemented the protocol logic of three network stacks: Crystal~\cite{istomin2018Interferenceresilient}, Sleeping Beauty~\cite{sarkar2016Sleeping}, and LWB~\cite{ferrari2012LWB}. We chose these protocols because:
-\begin{itemize}
+\begin{itemize}[nosep]
 
-	\item They are well-known solutions from the literature, considering different types of scenario.
+	\item These well-known solutions from the literature consider different scenarios.
 
 	\item Together, they use most of the features offered by \baloo.
 
@@ -86,6 +86,8 @@ As much as possible, we designed the experiments to match those from the origina
 	We ran tests varying the percentage of nodes that that have a packet to transmit in each round.
 	We used $12.5\%$, $25\%$, and $50\%$ of the available nodes.
 	All other parameters were set according to the author's paper~\cite{sarkar2016Sleeping}.
+	
+\pagebreak
 
 	\item[LWB]
 	We ran tests varying the inter-packet interval $IPI$ of the data stream registered by each node in the network.

@@ -14,8 +14,8 @@ We first describe how \APs and \CPs exchange messages through \bolt~(\cref{subse
 \bolt~\cite{sutton2015Bolt} provides predictable asynchronous message passing between two arbitrary processors, and hence decouples the processors with respect to time, power, and clock domains.
 Concrete realizations of Dual-Processor Platforms (\DPP) based on \bolt are depicted in~\cref{append:dpp}.
 
-\cref{fig:bolt_logical} shows a conceptual view of the DPP two message queues with first-in-first-out (FIFO) semantics, one for each direction, form the core of \bolt.
-\bolt allows for concurrent \texttt{read} and \texttt{write} operations by \ap and \cp on both queues.
+\cref{fig:bolt_logical} shows a conceptual view of the \DPP: two message queues with first-in-first-out (FIFO) semantics, one per direction, form the core of \bolt, which
+allows concurrent \texttt{read} and \texttt{write} operations by \ap and \cp on both queues.
 
 \bolt API includes three functions~(\cref{table:boltAPI}).
 The \opwrite function appends a message to the end of the outgoing queue, whereas \opread reads and removes the first message from the incoming queue.
@@ -79,7 +79,7 @@ In each time slot a message is sent from a given \cp to all other \CPs using Glo
 \blink is a real-time scheduler for LWB.}
 %
 The interval between the start of consecutive rounds, denoted by \rperiod, is determined by the host at runtime based on current real-time traffic demands. \rperiodmin and \rperiodmax are implementation-specific bounds on \rperiod.
-\blink defines \rperiod and the assignment of messages to rounds such that the number of rounds is minimized and all messages meet their \emph{network deadline} \ndeadlinei between network interfaces (\ie the \CPs).
+\blink defines \rperiod and assigns messages to rounds such that the number of rounds is minimized and all messages meet the \emph{network deadline} \ndeadlinei between network interfaces (\ie the \CPs).
 
 \blink communication rounds are atomic: during a round, all \CPs are busy executing \blink; other tasks (\eg exchanging messages through \bolt) can only be executed between rounds.
 Furthermore, \blink assumes constrained deadlines ($\ndeadlinei \leq \periodi$).
@@ -113,7 +113,7 @@ that guarantee to meet the specified end-to-end deadlines.
 
 \fakepar{Contracts}
 \DRP contracts are key to fulfill the \feature{Timeliness} and \feature{Reliability} requirements. Concretely, these contracts
-\begin{itemize}
+\begin{itemize}[nosep]
   \item avoid overflows of message buffers (\eg the \bolt queues) at the source and destination nodes, thus preventing message losses;
   \item ensure that messages are handled ``fast enough'' between the network (\ie \CPs) and the application (\ie \APs) interfaces by the source and destination nodes, such that all messages meet their end-to-end deadlines.
 \end{itemize}
@@ -123,7 +123,7 @@ $T_f^s$ is statically set for all \CPs in order not to constrain the achievable 
 Conversely, $T_f^d$ is adjusted dynamically by the destination nodes upon registration of a new flow.
 
 Providing end-to-end guarantees entails that \DRP decides on the {distribution of responsibilities} among the source node, \blink, and the destination node of a flow \flowi with regard to meeting the end-to-end deadline \deadlinei. To this end, \DRP uses the \emph{deadline ratio}~$r \in (0,1)$, a global parameter chosen at design time.
-The joint responsibility of the source and \blink is a function of the source flushing interval $T_f^s$ and the flow's network deadline \ndeadlinei~(computed by \DRP -- \cref{fig:design_overview}). They are responsible for meeting a fraction $r$ of the end-to-end deadline
+The joint responsibility of the source and \blink is a function of the source flushing interval $T_f^s$ and the flow's network deadline \ndeadlinei~(computed by \DRP). They are responsible for meeting a fraction $r$ of the end-to-end deadline
 \begin{equation}\label{eq:function_f}
  f(T_f^s,\ndeadlinei) \; \leq \; r * \deadlinei
 \end{equation}

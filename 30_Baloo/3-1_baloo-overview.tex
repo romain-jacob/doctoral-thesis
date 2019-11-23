@@ -32,12 +32,9 @@ Nodes turn their radio off between rounds to save energy.
 While this framework may look restrictive and hinder \feature{Generality}, such round-based design is in fact very generic, and compatible with many (if not all) \ST-based network stacks proposed so far in the literature. The flexibility and limitations of \baloo will be discussed in the evaluation (\cref{sec:baloo_eval} and \ref{sec:requirements}).
 
 \fakepar{Control Information}
-In \baloo, the control packet, sent at the beginning of each round, plays a key role. It is constructed such that if a node receives a control packet from the host, this nodes knows exactly
-\begin{itemize}
-	\item how to execute the current communication round, and
-	\item when to wake up for the next round.
-\end{itemize}
-
+In \baloo, the control packet, sent at the beginning of each round, plays a key role. It is constructed such that if a node receives a control packet from the host, this nodes knows exactly\\
+	\inlineitem how to execute the current communication round, and\\
+	\inlineitem when to wake up for the next round.\\
 Thus, the control packet contains both \textsl{schedule information} (\eg the slot assignment for the round or the time interval before the next round) and \textsl{configuration parameters}, like the length of the slots or the number of retransmissions.
 The control packet is broadcast using Glossy~\cite{ferrari2011Glossy}, which is also used to synchronize the whole network.
 
@@ -50,7 +47,7 @@ Consequently, \baloo adopts the following fail-safe mechanism: \textsl{a node do
 The main challenge in the design of \baloo is the definition of an interface that isolates the management of the radio (\ie running the \ST communication primitives) from the implementation of the protocol logic at the network layer.
 %
 \baloo realizes this interface using a middleware layer that is responsible for the following tasks:
-\begin{itemize}
+\begin{itemize}[nosep]
 
 	\item The middleware organizes the timers and controls the radio operations (\ie it executes the \ST primitives).
 
@@ -60,8 +57,7 @@ The main challenge in the design of \baloo is the definition of an interface tha
 
 \end{itemize}
 The middleware is a \textsl{fixed piece of software} which can be configured but neither accessed nor modified by the network layer.
-The protocol logic (payload management, state keeping, \etc) is implemented entirely within the callback functions.%
-\footnote{The different callbacks are further described in \cref{subsec:CB}.}
+The protocol logic (payload management, state keeping, \etc) is implemented entirely within the callback functions~(\cref{subsec:CB}).%
 The middleware interface is illustrated in \cref{fig:callbacks}.
 
 With this approach, all low-level programming complexities are managed by the middleware and let the network designer focus on the main task: design the protocol logic of the network layer.

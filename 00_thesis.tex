@@ -5,6 +5,14 @@
 \documentclass[a5paper,twoside,12pt]{book}
 % \documentclass[a5paper,twoside,12pt, draft]{book}
 
+\newcommand{\titlestring}{%
+Leveraging Synchronous Transmissions\\
+for the Design of Real-time Wireless\\
+Cyber-Physical Systems}
+\newcommand{\titlestringNOBR}{%
+Leveraging Synchronous Transmissions for the Design of Real-time Wireless Cyber-Physical Systems
+%
+}
 
 \input{01_preamble.tex}
 \input{01_hyperlinks.tex}
@@ -30,29 +38,32 @@
 \pagenumbering{Alph}
 
 \input{02_title_eth}
-% \cleardoublepage
-%\input{03_title_tik}
-%
-%\cleardoublepage
-%\chapter*{}
-%\vfill
-%{\footnotesize
-%\begin{flushright}
-%\emph{Some short dedicasse}
-%\end{flushright}
-%}
-%\vfill
-%
-% \cleardoublepage
-% \frontmatter
-% \pagestyle{headings}
-% \input{04_abstract.tex}
-%
+\cleardoublepage
+\input{03_title_tik}
+
+\cleardoublepage
+\chapter*{}
+\vfill
+{%\footnotesize
+\begin{flushright}
+\emph{À mes parents, qui m'ont permi de devenir ce que je suis aujourd'hui.\\
+À ma femme, qui m'aide à devenir meilleur chaque jour.}
+\end{flushright}
+}
+\vfill
+
+\cleardoublepage
+\frontmatter
+\pagestyle{headings}
+\input{04_abstract.tex}
+\input{05_abstract_FR.tex}
+
 % \cleardoublepage
 % \input{06_acknowledgments.tex}
 
 \clearpage
-\phantomsection\pdfbookmark[0]{Contents}{Contents}
+\pagestyle{empty}
+\pdfbookmark[0]{Contents}{Contents}
 {\small\tableofcontents}
 \cleardoublepage
 %\phantomsection\addcontentsline{toc}{chapter}{List of Figures}
@@ -61,8 +72,7 @@
 %\phantomsection\addcontentsline{toc}{chapter}{List of Tables}
 %\listoftables
 %\cleardoublepage
-%
-%
+
 \mainmatter
 \pagenumbering{arabic}
 \setcounter{page}{1}
@@ -71,15 +81,10 @@
 
 \TODO{
 \begin{itemize}
-  % \item citation style? Egal, reflect on benefit of more legible ref style.
-  % \item short title for the chapters
-  % \item explicit reference to the corresponding papers? At the end of chapter intro
-  \item capitalization (chapter, sections, rest)
   % \item CRediT for each chapter! -> Nope, give it up for now
+  \item check the reference formating
   \item credit of the icons in figures
-  % \item symbol after description?
   \item `click` message on hover (pdf)
-  \item Baloo new release (minimal effort, just upload what I need. lqe, ttw, energy model. One problem is, I will loose the commits from the private repo... or not? ask Reto maybe.)
 \end{itemize}
 }
 
@@ -92,19 +97,25 @@
 \input{60_conclusions}
 
 \cleardoublepage
-% \def\bibname{Bibliography}
+\def\bibname{Bibliography}
 \phantomsection\addcontentsline{toc}{chapter}{Bibliography}
 % \bibliographystyle{alphaabbr}
 % \bibliographystyle{abbrv}
 \bibliographystyle{plainurl}
+% {\smaller \bibliography{Thesis}}
 {\smaller \bibliography{Thesis}}
 
 
-%\cleardoublepage
-%\backmatter
+\cleardoublepage
+\pagestyle{empty}
+% \pdfbookmark[0]{Credits}{Credits}
+\input{70_credits}
+
+\cleardoublepage
+\backmatter
 %\input{60_pubs.tex}
 %\cleardoublepage
-% \input{70_cv.tex}
+\input{70_cv}
 % \cleardoublepage
 % \newpage
 % ~

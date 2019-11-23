@@ -38,10 +38,9 @@ First, the communication between \APs and \CPs cannot be completely asynchronous
 Second, \blink assumes a periodic release of messages at the network interfaces (\ie the \CPs); since our flow model is not periodic but sporadic with jitter~(\cref{sec:problem}), messages may be delayed in \CPs buffer until they can be transmitted over the network.
 
 \DRP strikes a balance between  \feature{Composability} and \feature{Efficiency}; that is, between
-\begin{itemize}
-  \item decoupling the execution of \APs, \CPs, and Blink, and
-  \item supporting short the end-to-end deadlines between the \APs.
-\end{itemize}
+\linebreak
+\inlineitem decoupling the execution of \APs, \CPs, and Blink, \\
+\inlineitem supporting short the end-to-end deadlines between the \APs.\\
 The idea behind \DRP is to split the responsibility of meeting end-to-end deadlines between (i)~the source node $n^s_i$ and \blink, and (ii)~the destination node $n^d_i$;
 If the source does not write too many messages, \blink guarantees every message will meet a given network deadline $D$, in turns, the destination commits to read its \bolt queue sufficiently often to meet the flow's end-to-end deadlines \deadlineany.
 

@@ -1,0 +1,90 @@
+% !TEX root = 00_thesis.tex
+\chapter{Résumé}
+
+% Context
+%% CPS
+\startsquarepar
+Les systèmes cyber-physiques (\CPS, de l'anglais \emph{Cyber-Physical Systems}) sont des systèmes où des éléments informatiques interagissent avec leur environnement : ils collectent certaines informations sur leur environnement, traitent ces informations et agissent en conséquence, ce qui modifie l'état de l'environnement.
+Monter automatiquement le chauffage lorsque la température baisse est l'un des exemples les plus simples de \CPS.
+%
+La situation devient plus complexe lorsque les applications sont distribuées entre des systèmes embarqués à
+faible consommation d'énergie, qui sont supposés fonctionner de façon autonome durant plusieurs années.
+Une communication sans-fil fiable et à basse consommation devient alors essentielle.
+%
+De plus, des délais maximum sur l'exécution de différentes opérations sont souvent imposés. Un système capable de garantir ces délais est appelé un système temps-réel.
+%
+Des \CPS sans-fil  capablent de fournir des garanties temps-réel tout en utilisant des technologies de communication à basse consommation sont souhaitables mais difficiles à concevoir.
+%% ST
+Ces dernières années, une technique appelée transmission synchrone (\ST, de l'anglais \emph{synchronous transmissions}) a été utilisée pour communiquer de façon fiable et à basse consommation dans les réseaux multi-sauts.
+\linebreak
+En un mot, le principe de la \ST est d'autoriser différents appareils à transmettre un paquet durant le même intervalle de temps ; la communication a de bonnes chances de réussir si les transmissions sont suffisamment bien synchronisées.
+La \ST peut être utilisée pour réaliser en un temps donné n'importe quel broadcast multi-saut, \cad une communication depuis un appareil à tous les autres ; une propriété très intéressante pour concevoir un système temps-réel.
+\stopsquarepar
+
+\startsquarepar
+Bien que le potentiel de la \ST soit reconnu par la communauté académique réseaux, cette technique a été pour l'instant peu utilisée pour la conception de \CPS.
+Au moins trois problèmes limitent l'adoption de la \ST dans ce domaine.
+\linebreak
+\smallBox{(i)}La \ST est difficile à utiliser à cause des exigences strictes de synchronisation, de l'ordre de la \us.
+Il manque des outils facilitant l'usage de la \ST par des ingénieurs \CPS, qui souvent ne sont pas des experts en communication.
+\linebreak
+% \\
+\smallBox{(i)}Il y a peu d'exemples illustrant l'utilisation de la \ST pour des applications \CPS ; les travaux académiques sur la \ST sont souvent plus focalisés sur les aspects communication que application.
+Il manque de preuves de concept convaincantes démontrant l'intérêt de la \ST pour des applications \CPS.
+% There are only few examples showcasing the use of \ST for \CPS applications and academic works based on \ST tend to focus on communication rather than applications. Convincing proof-of-concept \CPS applications are missing.
+\linebreak
+\smallBox{(i)}La variabilité inhérente de l'environnement sans-fil rend difficile l'évaluation des performances. L'absence d'une méthode établie menace la reproductibilité des expériences et limite la confiance dans les performances annoncées.
+\stopsquarepar
+
+\pagebreak
+\startsquarepar
+Ainsi, nous avons développé des outils et méthodes pour faciliter l'évaluation de protocoles sans-fil et l'implémentation de \CPS utilisant la \ST.
+De plus, nous avons tiré parti de la \ST pour concevoir deux \CPS visant différentes classes d'applications temps-réel.
+Cette dissertation présente ces contributions.
+\stopsquarepar
+
+\begin{itemize}
+
+  % =============================== %
+  \item
+  \startsquarepar
+  Dans le chapitre \ref{ch:triscale}, nous proposons de concevoir et d'analyser les expériences d'évaluation de performance pour les protocoles réseaux en utilisant une méthodologie concrète, rationnelle et statistiquement robuste.
+  Nous implémentons cette méthodologie dans un framework appelé \triscale, qui permet d'obtenir des performances avec un niveau de confiance quantifiable.
+  % \linebreak
+  De plus, nous tirons parti de \triscale pour proposer la première définition formelle de reproductibilité appliquée aux expériences pour les protocoles réseaux.
+  \stopsquarepar
+
+  % =============================== %
+  \item
+  % \startsquarepar
+  Le chapitre \ref{ch:baloo} présente \baloo, un framework pour la conception de protocoles réseaux basés sur la \ST.
+  L'utilisateur implémente son protocole via l'interface fournie par \baloo, qui prend en charge la gestion des opérations complexes telles que garantir la synchronisation nécessaire pour la \ST.
+  Nous montrons que \baloo est suffisamment flexible pour implémenter un large panel de protocoles pour un coût minime en termes d'utilisation mémoire et de consommation d'énergie.
+  % \stopsquarepar
+
+  % =============================== %
+  \item
+  Enfin, nous concevons et implémentons deux \CPS sans-fil utilisant la \ST :
+  {\setlength{\parskip}{0pt}%
+    \begin{itemize}[nosep]
+      \item
+      le Distributed Real-time Protocol (\DRP) utilise le concept de contrat pour maximiser la flexibilité entre les tâches à exécuter~(Chapitre~\ref{ch:drp}) ;
+      \item
+      Time-Triggered Wireless (\TTW) planifie statiquement tous les échanges de paquets et les exécutions de tâches de façon à minimiser la latence de bout en bout entre les tâches~(Chapitre~\ref{ch:ttw}).
+    \end{itemize}
+    \startsquarepar
+    Nous démontrons que des garanties temps-réel peuvent être fournies de façon fiable et efficace en énergie.
+    De plus, \TTW supporte des latences de l'ordre de dizaines de \ms, ce qui est suffisant pour contrôler en boucle fermée des pendules inversés ; une référence pour les applications de contrôle et de robotique.
+    \stopsquarepar
+  }
+
+\end{itemize}
+
+% Conclusion
+\startsquarepar
+Dans cette dissertation, nous montrons que la \ST permet de satisfaire les exigences des \CPS sans-fil temps-réel.
+De plus, nous facilitons l'implémentation de tels systèmes avec \baloo, un framework qui rend la \ST accessible pour le non-expert.
+Enfin, \triscale est un élément important pour améliorer la confiance dans les performances des protocoles réseaux.
+À partir de \triscale, il serait utile de définir, pour différentes classes d'applications, des problèmes de références pour l'évaluation de futurs \CPS.
+In fine, il est nécessaire d'évoluer depuis les preuves de concept vers des applications de \CPS sans-fil dans le monde réel. Cela serait facilité par le portage de \baloo sur des systèmes embarqués plus récents et plus puissants, ce qui améliorerait les performances atteignables.
+\stopsquarepar

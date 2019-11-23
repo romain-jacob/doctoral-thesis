@@ -72,17 +72,15 @@ We briefly present these features in this section.
 	\item [Repeating slots or rounds]
 	On the contrary, it may be useful to repeat the execution of specific slots, or even entire communication rounds (\eg when the number of slots required in a round is dynamic) or to retransmit lost packets.
 
-	\baloo lets the network layer trigger slot and round repeat using the return value of the \texttt{on\_slot\_post()} callback.
-	\begin{subitemize}
-
-		\item
-		If the slot repeat flag is received, the middleware re-executes the same slot.
-
-		\item
-		If the round repeat flag is received, the middleware immediately restarts executing from the first slot of the round.
-
-	\end{subitemize}
-
+	\baloo lets the network layer trigger slot and round repeat using the return value of the \texttt{on\_slot\_post()} callback.\\
+	% \begin{subitemize}
+		% \item
+		\inlineitem
+		If the slot repeat flag is received, the same slot is re-executed.\\
+		% \item
+		\inlineitem
+		If the round repeat flag is received, the middleware immediately restarts executing from the first slot of the round.\\
+	% \end{subitemize}
 	This feature is used \eg in Crystal~\cite{istomin2018Interferenceresilient}.
 
 

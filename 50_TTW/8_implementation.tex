@@ -27,7 +27,7 @@ The \DPP links two arbitrary processors with a processor interconnect called \bo
 %
 The \DPP architecture is compatible with \TTW's system model, which assumes that a node is capable of performing one task execution and one message transmission simultaneously~(\cref{sec:model}):
 We dedicate one processor (a TI MSP432~\cite{msp432}) to the execution of tasks and another one (a TI CC430 SoC~\cite{CC430F6137}) to wireless communication.
-The \DPP platform used for our implementation is illustrated in~\cref{fig:dpp2-cc430}.
+The \DPP platform we used is illustrated in~\cref{fig:dpp2-cc430}.
 
 To implement the \TTnet network stack, we leverage the \baloo design framework~(introduced in \cref{ch:baloo}).
 In particular, we use the ``static configuration'' mode of \baloo~(\cref{sec:adv_features}):
@@ -71,18 +71,18 @@ Our implementation of \TTnet is available in the \baloo repository~\cite{repoBal
 \label{subsec:implem_sched}
 
 We implement the \TTW scheduler using Matlab~\cite{Matlab} and we use the Gurobi solver~\cite{Gurobi} for synthesizing the schedules.
-All scripts are publicly available~(\cref{appendix:ttw_artifacts}).%
+All scripts are publicly available,%
 %
 \footnote{Although Matlab and Gurobi are commercial software, free academic and/or student licenses are currently available from the software vendors.}
 %
-The details of the MILP formulation can be found in Appendix~(\cref{appendix:ttw_artifacts}).
+together with details of the MILP formulation~(\cref{appendix:ttw_artifacts}).
 In this section, we describe how to run the \TTW scheduler.
 
 % \begin{itemize}
 %
 %   \item
   There are four high-level communication parameters that the user must specify in the \texttt{multimode\_main.m} file:
-  \begin{itemize}
+  \begin{itemize}[nosep]
     \item \customBox{$L$} The message payload size (in\bytes)
     \item \customBox{\nslotsmax} The maximal number of slots per round
     \item \customBox{$N$} The number of message transmissions in a Glossy flood~\cite{ferrari2011Glossy}
@@ -96,6 +96,8 @@ In this section, we describe how to run the \TTW scheduler.
   Finally, the user must specify the system's operation modes, applications, tasks, and messages, which is done by filling cell arrays in the \texttt{system\_configuration.m} and \texttt{mode\_configuration.m} files.
 %
 % \end{itemize}
+
+\pagebreak
 
 The scheduler supports user-defined constraints on the task and message offsets. These constraints must have the following form
 \begin{equation}
