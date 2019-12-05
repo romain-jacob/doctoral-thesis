@@ -46,6 +46,7 @@ Consequently, \baloo adopts the following fail-safe mechanism: \textsl{a node do
 \fakepar{A Middleware to Provide the Right Level of Abstraction}
 The main challenge in the design of \baloo is the definition of an interface that isolates the management of the radio (\ie running the \ST communication primitives) from the implementation of the protocol logic at the network layer.
 %
+{\setlength{\parskip}{0pt}%
 \baloo realizes this interface using a middleware layer that is responsible for the following tasks:
 \begin{itemize}[nosep]
 
@@ -58,7 +59,8 @@ The main challenge in the design of \baloo is the definition of an interface tha
 \end{itemize}
 The middleware is a \textsl{fixed piece of software} which can be configured but neither accessed nor modified by the network layer.
 The protocol logic (payload management, state keeping, \etc) is implemented entirely within the callback functions~(\cref{subsec:CB}).%
-The middleware interface is illustrated in \cref{fig:callbacks}.
+The middleware interface is illustrated in \cref{fig:callbacks}.%
+}
 
 With this approach, all low-level programming complexities are managed by the middleware and let the network designer focus on the main task: design the protocol logic of the network layer.
 

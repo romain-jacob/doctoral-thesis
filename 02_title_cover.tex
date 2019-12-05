@@ -1,0 +1,50 @@
+% !TEX root = 00_thesis.tex
+
+\thispagestyle{empty}
+
+\backgroundsetup{
+  placement=center,
+  angle=0,
+  contents={\includegraphics[scale=1]{Cover/cover_background}},
+  }
+\BgThispage
+
+% Decrease the inner margin
+\newlength{\savedoddsidemargin}
+\setlength{\savedoddsidemargin}{\oddsidemargin}
+\setlength{\oddsidemargin}{1in}
+
+
+{\sffamily\setlength{\baselineskip}{9mm}
+~
+\vfill
+
+{
+\LARGE\bfseries
+\titlestring
+}
+
+\vspace{0.5in}
+
+{\Large
+Romain Jacob
+}
+
+\vspace{0.8in}
+
+\includegraphics[scale=1]{Cover/cover_image}
+
+\vspace{0.8in}
+
+{\Large
+Diss.\ ETH No.\ \dissnumstring
+}
+
+}
+
+\clearpage
+
+%Restore the initial values
+\setlength{\oddsidemargin}{\savedoddsidemargin}
+
+\clearpage

@@ -1,0 +1,129 @@
+% !TEX root = ../00_thesis.tex
+
+\section{Appendix B}
+% \subsection*{Additional constraints for the multi-mode schedule synthesis problem}
+\label{appendix:multi_mode}
+
+In this appendix, we present how are practically implemented the constraints ensuring that
+\begin{itemize}
+
+	\item Schedules in the multi-mode case are compatible, \ie the inheritance constraints formulated in Theorem~\ref{thm:minVirtLegacy} (\cref{sec:multi_mode}) are respected
+
+	\item Running applications can seamlessly switch between modes, \ie there is no risk of missed deadline due to a mode change, as described in \cref{sec:modeChanges}.
+
+\end{itemize}
+Finally, we conclude with a short comment on how to implement context-specific requirements in the schedule synthesis problem.
+
+\vspace{10pt}
+\fakepar{Compatible schedules}
+Let us consider the schedule synthesis of mode \mode{j} where applications \app and \appB have been scheduled in higher-priority mode \mode{i}, such that
+\begin{itemize}
+
+	\item $\exists \; \app \in \legApp{j}$
+
+	\item $\exists \; \appX \in \freeApp{j} \, , \; \appB \in \minvirtlegApp{j}{\appX}$
+
+\end{itemize}
+We denote with a superscript $^k$ a schedule value computed in mode \mode{k}, \eg $m^j.o$ is the offset of message $m$ computed in mode \mode{j}.
+
+%legacy app: fix everything.
+\app is a legacy application for mode \mode{j}. Its schedule must be reserved, which is realized simply as follows
+\begin{flalign}
+&\forall \; (\tau, m) \in \app.c,
+&	\tau^{j}.o \; &= \; \tau^i.o
+&&\\
+&
+&	m^i.o \; &= \; m^j.o
+&&\\
+&
+&	m^i.d \; &= \; m^j.d
+&&
+\end{flalign}
+
+%virtual legacy app: use
+\appB is a virtual legacy application for application \appX. As a result, the scheduling ``space'' of the tasks of \appB must be reserved, to guarantee that the tasks of \appX will not overlap with \appB. This is achieved by adding constraints similar to those enforcing (C3), guaranteeing the validity of the task mappings (see the previous Appendix)
+%
+\begin{align}
+\intertext{%
+$	\forall\,
+		\tau_\appB \in \appB.c	, \,
+		\tau_\appX \in \appX.c  , \;
+		\; E_\appB == E_\appX, \;
+	\forall\, k_\appB \in [1..LCM/\tau_\appB.p], \; \forall\, k_\appX \in [1..LCM/\tau_\appX.p]$}
+	\tau_\appB.o + \tau_\appB.e + \tau_\appB.p*k_\appB
+	&\; \leq \; \tau_\appX.o + \tau_\appX.p*k_\appX \\
+\texttt{or} \quad
+	\tau_\appX.o + \tau_\appX.e + \tau_\appX.p*k_\appX
+	&\; \leq \; \tau_\appB.o + \tau_\appB.p*k_\appB
+\end{align}
+%
+Similarly, the \; \texttt{or} \; condition is realized using a ``big'' time constant $M$ and boolean variables.
+%
+\begin{align}
+\tau_\appB.o + \tau_\appB.e + \tau_\appB.p*k_\appB
+	&\; \leq \; \tau_\appX.o + \tau_\appX.p*k_\appX
+		+ M * (1 - \lambda_{\appB,\appX}^{k_\appB,k_\appX})\\
+\tau_\appX.o + \tau_\appX.e + \tau_\appX.p*k_\appX
+	&\; \leq \; \tau_\appB.o + \tau_\appB.p*k_\appB
+		+ M * \lambda_{\appB,\appX}^{k_\appB,k_\appX}
+\end{align}
+
+
+\vspace{10pt}
+\fakepar{Seamless mode switch}
+%message served and released in the same hyperperiod
+In order to prevent the risk of missed deadline due to a mode change, we described in \cref{sec:modeChanges} a simple procedure to execute mode change requests.
+\begin{enumerate}
+
+	\item All messages must be released and served within the same hyperperiod.
+	\label{rule1}
+
+	\item The starting time \tjstart of mode \modej is set to the end of the first hyperperiod of \modei after which the execution of all applications $\app \in \Sij$ has been completed.
+
+\end{enumerate}
+%
+The second rule depends on the embedded software, it is independent of the schedule synthesis.
+To enforce the first rule however, additional constraints must be formulated. As discussed at the end of \cref{sec:single_mode} and illustrated in \cref{fig:openboxoptions}, the rounds schedule may be such that some messages are released in one of the mode's hyperperiod, but served only in the next hyperperiod, see~\cref{subfig:case2}.
+\TODO{Now the only case presented in df(0) = -1, adapt the text}
+
+For applications scheduled in only one mode, this is no problem. Indeed, for every mode changed, they are either starting, terminating, or not involved, which cannot lead to a deadline miss.
+For the other applications, \ie scheduled in more than one mode, we enforce rule (\ref{rule1}) by setting the parameters $r_o.B_i$ in the definition of the service function $sf_i$~(see \eqref{eq:sf_def}).
+For any application \app scheduled in more than one mode,
+%
+\begin{flalign}
+&
+\forall \, m_i \in \app.c,
+&&r_o.B_i \; = \; 0
+&&
+\end{flalign}
+%
+
+
+
+\vspace{5pt}
+\fakepar{Context-specific requirements}
+The scheduling framework proposed in this work is very flexible thanks to the use of an ILP formulation to synthesize the schedules.
+We described in the Appendices a set of constraints for this ILP formulation that solves our initial problem, as stated in \cref{sec:model}.
+Then, additional constraints can be added to the formulation, to capture context-specific requirements. We give thereafter some examples of practically-relevant constraints.
+
+\vspace{5pt}
+\begin{description}
+
+	\item[Tasks $\tau_1$ and $\tau_2$ must start simultaneously]
+	\begin{equation}
+	\tau_1.o \; = \;  \tau_2.o
+	\end{equation}
+
+	\item[The time difference between $\tau_1$ finishing and $\tau_2$ starting is bounded by $D$]
+	\begin{equation}
+	\tau_2.o - ( \, \tau_1.o + \tau_1.e \, ) \; \leq \; D
+	\end{equation}
+
+	\item[Messages $m_1$ and $m_2$ must be allocated to the same rounds]
+	\begin{flalign}
+	&\forall\, j\in [1..R],
+	&&r_j.B_1 \; = \; r_j.B_2 \qquad
+	&&
+	\end{flalign}
+
+\end{description}

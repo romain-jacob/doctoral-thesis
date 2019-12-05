@@ -3,10 +3,12 @@
 %% Packages
 
 %debuging
-%\usepackage{showframe}
+% \usepackage{showframe}
+\usepackage{layout}
 \usepackage{lineno}
 %% Uncomment to display line numbers
 % \linenumbers
+
 
 \usepackage{xspace}
 \usepackage{tabularx}
@@ -17,10 +19,71 @@
 \definecolor{orange}{RGB}{255,153,51}
 \definecolor{lightorange}{RGB}{255,235,214}
 \definecolor{darkorange}{RGB}{171,68,1}
+
 \definecolor{lightgrey}{RGB}{242,242,242}
 \definecolor{midgrey}{RGB}{191,191,191}
-\definecolor{recapshadowcolour}{rgb}{0.5,0.5,0.5}
-\definecolor{recapbackcolour}{rgb}{0.98,0.98,0.95}
+
+\definecolor{darkblue}{RGB}{29,117,180}
+\definecolor{lightblue}{RGB}{205,224,220}
+
+\definecolor{darkred}{RGB}{255,32,33}
+\definecolor{lightred}{RGB}{255,128,129}
+
+\definecolor{darkgreen}{RGB}{101,178,50}
+\definecolor{lightgreen}{RGB}{170,223,135}
+
+
+\usepackage[pages=some,scale=1,angle=0,opacity=1]{background}
+
+% \usepackage{totcount}
+% \usetikzlibrary{calc}
+%
+% \newlength\LabelSize
+% \setlength\LabelSize{2.5cm}
+% \newif\ifMaterial
+%
+% \AtBeginDocument{%
+% \regtotcounter{chapter}
+% \setlength\LabelSize{\dimexpr\textheight/\totvalue{chapter}\relax}
+% \ifdim\LabelSize>2.5cm\relax
+%   \global\setlength\LabelSize{2.5cm}
+% \fi
+% }
+%
+% \newcommand\AddLabels{%
+% \Materialtrue%
+% \AddEverypageHook{%
+% \ifMaterial%
+% \ifodd\value{page} %
+%  \backgroundsetup{
+%   angle=90,
+%   position={current page.east|-current page text area.north  east},
+%   vshift=15pt,
+%   hshift=-\thechapter*\LabelSize,
+%   contents={%
+%   \tikz\node[fill=gray!30,anchor=west,text width=\LabelSize,
+%     align=center,text height=15pt,text depth=10pt,font=\large\sffamily] {\thechapter};
+%   }%
+%  }
+%  \else
+%  \backgroundsetup{
+%   angle=90,
+%   position={current page.west|-current page text area.north west},
+%   vshift=-15pt,
+%   hshift=-\thechapter*\LabelSize,
+%   contents={%
+%   \tikz\node[fill=gray!30,anchor=west,text width=\LabelSize,
+%     align=center,text height=15pt,text depth=10pt,font=\large\sffamily] {\thechapter};
+%   }%
+%  }
+%  \fi
+%  \BgMaterial%
+% \else\relax\fi}%
+% }
+%
+% \newcommand\RemoveLabels{\Materialfalse}
+
+
 
 
 \newcommand{\startsquarepar}{%
@@ -337,6 +400,12 @@ topsep=0pt,%
 \usepackage[hyphens]{url}
 %% PDF metadata
 \usepackage[pdftitle={\titlestringNOBR},pdfauthor={Romain Jacob},pdfsubject={Doctoral Dissertation},pdfkeywords={synchronous transmissions, low-power communication, wireless, cyber-physical systems}]{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=darkorange,
+  urlcolor=darkblue,
+  citecolor=darkorange
+}
 
 % \usepackage[pdftex,%
 %             pdfauthor={Romain Jacob}]{hyperref}%%

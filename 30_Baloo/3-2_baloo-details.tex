@@ -8,6 +8,7 @@
 	\caption{The middleware in \baloo implements a minimal state machine, sufficient to capture the desired behaviour of a node at physical layer.
 		\capt{A node either executes normally (\textsl{Running}), stays synchronized but does not participate to the communication rounds (\textsl{Suspended}), or continuously listens for an incoming control packet (\textsl{Bootstrapping}).}}
 	\label{fig:state-machine}
+	\vspace{-0.5cm}
 \end{figure}
 
 The previous section described the general concepts of \baloo.
@@ -43,7 +44,7 @@ If necessary, the network layer protocol can extend this minimal state machine u
 
 \baloo uses callback functions to implement the network layer protocol logic. This is how the network layer interacts with the middleware at runtime (\feature{Usability}).
 %
-There are five different callbacks, which have specific purposes and are executed by the middleware at precise points in time, as illustrated in \cref{fig:callbacks}.
+There are five different callbacks, each having a specific purpose and executed by the middleware at precise points in time~(\cref{fig:callbacks}).
 
 \begin{functions}
 
@@ -59,7 +60,6 @@ There are five different callbacks, which have specific purposes and are execute
 	is executed at the end of each data slot.
 	It is used to process the received payload, if any.
 
-	\pagebreak
 	\item[on\_round\_finished()]~\\
 	is executed at the end of the round.
 	It is used to do more time consuming state management or data processing.
