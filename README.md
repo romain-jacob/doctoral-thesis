@@ -10,4 +10,4 @@ This repository contains all source files and visualization notebooks of my doct
 | Title| Leveraging Synchronous Transmissions for the Design of Real-time Wireless Cyber-Physical Systems | 
 | Author | Romain Jacob| 
 |Affiliation| ETH Zurich|
-|Date (expected)| December 2019| 
+|Date | December 17, 2019| 

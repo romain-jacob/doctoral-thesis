@@ -74,7 +74,6 @@ Pantheon focuses on collecting data, not on their interpretation. Yet, the inter
     % Are the results reproducible?
 \end{itemize}
 
-
 These questions relate to the \feature{Robustness} and \feature{Rationality} requirements mentioned in~\cref{sec:triscale_intro}.
 The data analysis shown in \Cref{fig:example_pantheon} leaves these questions unanswered.
 Worse, the analysis may suggest wrong interpretations: the ellipses are a two-dimensional representation of the standard deviation across the runs, which suggests that one expects about 68\% of the data points to fall in that region.
@@ -100,7 +99,7 @@ These two schemes eventually converge, but it often takes more than 30 seconds.
 In \Cref{fig:example_triscale},
 \emph{the KPIs are representative of the ``long-running'' performance} (\ie the performance expected if the scheme would run ``forever'') with a 95\% probability.
 
-\fakepar{Conclusion}
+\fakepar{Conclusion} 
 Tools like Pantheon~\cite{yan18pantheon} support data collection, but leave to the researcher to design the experiments and analyze the data, leading to ambiguous interpretations and non-reproducible results.
 \triscale aims to fill this gap.
 \afterpage{
@@ -144,10 +143,6 @@ As experiments are carried out in emulation, there is no time dependency and the
 applying carefully-chosen statistical methods, verifying that their hypotheses hold for the collected data, and automating the computations.
 In particular, once the experiment has been designed and the data collected, the raw data is passed to \triscale for analysis.
 The analysis is divided into three timescales: \emph{runs}, \emph{series}, and \emph{sequels} (hence the name of \triscale):\\
-%
-% \begin{description}
-%
-%   \item[Runs]
   A \textbf{run} is one execution of the evaluation scenario (\eg a 30\s execution of one congestion-control scheme).
   The raw data from one run are analyzed to compute the performance metrics defined in the evaluation objectives.
   This timescale leads to one number per run and per metric~(\cref{subsec:metrics}).\\

@@ -25,7 +25,7 @@ To reduce the energy consumption, \TTW aims to minimize the number of rounds \ob
 The schedule synthesis for a single mode is optimal in this respect; that is, the procedure guarantees that the schedule minimizes the number of communication rounds~(\cref{sec:single_mode}).
 
 The second objective of the scheduler is to allow persistent applications to keep the same schedule in different operation modes \objective{2}.
-This creates additional constraints that break the optimality guarantee: in other words, the schedule of mode \modej, when constrained to be compatible with mode \modei, may contain more rounds that required to schedule the mode \modej alone.
+This creates additional constraints that break the optimality guarantee: in other words, the schedule of mode \modej, when constrained to be compatible with mode \modei, may contain more rounds than required to schedule the mode \modej alone.
 A naive solution to meet \objective{2} is to completely ``reserve the space'' of previously scheduled modes. This is equivalent to consider that all applications executing in mode \modei are also executing in \modej, even if it is not actually the case. We call this the \emph{full inheritance} approach.
 This approach does guarantee compatibility but it is very pessimistic: it leads to an excessive increase of the number of rounds and find problems to be non-schedulable when they may in fact be feasible.
 
