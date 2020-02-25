@@ -20,7 +20,7 @@ Leveraging Synchronous Transmissions for the Design of Real-time Wireless Cyber-
 
 %global settings
 \sloppy
-\setcounter{tocdepth}{1}
+\setcounter{tocdepth}{0}
 \hyphenpenalty=5000
 \tolerance=2000
 \vfuzz2pt % Don't report over-full v-boxes if over-edge is small
@@ -34,9 +34,14 @@ Leveraging Synchronous Transmissions for the Design of Real-time Wireless Cyber-
 
 \begin{document}
 
+% Comment to remove the chapter labels on odd pages
+\chapterLabels
+
 \pagestyle{empty}
 \pagenumbering{Alph}
-\input{02_title_cover}
+
+% \input{02_title_cover}
+
 \input{02_title_eth}
 \cleardoublepage
 \input{03_title_tik}
@@ -58,12 +63,12 @@ Leveraging Synchronous Transmissions for the Design of Real-time Wireless Cyber-
 \input{04_abstract.tex}
 \input{05_abstract_FR.tex}
 
-% \cleardoublepage
-% \input{06_acknowledgments.tex}
+\cleardoublepage
+\input{06_acknowledgments.tex}
 
 \clearpage
 \pagestyle{empty}
-\pdfbookmark[0]{Contents}{Contents}
+\pdfbookmark[0]{Table of Contents}{Table of Contents}
 {\small\tableofcontents}
 \cleardoublepage
 %\phantomsection\addcontentsline{toc}{chapter}{List of Figures}
@@ -101,7 +106,6 @@ Leveraging Synchronous Transmissions for the Design of Real-time Wireless Cyber-
 \bibliographystyle{plainurl}
 % {\smaller \bibliography{Thesis}}
 {\smaller \bibliography{Thesis}}
-
 
 \cleardoublepage
 \pagestyle{empty}

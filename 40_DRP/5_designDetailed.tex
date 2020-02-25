@@ -93,17 +93,21 @@ We refer to this as the expected arrival pattern.
 For any message matching the expected arrival pattern,
 \blink guarantees that, if the message is successfully received at the destination \cp, the message meets its relative network deadline~\ndeadlineany.%
 
-However, we must consider the complete system:
-(i)~the message release from the \APs is sporadic with jitter, and
-(ii)~\APs and \CPs operate independently~(\feature{Composability}). Thus, there is a mismatch between the periodic arrival pattern assumed by \blink and the actual message arrival at the \CPs.
+\squarepar{%}
+  However, we must consider the complete system:
+  (i)~the message release from the \APs is sporadic with jitter, and
+  (ii)~\APs and \CPs operate independently~(\feature{Composability}). Thus, there is a mismatch between the periodic arrival pattern assumed by \blink and the actual message arrival at the \CPs.%
+}
 
 \subsection{\DRP: Distributed Real-time Protocol}
 \label{subsec:drp}
 
-\blink provides real-time guarantees between the network interfaces (\ie the \CPs) assuming periodic message release. \DRP handles the mismatch between the \blink assumptions and the actual message arrival at the \CPs by
-(i)~letting the host \emph{assume} that messages are indeed released periodically at the \CPs.
-  \blink's communication schedule is computed based on the expected arrival pattern and using an arbitrary initial phase for the flows.
-(ii)~analyzing the maximal mismatch between the actual and expected arrival patterns.
+\squarepar{%}
+  \blink provides real-time guarantees between the network interfaces (\ie the \CPs) assuming periodic message release. \DRP handles the mismatch between the \blink assumptions and the actual message arrival at the \CPs by
+  (i)~letting the host \emph{assume} that messages are indeed released periodically at the \CPs.
+    \blink's communication schedule is computed based on the expected arrival pattern and using an arbitrary initial phase for the flows.
+  (ii)~analyzing the maximal mismatch between the actual and expected arrival patterns.%
+}
 
 This upper-bound represents the maximum extra-delay that a message can suffer before it is scheduled for communication by \blink.
 Then, the delay bounds for communication over \bolt and over the wireless network can be combined into a worst-case latency analysis which connects the system parameters (such as the network deadlines and flushing rate of \bolt) with the expected message latency.
@@ -172,7 +176,9 @@ If \blink admits the flow, the destination node's \cpdst and \apdst check whethe
 Moreover, \apdst re-computes its required flushing interval $T_f^d$ and checks using mainstream schedulability analysis~\cite{buttazzo2011HardRT} whether it can support this new load (in addition to the load incurred by other tasks running on \apdst).
 \DRP registers a flow only if all admission tests succeed, which then triggers changes in the runtime operation of \apsrc, \blink, and \apdst.
 
-Flow requests and acknowledgments are sent via dedicated control flows, which are registered by default at bootstrapping for each node in the network.
+\squarepar{%}
+  Flow requests and acknowledgments are sent via dedicated control flows, which are registered by default at bootstrapping for each node in the network.%
+}
 
 \afterpage{
 \begin{figure}

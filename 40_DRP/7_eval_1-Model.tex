@@ -49,10 +49,12 @@ In this section, we analyze the influence of these parameters on the achievable 
 \end{figure}}
 
 %-------------------------------------------------------------------------------
-\fakepar{Responsiveness: Minimal Admissible End-to-end Deadline}
-Let us assume that the duration of communication rounds \rlength is given.
-\DRP handles messages between application interfaces (\ie the \APs) and constrains the destination \apdst to flush \bolt (at least) every $T_f^d$. Naturally, there exists a lower bound on the admissible $T_f^d$; let us refer to this bound as \tfdmin.
-Given these parameters, we are interested in the minimal admissible end-to-end deadline $\D_{min}$, or in other words, the maximal responsiveness of the protocol.
+\squarepar{%
+	\fakepar{Responsiveness: Minimal Admissible End-to-end Deadline}
+	Let us assume that the duration of communication rounds \rlength is given.
+	\DRP handles messages between application interfaces (\ie the \APs) and constrains the destination \apdst to flush \bolt (at least) every $T_f^d$. Naturally, there exists a lower bound on the admissible $T_f^d$; let us refer to this bound as \tfdmin.
+	Given these parameters, we are interested in the minimal admissible end-to-end deadline $\D_{min}$, or in other words, the maximal responsiveness of the protocol.%
+}
 
 From the previous remark on $T_f^d$ and eq.  \eqref{eq:design_delay_destination} it follows
 \begin{align}
@@ -150,9 +152,11 @@ Using the parameters in \cref{table:simulation_parameters} from real-world proto
 \end{table}
 
 %-------------------------------------------------------------------------------
-\fakepar{Bandwidth: Maximal Duration of Communication Rounds}
-Conversely, let us now assume that the minimal end-to-end deadline to be supported is given by $\D$, and consider the same assumption on $T_f^d$. The maximal bandwidth achievable by \blink is $\nslotsmax/T_{net}^{min}$ \pkts/\s. The round length $C_{net}$ is a linear function of the number of packets per round \nslotsmax (\ie a constant time per packet plus some overhead), and \linebreak
-\eqref{eq:design_round_period} : $T_{net}^{min} = C_{net} + C_{CP}$. Hence, the maximal bandwidth actually grows with $C_{net}$. Thus, we now investigate the maximal admissible duration of communication rounds $C_{net}$ that yields the maximum available network bandwidth.
+\squarepar{%
+	\fakepar{Bandwidth: Maximal Duration of Communication Rounds}
+	Conversely, let us now assume that the minimal end-to-end deadline to be supported is given by $\D$, and consider the same assumption on $T_f^d$. The maximal bandwidth achievable by \blink is $\nslotsmax/T_{net}^{min}$ \pkts/\s. The round length $C_{net}$ is a linear function of the number of packets per round \nslotsmax (\ie a constant time per packet plus some overhead), and \linebreak
+	\eqref{eq:design_round_period} : $T_{net}^{min} = C_{net} + C_{CP}$. Hence, the maximal bandwidth grows with $C_{net}$. Thus, we now investigate the maximal admissible duration of communication rounds $C_{net}$ that yields the maximum available network bandwidth.%
+}
 
 From \eqref{eq:ndeadline_constraint_latency} we have
 $T + D + \overline{J}\;

@@ -20,21 +20,23 @@ The performance of the implementation is discussed in \cref{sec:ttw_evaluation_s
 \subsection{Implementation of \TTnet}
 \label{subsec:implem_ttnet}
 
-We implement \TTnet on embedded platforms built using the Dual-Processor Platform (\DPP) concept.
-The \DPP links two arbitrary processors with a processor interconnect called \bolt~\cite{sutton2015Bolt}, which provides predictable asynchronous message passing between the two processors using message queues with first-in-first-out (FIFO) semantics, one for each direction.%
-%
-\footnote{Refer to the Introduction chapter for more details about the \DPP concept.}
-%
-The \DPP architecture is compatible with \TTW's system model, which assumes that a node is capable of performing one task execution and one message transmission simultaneously~(\cref{sec:model}):
-We dedicate one processor (a TI MSP432~\cite{msp432}) to the execution of tasks and another one (a TI CC430 SoC~\cite{CC430F6137}) to wireless communication.
-The \DPP platform we used is illustrated in~\cref{fig:dpp2-cc430}.
+\squarepar{%}
+  We implement \TTnet on embedded platforms built using the Dual-Processor Platform (\DPP) concept.
+  The \DPP links two arbitrary processors with a processor interconnect called \bolt~\cite{sutton2015Bolt}, which provides predictable asynchronous message passing between the two processors using message queues with first-in-first-out (FIFO) semantics, one for each direction.%
+  %
+  \footnote{Refer to the Introduction chapter for more details about the \DPP concept.}
+  %
+  The \DPP architecture is compatible with \TTW's system model, which assumes that a node is capable of performing one task execution and one message transmission simultaneously~(\cref{sec:model}):
+  We dedicate one processor (a TI MSP432~\cite{msp432}) to the execution of tasks and another one (a TI CC430 SoC~\cite{CC430F6137}) to wireless communication.
+  The \DPP platform we used is illustrated in~\cref{fig:dpp2-cc430}.
 
-To implement the \TTnet network stack, we leverage the \baloo design framework~(introduced in \cref{ch:baloo}).
-In particular, we use the ``static configuration'' mode of \baloo~(\cref{sec:adv_features}):
-\TTW produces scheduling tables offline, which can be loaded in the nodes' memory to limit the runtime communication overhead~(\feature{Efficiency}).
-The \TTnet beacons~(\cref{sec:ttw_overview}) are sent as \baloo control packets, using the customizable ``user-bytes'' field.%
-%
-\footnote{\href{https://github.com/ETHZ-TEC/Baloo/wiki/Baloo-control-packet}{github.com/ETHZ-TEC/Baloo/wiki/Baloo-control-packet}}
+  To implement the \TTnet network stack, we leverage the \baloo design framework~(introduced in \cref{ch:baloo}).
+  In particular, we use the ``static configuration'' mode of \baloo~(\cref{sec:adv_features}):
+  \TTW produces scheduling tables offline, which can be loaded in the nodes' memory to limit the runtime communication overhead~(\feature{Efficiency}).
+  The \TTnet beacons~(\cref{sec:ttw_overview}) are sent as \baloo control packets, using the customizable ``user-bytes'' field.%
+  %
+  \footnote{\href{https://github.com/ETHZ-TEC/Baloo/wiki/Baloo-control-packet}{github.com/ETHZ-TEC/Baloo/wiki/Baloo-control-packet}}%
+}
 
 
 \begin{table}

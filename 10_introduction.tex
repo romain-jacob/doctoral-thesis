@@ -3,27 +3,21 @@
 \chapter{Introduction}
 \label{ch:introduction}
 
-\TODO{
-\begin{itemize}
-	\item Fig4: left-align. remove white boxes
-\end{itemize}
-}
-
-
-Cyber-Physical Systems (\CPS) are understood as systems where ``\emph{physical and software components are deeply intertwined, each operating on different spatial and temporal scales, exhibiting multiple and distinct behavioral modalities, and interacting with each other in a myriad of ways that change with context}''~\cite{nsf2010Cyber}.
-The domains of application of \CPS are very diverse: \eg robotics, distributed monitoring, process control, power-grid management~\cite{stankovic2008WSAN, lee2008Cyber, rajkumar2010CPS}.
-
-It is important to realize that the design of \CPS encompasses three main aspects, mapping to as many research fields, with their own purpose and goals: %\linebreak
+% \TODO{
 % \begin{itemize}
-	% \inlineitem
-	The \emph{embedded hardware design} aims to extend the amount of computational resources available (\eg processing power, memory, sensors and actuators) while limiting the cost, form factor, and energy consumption of a device.
-	% \linebreak
-	% \inlineitem
-	The \emph{communication}, either wired or wireless, aims to transmit messages between distributed devices efficiently; that is, quickly and using little energy.
-	% \linebreak
-	% \inlineitem
-	Finally, the \emph{distributed system design} realizes the implementation of the \CPS functions, such as \eg remote monitoring and control of distributed processes.
 % \end{itemize}
+% }
+
+
+\squarepar{%}
+	Cyber-Physical Systems (\CPS) are understood as systems where ``\emph{physical and software components are deeply intertwined, each operating on different spatial and temporal scales, exhibiting multiple and distinct behavioral modalities, and interacting with each other in a myriad of ways that change with context}''~\cite{nsf2010Cyber}.
+	The domains of application of \CPS are very diverse: \eg robotics, distributed monitoring, process control, power-grid management~\cite{stankovic2008WSAN, lee2008Cyber, rajkumar2010CPS}.
+
+	It is important to realize that the design of \CPS encompasses three main aspects, mapping to as many research fields, with their own purpose and goals:
+	The \emph{embedded hardware design} aims to extend the amount of computational resources available (\eg processing power, memory, sensors and actuators) while limiting the cost, form factor, and energy consumption of a device.
+	The \emph{communication}, either wired or wireless, aims to transmit messages between distributed devices efficiently; that is, quickly and using little energy.
+	Finally, the \emph{distributed system design} realizes the implementation of the \CPS functions, such as \eg remote monitoring and control of distributed processes.%
+}
 
 The goal of the overall design is to reliably provide the specified \CPS functions.
 Achieving this goal relies on hardware and communication; however reaching ``perfect'' communication, such as 100\% packet reception rate, is not a goal in itself; it is merely a mean to an end. What truly matters is to fulfill the system functionality.
@@ -45,16 +39,20 @@ However, \CPS applications have challenging performance requirements~\cite{akerb
 
 \section{Requirements of Wireless \CPS}
 
-\CPS applications are subject to different types of requirements, such as the specified end-to-end latency, bandwidth, or number of devices; the precise performance level for these requirements depends on the application context.
-Generally, \CPS requirements belong to one of the following classes:
+\squarepar{%}
+	\CPS applications are subject to different types of requirements, such as the specified end-to-end latency, bandwidth, or number of devices; the precise performance level for these requirements depends on the application context.
+	Generally, \CPS requirements belong to one of the following classes:%
+}
 
 \begin{features}[labelwidth=65pt, leftmargin=(\labelwidth+\labelsep)]
 
   \item[Reliability]
   A large ratio of messages are successfully transmitted wirelessly.
 
-  \item[Adaptability]
-  The system adapts to runtime changes in resource demands.
+	\squarepar{%}
+	  \item[Adaptability]
+	  The system adapts to runtime changes in resource demands.%
+	}
 
 	\item[Mobility]
   The system supports mobile devices.
@@ -62,12 +60,10 @@ Generally, \CPS requirements belong to one of the following classes:
 	\item[Timeliness]
   Applications meet their deadlines, which are often specified end-to-end. Depending on the class of systems, deadlines can be either soft or hard~\cite{buttazzo2011HardRT}.
 
-  \item[Efficiency]
-  The system
-  supports short end-to-end latency,
-  scales in terms of system size,
-  and
-  optimizes its energy consumption and bandwidth utilization.
+	\squarepar{%}
+	  \item[Efficiency]
+	  The system supports short end-to-end latency, scales in terms of system size, and optimizes its energy and bandwidth utilization.%
+	}
 
 \end{features}
 
@@ -85,14 +81,13 @@ Low-power wireless communication is a mature field of research, heavily studied 
 A large part of the research focused on wireless sensor networks, where low power consumption is a key requirement to enable long-term operation of the deployed networks, with specifications up to multiple years of operation on small batteries.
 Many successful applications and deployments include monitoring of soils~\cite{geissdoerfer2019PREAct}, permafrost~\cite{weber2019decade}, buildings~\cite{chintalapudi2006Monitoring}, or wildlife~\cite{cassens2019Bursting, zhang2004Zebranet}.
 
-In these scenarios, the distributed application often remains simple (\eg collect sensor readings).
-The main challenge is to reliably aggregate or disseminate messages across a multi-hop network.
-\emph{Single-hop} communication refers to the case where a source node is in communication range from its destination. This is a rather simple case, but the deployed networks often span large areas whereas low-power radios can typically communicate in the range of tens of meters.
-Thus, \emph{multi-hop} communication is required, whereby a source node must rely on other nodes in the network to forward its messages, hop after hop, until the destination is reached.%
-%
-% \footnote
-{This is the same principle as in the children's game known as Chinese whispers~\cite{ChineseWhispers}; if you ever played, you know that the original message hardly ever reaches the end of the chain successfully.}
-%
+\squarepar{%}
+	In these scenarios, the distributed application often remains simple (\eg collect sensor readings).
+	The main challenge is to reliably aggregate or disseminate messages across a multi-hop network.
+	\emph{Single-hop} communication refers to the case where a source node is in communication range from its destination. This is a rather simple case, but the deployed networks often span large areas whereas low-power radios can typically communicate in the range of tens of meters.
+	Thus, \emph{multi-hop} communication is required, whereby a source node must rely on other nodes in the network to forward its messages, hop after hop, until the destination is reached.
+	This is the same principle as in the children's game known as Chinese whispers~\cite{ChineseWhispers}; if you ever played, you know that the original message hardly ever reaches the end of the chain successfully.%
+}
 
 Multi-hop communication is a collaborative task for which the nodes must be coordinated.
 Indeed, if a node transmits a message while another wireless communication is ongoing, the transmissions will interfere and they may both fail.
@@ -115,14 +110,16 @@ A destination node can successfully receive (one of these) synchronous transmiss
 In a nutshell, \ST is likely to be successful if the incoming messages arrive at the receiving node's antenna within a small time offset (in the range of a few symbol periods -- a few tens of \us~-- depending on the physical layer and the effect considered).
 \ST has been shown to work both analytically~\cite{wilhelm2014Reception}, empirically~\cite{ferrari2011Glossy}, and on different physical layers, such as IEEE 802.15.4\cite{yuan2014Sparkle}, Bluetooth~\cite{alnahas2019BlueFlood}, and LoRa~\cite{wegmann2018Reliable}.
 
-The use of \ST in low-power communication, pioneered by Glossy~\cite{ferrari2011Glossy} in 2011, has triggered a paradigm shift in the low-power wireless community: \ST can be leveraged to implement efficient broadcast in a multi-hop network using network-wide flooding~(\cref{fig:flooding}).
-The flooding procedure implemented by Glossy is illustrated in \cref{fig:glossy}. A first node initiates the flooding process. The 1-hop neighbors of the initiator receive the message and synchronously broadcast this same message in the next time step, which is then received by the initiator's 2-hop neighbors with high probability, thanks to \ST. The process repeats following the same logic: a node that receives a packet broadcasts it again in the next time slot. Each node in the network transmits each packet up to $N$ times, after which the flood terminates.
-It has been shown in a wide range of scenario that, with $N=3$, Glossy achieves a reliability above 99.99\%~\cite{ferrari2011Glossy}; that is, 99.9\% of the floods are successfully received by nodes in the network. With $N=5$, the average reliability reaches 99,999\%~\cite{ferrari2011Glossy}.
-Glossy achieves such high reliability by leveraging spatio-temporal redundancy.
-Packets are transmitted along all possible paths; in other words, they are implicitly routed everywhere, and therefore avoid interference sources localized in space.
-In addition, having each node transmitting $N$ times creates temporal redundancy, thereby avoiding interference sources localized in time.
-Moreover, the predictability of the operation timing in \ST-based flooding can be leveraged to perform distributed time synchronization. Glossy demonstrated that sub-\us synchronization accuracy can be achieved in a multi-hop network composed of tens to hundreds of nodes~\cite{ferrari2011Glossy}.
-Since Glossy, other flooding strategies have been proposed~\cite{lim2017Competition, baddeley2019AtomicSDN, ma2019DeCoT}, but the overall principle remains the same.
+\squarepar{%}
+	The use of \ST in low-power communication, pioneered by Glossy~\cite{ferrari2011Glossy} in 2011, has triggered a paradigm shift in the low-power wireless community: \ST can be leveraged to implement efficient broadcast in a multi-hop network using network-wide flooding~(\cref{fig:flooding}).
+	The flooding procedure implemented by Glossy is illustrated in \cref{fig:glossy}. A first node initiates the flooding process. The 1-hop neighbors of the initiator receive the message and synchronously broadcast this same message in the next time step, which is then received by the initiator's 2-hop neighbors with high probability, thanks to \ST. The process repeats following the same logic: a node that receives a packet broadcasts it again in the next time slot. Each node in the network transmits each packet up to $N$ times, after which the flood terminates.
+	It has been shown in a wide range of scenario that, with $N=3$, Glossy achieves a reliability above 99.99\%~\cite{ferrari2011Glossy}; that is, 99.9\% of the floods are successfully received by nodes in the network. With $N=5$, the average reliability reaches 99,999\%~\cite{ferrari2011Glossy}.
+	Glossy achieves such high reliability by leveraging spatio-temporal redundancy.
+	Packets are transmitted along all possible paths; in other words, they are implicitly routed everywhere, and therefore avoid interference sources localized in space.
+	In addition, having each node transmitting $N$ times creates temporal redundancy, thereby avoiding interference sources localized in time.
+	Moreover, the predictability of the operation timing in \ST-based flooding can be leveraged to perform distributed time synchronization. Glossy demonstrated that sub-\us synchronization accuracy can be achieved in a multi-hop network composed of tens to hundreds of nodes~\cite{ferrari2011Glossy}.
+	Since Glossy, other flooding strategies have been proposed~\cite{lim2017Competition, baddeley2019AtomicSDN, ma2019DeCoT}, but the overall principle remains the same.%
+}
 
 \begin{figure}
   \centering
@@ -161,11 +158,13 @@ Since Glossy, other flooding strategies have been proposed~\cite{lim2017Competit
 \end{figure}
 
 
-The key benefit of \ST is that, thanks to the provided multi-hop broadcast primitive, the overall communication design can be dramatically simplified.
-Essentially, one can abstract the underlying multi-hop topology as a \emph{virtual single-hop network}, which can scheduled like a shared bus: any node can send a message to any other node(s) in the network in bounded time. The only requirement is that no other node is using the ``bus'' at the same time.
-This design, first proposed with the Low-power Wireless Bus protocol~\cite{ferrari2012LWB}, has been adapted into many different flavors~(\eg \cite{istomin2018Interferenceresilient, alnahas2017a2, sarkar2016Sleeping, baddeley2019AtomicSDN}) with always a similar concept~(\cref{fig:rounds}): communication is organized in rounds, between which nodes keep their radio turned off to save energy. Each round is composed of time slots, which are assigned to certain nodes for communication. In each of these slots, nodes execute a flooding primitive (\eg Glossy) thereby preforming a one-to-all communication.
-Consequently, the complexity of performing reliable multi-hop communication (described in \cref{sec:traditionalNetworking}) is significantly relaxed.
-Thanks to \ST, multi-hop communication is reduced to the scheduling of a single shared resource, a well-understood and relatively easy problem~\cite{buttazzo2011HardRT}.
+\squarepar{%}
+	The key benefit of \ST is that, thanks to the provided multi-hop broadcast primitive, the overall communication design can be dramatically simplified.
+	Essentially, one can abstract the underlying multi-hop topology as a \emph{virtual single-hop network}, which can scheduled like a shared bus: any node can send a message to any other node(s) in the network in bounded time. The only requirement is that no other node is using the ``bus'' at the same time.
+	This design, first proposed with the Low-power Wireless Bus protocol~\cite{ferrari2012LWB}, has been adapted into many different flavors~(\eg \cite{istomin2018Interferenceresilient, alnahas2017a2, sarkar2016Sleeping, baddeley2019AtomicSDN}) with always a similar concept~(\cref{fig:rounds}): communication is organized in rounds, between which nodes keep their radio turned off to save energy. Each round is composed of time slots, which are assigned to certain nodes for communication. In each of these slots, nodes execute a flooding primitive (\eg Glossy) thereby preforming a one-to-all communication.
+	Consequently, the complexity of performing reliable multi-hop communication (described in \cref{sec:traditionalNetworking}) is significantly relaxed.
+	Thanks to \ST, multi-hop communication is reduced to the scheduling of a single shared resource, a well-understood and relatively easy problem~\cite{buttazzo2011HardRT}.%
+}
 
 \begin{figure}
   \centering
@@ -266,23 +265,27 @@ In this dissertation, we attempt to leverage recent advances in the domain of lo
 \cref{fig:chapter_all} provides an overview of the contributions of the dissertation, which are summarized below.
 \begin{itemize}
 
-  \item
-  We work towards more rigorous and reproducible experimental networking research.
-  For the first time, we go beyond simple guidelines and propose a concrete methodology for designing networking experiments and analyzing their data.
-  We leverage this methodology to propose the first formalized definition of reproducibility for networking experiments.
-  We implemented our methodology in a framework called \triscale, a first-of-its-kind tool that assists researchers by streamlining the design process and automating the data analysis~(\cref{ch:triscale}).
+	\squarepar{%}
+	  \item
+	  We work towards more rigorous and reproducible experimental networking research.
+	  For the first time, we go beyond simple guidelines and propose a concrete methodology for designing networking experiments and analyzing their data.
+	  We leverage this methodology to propose the first formalized definition of reproducibility for networking experiments.
+	  We implemented our methodology in a framework called \triscale, a first-of-its-kind tool that assists researchers by streamlining the design process and automating the data analysis~(\cref{ch:triscale}).
 
-  \item
-  We propose and implement \baloo, a design framework for network stacks based on synchronous transmissions (\ST).
-  \baloo significantly lowers the entry barrier for harnessing the efficiency, reliability and mobility support of \ST:
-  users implement their protocol through a simple yet flexible API while \baloo handles all the complex low-level operations based on the users' inputs~(\cref{ch:baloo}).
+	  \item
+	  We propose and implement \baloo, a design framework for network stacks based on synchronous transmissions (\ST).
+	  \baloo significantly lowers the entry barrier for harnessing the efficiency, reliability and mobility support of \ST:
+	  users implement their protocol through a simple yet flexible API while \baloo handles all the complex low-level operations based on the users' inputs~(\cref{ch:baloo}).%
+	}
 
   \item
   We demonstrate for the first time that end-to-end real-time guarantees can be obtained in wireless \CPS by leveraging the efficiency and reliability of synchronous transmissions.
   We propose and implement wireless real-time protocols for two different design objectives.
   \begin{itemize}
-    \item The Distributed Real-time Protocol (\DRP) uses contracts to maximize the flexibility of execution between application tasks~(\cref{ch:drp}).
-    \item Time-Triggered Wireless (\TTW) statically co-schedules all task executions and message transfers to minimize end-to-end latency~(\cref{ch:ttw}).
+		\squarepar{%}
+	    \item The Distributed Real-time Protocol (\DRP) uses contracts to maximize the flexibility of execution between application tasks~(\cref{ch:drp}).
+	    \item Time-Triggered Wireless (\TTW) statically co-schedules all task executions and message transfers to minimize end-to-end latency~(\cref{ch:ttw}).%
+		}
   \end{itemize}
 
 \end{itemize}
@@ -301,7 +304,6 @@ In this dissertation, we attempt to leverage recent advances in the domain of lo
 % ------------------------------------------------------------------------------
 
 % ------------------------------------------------------------------------------
-\newpage
 \section{``Reproducible'' Dissertation}
 
 As discussed above, one of the contribution of this dissertation attempts to foster reproducible experimental practices in networking research~(\cref{ch:triscale}).
@@ -316,13 +318,20 @@ In line with this idea, we take a step forward in that direction and attempt to 
 	In particular, whenever possible, we make publicly available all the data presented in this dissertation, in both raw and processed form.
 	We often provide links to digital notebooks, which allow data visualization in a web browser without requiring any file download.
 
-	\item
-	All the plots in this dissertation are ``clickable''; that is, the plots are hyperlinks pointing to dynamic visualizations which let the reader explore the data (\eg zooming-in and -out in the plot, toggle visibility of individual traces, \etc).
-	If you are reading a printed version of this document, you can find the corresponding link addresses in the ``Artifacts and Links'' appendices.
+	\squarepar{%}
+		\item
+		All the plots in this dissertation are ``clickable''; that is, the plots are hyperlinks pointing to dynamic visualizations which let the reader explore the data (\eg zooming-in and -out in the plot, toggle visibility of individual traces, \etc).
+		If you are reading a printed version of this document, you can find the corresponding link addresses in the ``Artifacts and Links'' appendices.%
+	}
 
 	\item
 	The source files of this dissertation (this document) are themselves publicly available.
 	\tex source files and figures are published on GitHub under the Creative Commons \href{https://creativecommons.org/licenses/by/4.0/}{CC-BY-4.0 license}.
+
+	\item
+	The doctoral examination talk is also publicly available\\[5pt]
+	\customLink{\IconPresentation}{Presentation}{osf.io/rgkdx/}{https://osf.io/rgkdx/}\\[-8pt]
+	\customLink{\IconVideo}{Video}{youtu.be/t-cynMz2s0c}{https://youtu.be/t-cynMz2s0c}
 
 \end{itemize}
 

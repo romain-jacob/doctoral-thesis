@@ -3,7 +3,9 @@
 \section{Prolem Setting}
 \label{sec:baloo_intro}
 
-Synchronous Transmissions (\ST) is an increasingly used wireless communication technology for low-power multi-hop networks. Popularized by Glossy~\cite{ferrari2011Glossy} in 2011, it has been proven to be highly reliable and energy efficient, as illustrated by the EWSN Dependability Competition ~\cite{schuss2017Competition}, where all wining solutions were based on \ST~\cite{escobar2018Competition,sommer2016Competition,lim2017Competition, escobar2019RedNodeBus, ma2019DeCoT} in the past four years (2016 to 2019).
+\squarepar{%
+  Synchronous Transmissions (\ST) is an increasingly used wireless communication technology for low-power multi-hop networks. Popularized by Glossy~\cite{ferrari2011Glossy} in 2011, it has been proven to be highly reliable and energy efficient, as illustrated by the EWSN Dependability Competition ~\cite{schuss2017Competition}, where all wining solutions were based on \ST~\cite{escobar2018Competition,sommer2016Competition,lim2017Competition, escobar2019RedNodeBus, ma2019DeCoT} in the past four years (2016 to 2019).%
+}
 
 A \textsl{\ST primitive} refers to a protocol that efficiently realizes broadcast (\ie any-to-all communication) in bounded time, usually relying on \textsl{flooding}.
 Flooding is a communication strategy that realizes broadcast by having all receivers of a packet retransmit this same packet to all their neighbours; the packet is thus ``flooded'' through the whole network. \ST makes flooding energy and time efficient by letting multiple wireless nodes transmit the packet \textsl{synchronously}, hence the name of \textsl{Synchronous Transmissions}. The successful reception of the packet can be achieved if the transmitters are tightly synchronized, thanks to \textsl{constructive interference} and the \textsl{capture effect}~\cite{yuan2013LetTalkTogether}.
@@ -19,11 +21,12 @@ Instead, some primitives aim to minimize latency for specific traffic patterns.
 For example, Chaos~\cite{landsiedel2013Chaos} lets all nodes modify the packet being flooded to quickly aggregate information (\eg the max value of all sensor readings) or efficiently perform all-to-all data sharing to achieve distributed consensus~\cite{alnahas2017a2}.
 Codecast~\cite{mohammad2018Codecast} also targets many-to-many exchange for a larger amount of data.
 Pando~\cite{du2015Pando} is another primitive focused on high throughput, which uses fountain code and packet pipelining for efficient data dissemination.
-Syncast~\cite{mohammad2017Improving} aims to reduce the radio on time required compared to Glossy to save energy.
-Finally, Less is More (LiM)~\cite{zhang2017LiM} is a primitive that reduces energy consumption using learning to avoid unnecessary retransmissions during flooding.
+Syncast~\cite{mohammad2017Improving} aims to reduce the radio on time required to save energy, while Less is More (LiM)~\cite{zhang2017LiM} is a primitive that reduces energy consumption using learning to avoid unnecessary retransmissions during flooding.
 
-All these primitives share the same drawback: Successful \ST requires low-level control of timers and radio events in order to meet \ST tight synchronization requirements (the order of \us).
-This degree of accuracy is difficult to achieve as it requires a detailed knowledge of the underlying hardware, low-level control of the radio operations, and a very careful management of software delays.
+\squarepar{%
+  All these primitives share the same drawback: Successful \ST requires low-level control of timers and radio events in order to meet \ST tight synchronization requirements (the order of \us).
+  This degree of accuracy is difficult to achieve as it requires a detailed knowledge of the underlying hardware, low-level control of the radio operations, and a very careful management of software delays.%
+}
 
 As a result, designing a network stack based on \ST is a complex and time consuming task, for which only few solutions have been proposed.
 One of the first was the Low-power Wireless Bus (LWB) ~\cite{ferrari2012LWB}, which tries to flexibly support all kinds of traffic patterns in a balanced trade-off between latency and energy consumption.
@@ -77,6 +80,7 @@ Indeed, meeting the tight timing requirements for \ST is directly conflicting wi
 	The middleware must guarantee to respect the time synchronization requirements for \ST (from sub-\us to tens of \us~\cite{yuan2013LetTalkTogether}).
 \end{features}
 
+\pagebreak
 %Task/Contibution
 \fakepar{Our solution}
 To address these challenges, we have designed \baloo, a flexible design framework for low-power network stacks based on \ST.%

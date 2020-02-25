@@ -101,10 +101,12 @@ A mode \modeany is characterized by
 	 \modeany.\prio
 	\quad &\text{--\quad priority} \quad \}
 \end{align*}
-We write $\app \in \modeany$ to denote that \app is executing in mode \modeany.
-When unambiguous, we use \modeany to denote the set of applications executing in mode \modeany.
-The mode \emph{hyperperiod} \modeHyperperiod is the least common multiple of the mode's applications.
-Possible transitions between modes at runtime are described with the \emph{mode graph} \modeGraph~(\cref{fig:modeGraph}). The mode graph is undirected; a transition from \modei to \modej implies that it is possible to transition from \modej to \modei as well.
+\squarepar{%}
+	We write $\app \in \modeany$ to denote that \app is executing in mode \modeany.
+	When unambiguous, we use \modeany to denote the set of applications executing in mode \modeany.
+	The mode \emph{hyperperiod} \modeHyperperiod is the least common multiple of the mode's applications.
+	Possible transitions between modes at runtime are described with the \emph{mode graph} \modeGraph~(\cref{fig:modeGraph}). The mode graph is undirected; a transition from \modei to \modej implies that it is possible to transition from \modej to \modei as well.%
+}
 
 
 
@@ -163,14 +165,16 @@ All inputs and output of the problem are summarized in \cref{table:ttw_inputs_ou
 	\smaller{\input{\ChapPath/Tables/in_out.csv}}
 \end{table}
 
-\fakepar{Application use case}
-Consider the control of physical systems demanding update rates in the order of tens of \ms, which are common in an industrial context~\cite{akerberg2011Future}.
-The classical proof-of-concept application is the closed-loop control of an inverted pendulum~\cite{boubaker2012inverted}.
-With \TTW, one can use low-power wireless technology to remotely control multiple such pendulums, as demonstrated in~\cite{mager2019Feedback}.
-Different \TTW operation modes may correspond to different control tasks: \eg solely stabilizing the pendulums or synchronizing their positions~\cite{mager2019Demo}.
-Furthermore, thanks to the stateless logic of \TTnet (inherited from Glossy~\cite{ferrari2011Glossy}), \TTW inherently supports \feature{Mobility}.%
-%
-\footnote{Mobility experiment (1min): \href{https://youtu.be/19xPHjnobkY}{youtu.be/19xPHjnobkY}}
+\squarepar{%}
+	\fakepar{Application use case}
+	Consider the control of physical systems demanding update rates in the order of tens of \ms, which are common in an industrial context~\cite{akerberg2011Future}.
+	The classical proof-of-concept application is the closed-loop control of an inverted pendulum~\cite{boubaker2012inverted}.
+	With \TTW, one can use low-power wireless technology to remotely control multiple such pendulums, as demonstrated in~\cite{mager2019Feedback}.
+	Different \TTW operation modes may correspond to different control tasks: \eg solely stabilizing the pendulums or synchronizing their positions~\cite{mager2019Demo}.
+	Furthermore, thanks to the stateless logic of \TTnet (inherited from Glossy~\cite{ferrari2011Glossy}), \TTW inherently supports \feature{Mobility}.%
+	%
+	\footnote{Mobility experiment (1min): \href{https://youtu.be/19xPHjnobkY}{youtu.be/19xPHjnobkY}}%
+}
 
 \pagebreak
 

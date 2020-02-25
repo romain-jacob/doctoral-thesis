@@ -42,9 +42,10 @@ If necessary, the network layer protocol can extend this minimal state machine u
 \subsection{Middleware Callback Functions}
 \label{subsec:CB}
 
-\baloo uses callback functions to implement the network layer protocol logic. This is how the network layer interacts with the middleware at runtime (\feature{Usability}).
-%
-There are five different callbacks, each having a specific purpose and executed by the middleware at precise points in time~(\cref{fig:callbacks}).
+\squarepar{%
+	\baloo uses callback functions to implement the network layer protocol logic. This is how the network layer interacts with the middleware at runtime (\feature{Usability}).
+	There are five different callbacks, each having a specific purpose and executed by the middleware at precise points in time~(\cref{fig:callbacks}).%
+}
 
 \begin{functions}
 
@@ -70,7 +71,9 @@ There are five different callbacks, each having a specific purpose and executed 
 
 \end{functions}
 
-These callback functions are also used to implement more advanced features of \baloo (\eg skipping or repeating a slot), which are briefly presented in \cref{sec:adv_features}.
+\squarepar{%
+	These callback functions are also used to implement more advanced features of \baloo (\eg skipping a slot), which are briefly presented in \cref{sec:adv_features}.%
+}
 
 \afterpage{
 	\begin{landscape}
@@ -88,12 +91,16 @@ These callback functions are also used to implement more advanced features of \b
 \subsection{Achieving Timeliness of Execution}
 \label{subsec:timeliness}
 
-The callback functions enable flexible interactions between the network layer and the middleware. While this is key to address \feature{Usability} and \feature{Generality}, it also inherently couples the two software components, thus challenging the timely execution of the middleware and compromising \feature{Synchronicity}.
+\squarepar{%
+	The callback functions enable flexible interactions between the network layer and the middleware. While this is key to address \feature{Usability} and \feature{Generality}, it also inherently couples the two software components, thus challenging the timely execution of the middleware and compromising \feature{Synchronicity}.%
+}
 
 Indeed, the callbacks execute between communication slots or between rounds (see \cref{fig:callbacks}), which must start synchronously on all nodes to permit successful \ST.
 The middleware could interrupt an overrunning callback to ensure synchronicity, but that is not desirable. In general, an interrupted callback would have to be considered as a failure by the network layer; then successful \ST at the lower layer would not really matter anyway.
 
-To mitigate this problem, the middleware \textsl{monitors} the execution time of the callbacks. If a callback overruns and the middleware cannot guarantee the timely execution of the next slot, this slot is skipped (\ie the node does not participate at all in this slot) and a notification event is sent to the network layer.
+\squarepar{%
+	To mitigate this problem, the middleware \textsl{monitors} the execution time of the callbacks. If a callback overruns and the middleware cannot guarantee the timely execution of the next slot, this slot is skipped (\ie the node does not participate in this slot) and a notification event is sent to the network layer.%
+}
 
 With this approach, \baloo can guarantee to respect the timing requirement for \ST \textit{under the condition that the callbacks have enough time to complete their execution}.%
 \footnote{This default strategy may lead to a starvation problem if a callback ``never'' returns, \eg if it relies on another software sitting at higher layers. One advanced feature lets the middleware interrupt overrunning callbacks (see \cref{subsec:add_func}).}

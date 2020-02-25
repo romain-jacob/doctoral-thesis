@@ -23,13 +23,15 @@ This makes \ST particularly suited for a time-triggered communication scheme. Wi
 
 \baloo uses Glossy~\cite{ferrari2011Glossy} as default \ST primitive, but it also supports other primitives, \eg Chaos~\cite{landsiedel2013Chaos}. In principle, \baloo is compatible with arbitrarily many other primitives (see \cref{subsec:multi-ST-primitives}), thus addressing \feature{Versatility}.
 
-\fakepar{Round-based Design}
-To maximize the benefits of \ST, \baloo organizes communication in
-TDMA rounds, with dedicated time slots assigned to specific nodes which are then allowed to initiate a transmission in this slot.
-The first slot in each round is assigned to a central node, called the \textsl{host}, to send some control information (see below). This \textsl{control slot} is then followed by arbitrarily many \textsl{data slots}.
-Nodes turn their radio off between rounds to save energy.
+\squarepar{%
+	\fakepar{Round-based Design}
+	To maximize the benefits of \ST, \baloo organizes communication in
+	TDMA rounds, with dedicated time slots assigned to specific nodes which are then allowed to initiate a transmission in this slot.
+	The first slot in each round is assigned to a central node, called the \textsl{host}, to send some control information (see below). This \textsl{control slot} is then followed by arbitrarily many \textsl{data slots}.
+	Nodes turn their radio off between rounds to save energy.
 
-While this framework may look restrictive and hinder \feature{Generality}, such round-based design is in fact very generic, and compatible with many (if not all) \ST-based network stacks proposed so far in the literature. The flexibility and limitations of \baloo will be discussed in the evaluation (\cref{sec:baloo_eval} and \ref{sec:requirements}).
+	While this framework may look restrictive and hinder \feature{Generality}, such round-based design is in fact very generic, and compatible with many (if not all) \ST-based network stacks proposed so far in the literature. The flexibility and limitations of \baloo will be discussed in the evaluation (\cref{sec:baloo_eval,sec:requirements}).%
+}
 
 \fakepar{Control Information}
 In \baloo, the control packet, sent at the beginning of each round, plays a key role. It is constructed such that if a node receives a control packet from the host, this nodes knows exactly\\
@@ -46,9 +48,11 @@ Consequently, \baloo adopts the following fail-safe mechanism: \textsl{a node do
 \fakepar{A Middleware to Provide the Right Level of Abstraction}
 The main challenge in the design of \baloo is the definition of an interface that isolates the management of the radio (\ie running the \ST communication primitives) from the implementation of the protocol logic at the network layer.
 %
-{\setlength{\parskip}{0pt}%
+{
+\setlength{\parskip}{3pt}%
+\setlength{\parsep}{3pt}%
 \baloo realizes this interface using a middleware layer that is responsible for the following tasks:
-\begin{itemize}[nosep]
+\begin{itemize}
 
 	\item The middleware organizes the timers and controls the radio operations (\ie it executes the \ST primitives).
 

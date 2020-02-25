@@ -10,8 +10,10 @@ This approach is inspired by similar work in the wired domain, in particular the
 Compared to \DRP~(\cref{ch:drp}), \TTW's static schedules allow to meet shorter end-to-end deadlines \feature{Efficiency} at the cost of a lesser (\feature{Adaptability}); indeed, \TTW's runtime adaptability is limited to switching between pre-defined operation modes.
 
 % Key concept/novel idea
-The main challenge in the \TTW design is that, with wireless communication, it is highly beneficial in terms of energy to send messages in rounds. Thus, the assignment of messages to round (similar to a bin-packing problem) must be combined to the traditional co-scheduling approaches, which is non-trivial.
+\squarepar{%}
+  The main challenge in the \TTW design is that, with wireless communication, it is highly beneficial in terms of energy to send messages in rounds. Thus, the assignment of messages to round (similar to a bin-packing problem) must be combined to the traditional co-scheduling approaches, which is non-trivial.
 
-% Take aways
-We solved this problem and implemented a multi-mode scheduler that allows critical applications to seamlessly switch between modes while minimizing the energy consumption spent for wireless communication.
-We further implemented a predictable network stack, called \TTnet. Together, these two pieces from \TTW, a publicly available~(\cref{appendix:ttw_artifacts}) real-time wireless \CPS design.
+  % Take aways
+  We solved this problem and implemented a multi-mode scheduler that allows critical applications to seamlessly switch between modes while minimizing the energy consumption spent for wireless communication.
+  We further implemented a predictable network stack, called \TTnet. Together, these two pieces from \TTW, a publicly available~(\cref{appendix:ttw_artifacts}) real-time wireless \CPS design.%
+}

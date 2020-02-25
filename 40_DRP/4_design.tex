@@ -19,6 +19,7 @@ This chapter presents the \DRPLong (\DRP), a solution to provide end-to-end real
 Before delving into details, this section provides an overview of \DRP's principles.
 
 The system model of \DRP divides the end-to-end communication between local and wireless parts~(\cref{fig:DRP_sysmodel}):
+\pagebreak
 \begin{description}
   \item[\AP  $\boldsymbol{\leftrightarrow}$ \CP]
   Applications run on dedicated application processors (\APs) which are isolated from the rest of the network by their attached communication processor (\CP).
@@ -33,9 +34,11 @@ The system model of \DRP divides the end-to-end communication between local and 
 The \DPP and \blink are key building blocks to fulfill the \feature{Reliability}, \feature{Adaptability}, \feature{Composability}, and \feature{Efficiency} requirements.
 However, two major issues remain in order to achieve \feature{Timeliness}.
 
-First, the communication between \APs and \CPs cannot be completely asynchronous: to guarantee end-to-end deadlines, both processors must look for incoming messages with some minimal rate.
-%
-Second, \blink assumes a periodic release of messages at the network interfaces (\ie the \CPs); since our flow model is not periodic but sporadic with jitter~(\cref{sec:problem}), messages may be delayed in \CPs buffer until they can be transmitted over the network.
+\squarepar{%}
+  First, the communication between \APs and \CPs cannot be completely asynchronous: to guarantee end-to-end deadlines, both processors must look for incoming messages with some minimal rate.
+  %
+  Second, \blink assumes a periodic release of messages at the network interfaces (\ie the \CPs); since our flow model is not periodic but sporadic with jitter~(\cref{sec:problem}), messages may be delayed in \CPs buffer until they can be transmitted over the network.%
+}
 
 \DRP strikes a balance between  \feature{Composability} and \feature{Efficiency}; that is, between
 \linebreak
@@ -44,11 +47,13 @@ Second, \blink assumes a periodic release of messages at the network interfaces 
 The idea behind \DRP is to split the responsibility of meeting end-to-end deadlines between (i)~the source node $n^s_i$ and \blink, and (ii)~the destination node $n^d_i$;
 If the source does not write too many messages, \blink guarantees every message will meet a given network deadline $D$, in turns, the destination commits to read its \bolt queue sufficiently often to meet the flow's end-to-end deadlines \deadlineany.
 
-\DRP formalizes these ``commitments'' into \emph{contracts} between the different entities. The challenge is to define, given the current network state and an end-to-end deadline \deadlineany to satisfy, what must be
-% \begin{itemize}
-  % \item
-  (i)~the network deadline $D$ requested to \blink and
-  % \item
-  (ii)~the minimal reading rate at the destination node.
-% \end{itemize}
-The goal is to make these contracts minimally restrictive, such that \APs, \CPs, and Blink can operate as much as possible independently from each other (\feature{Composability}).
+\squarepar{%}
+  \DRP formalizes these ``commitments'' into \emph{contracts} between the different entities. The challenge is to define, given the current network state and an end-to-end deadline \deadlineany to satisfy, what must be
+  % \begin{itemize}
+    % \item
+    (i)~the network deadline $D$ requested to \blink and
+    % \item
+    (ii)~the minimal reading rate at the destination node.
+  % \end{itemize}
+  The goal is to make these contracts minimally restrictive, such that \APs, \CPs, and Blink can operate as much as possible independently from each other (\feature{Composability}).%
+}

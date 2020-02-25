@@ -3,33 +3,35 @@
 \section{Concrete Realization of \DRP}
 \label{sec:concrete_realization}
 
-This section discusses how to concretely implement \DRP's concepts. In particular, one needs to define
-% \begin{itemize}
-  % \item
-(i)~the fixed flushing interval $T_f^s$ of the \CPs~(\cref{subsec:CP_schedule}), and
-  % \item
-(ii)~how to dynamically compute the network deadline \ndeadlinei of a flow \flowi and the flushing interval $T_f^d$ of each \ap (\cref{subsec:D_Tfd_computation}).
-% \end{itemize}
+\squarepar{%}
+  This section discusses how to concretely implement \DRP's concepts. In particular, one needs to define
+  (i)~the fixed flushing interval $T_f^s$ of the \CPs~(\cref{subsec:CP_schedule}), and
+  (ii)~how to dynamically compute the network deadline \ndeadlinei of a flow \flowi and the flushing interval $T_f^d$ of each \ap (\cref{subsec:D_Tfd_computation}).%
+}
 
 Then, a worst-case buffer analysis (\cref{subsec:WC_buffer}) will allow to formulate admission tests (\cref{subsec:admission}), one for {\ap}s and one for {\cp}s.
 The success of all admission tests guarantees that both contracts \textbf{Source}~$\boldsymbol{\leftrightarrow}$~\textbf{Blink} and \textbf{Blink}~$\boldsymbol{\leftrightarrow}$~\textbf{Destination} can be satisfied by \DRP.
 
 \subsection{Setting \CPs' Flushing Interval}\label{subsec:CP_schedule}
 
-To guarantee that all \CPs fulfill their share of the contracts (\ie prevent buffer overflows), we conceive a time-triggered approach to schedule all tasks of \CPs. It consists of (\emph{i}) setting the flushing interval $T_f^s$ of all \CPs to the same constant value, and (\emph{ii}) letting the round interval $T_{net}$ be a multiple of $T_f^s$.
-As discussed in \cref{sec:designDetailed}, $T_f^s$ should not to constrain the achievable deadline: thus, we aim to set it as short as possible.
-\CPs have three tasks to perform
+\squarepar{%}
+  To guarantee that all \CPs fulfill their share of the contracts (\ie prevent buffer overflows), we conceive a time-triggered approach to schedule all tasks of \CPs. It consists of (\emph{i}) setting the flushing interval $T_f^s$ of all \CPs to the same constant value, and (\emph{ii}) letting the round interval $T_{net}$ be a multiple of $T_f^s$.
+  As discussed in \cref{sec:designDetailed}, $T_f^s$ should not to constrain the achievable deadline: thus, we aim to set it as short as possible.
+  \CPs have three tasks to perform%
+}
+
 \begin{itemize}
  \item flushing \bolt before each communication round,
  \item participating in the communication during the rounds,
  \item writing all received messages into \bolt after the rounds.
 \end{itemize}
+
 Performing those tasks altogether takes $C_{CP} + C_{net}$ time units, where $C_{CP} = C_f + \nslotsmax * C_w$, and \nslotsmax denotes the number of time slots in one round.
 Hence, $C_{CP} + C_{net}$ is the smallest admissible round interval (otherwise \CPs' task set is not schedulable). Thus we set for all \CPs in the system,
 \begin{align}
 \label{eq:design_flush_period_source}
 	& T_f^s = C_{CP} + C_{net} \\
-\intertext{and we let the round interval be a multiple of $T_f^s$. In other words, for $k \in \mathbb{N}$, $k > 0$,}
+\intertext{and we let the round interval be a multiple of $T_f^s$. That is, for $k \in \mathbb{N}$, $k > 0$,}
 \label{eq:design_round_period}
 	& T_{net} = k * T_f^s
 \end{align}
@@ -127,8 +129,10 @@ Specifically, as shown in \cref{fig:design_overview},
 	\item \CPs are responsible for ensuring that their local message buffers and the outgoing \bolt queues do not overflow.
 \end{itemize}
 
-To formulate the admission tests for {\ap}s and {\cp}s, we first need the worst-case buffer sizes (\ie maximum number of messages in a buffer) induced by a given flow set \flowset.
-For ease of exposition, we make the following hypothesis.
+\squarepar{%}
+  To formulate the admission tests for {\ap}s and {\cp}s, we first need the worst-case buffer sizes (\ie maximum number of messages in a buffer) induced by a given flow set \flowset.
+  For ease of exposition, we make the following hypothesis.%
+}
 \begin{hypothesis}\label{hyp:f_max}
 For a given flow set \flowset, an \ap (resp. \cp) never writes more messages into \bolt than can be flushed by \cp (resp. \ap) in one \emph{\opflush} operation in the time span between two \emph{\opflush}.
 \end{hypothesis}
@@ -201,8 +205,10 @@ the buffer constraint of the incoming \bolt queue is bounded by the number of pa
 We now combine the above results and formulate the admission tests for \CPs and \APs, which form the cornerstone of \DRP's registration mechanism described in \cref{sec:designDetailed}.
 We further show that the computation complexity of the admission tests is not only small but \emph{constant}, and hence supports the requirements of \feature{Adaptability} and \feature{Efficiency}.
 
-Let $F_j$ be the flow for which a request has been issued, and $\mathcal{F}_{new} = \mathcal{F} \cup \{F_j\}$.
-The \cp of node $n$ is responsible for preventing overflows of its local memory (of size $S_{CP}$) and of the outgoing \bolt queue of node $n$ (of size $S_{\bolt}$).
+\squarepar{%}
+  Let $F_j$ be the flow for which a request has been issued, and $\mathcal{F}_{new} = \mathcal{F} \cup \{F_j\}$.
+  The \cp of node $n$ is responsible for preventing overflows of its local memory (of size $S_{CP}$) and of the outgoing \bolt queue of node $n$ (of size $S_{\bolt}$).%
+}
 
 \begin{theorem}[{Admission Test of \cp}]\label{thm:CP}
 If

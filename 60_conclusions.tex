@@ -3,13 +3,15 @@
 \chapter{Conclusions and Outlook}
 \label{ch:conclusions}
 
-Cyber-Physical Systems (\CPS) are believed to be the vector of the next computing revolution~\cite{rajkumar2010CPS}. In recent years, the buzz words have changed: it is now all about the ``Internet of Things'' or ``Industry 4.0'' -- different names, same concept.
-We are envisioning a world where devices with computing and wireless communication capabilities are deeply embedded into our lives, in our environments, and even within ourselves.
-However, the current state of technology is not quite yet able to realize these grand visions.
-In this dissertation, we considered certain challenges related to communication in ad-hoc networks; or as we say today: ``on the edge''.
-One important challenge is to support energy efficient and reliable communication within a network of mobile nodes, such as teams of robots or drones.
-It was recently shown that the technique referred to as \emph{synchronous transmissions} (\ST) has a lot of potential to tackle this challenge.
-Indeed, \ST can be leveraged to perform network-wide flooding in a stateless fashion; that is, packets are sent to all nodes in the network, in a way that does not depend on the current topology. And since the topology does not matter, supporting mobility comes essentially for free.
+\squarepar{%}
+  Cyber-Physical Systems (\CPS) are believed to be the vector of the next computing revolution~\cite{rajkumar2010CPS}. In recent years, the buzz words have changed: it is now all about the ``Internet of Things'' or ``Industry 4.0'' -- different names, same concept.
+  We are envisioning a world where devices with computing and wireless communication capabilities are deeply embedded into our lives, in our environments, and even within ourselves.
+  However, the current state of technology is not quite yet able to realize these grand visions.
+  In this dissertation, we considered certain challenges related to communication in ad-hoc networks; or as we say today: ``on the edge''.
+  One important challenge is to support energy efficient and reliable communication within a network of mobile nodes, such as teams of robots or drones.
+  It was recently shown that the technique referred to as \emph{synchronous transmissions} (\ST) has a lot of potential to tackle this challenge.
+  Indeed, \ST can be leveraged to perform network-wide flooding in a stateless fashion; that is, packets are sent to all nodes in the network, in a way that does not depend on the current topology. And since the topology does not matter, supporting mobility comes essentially for free.%
+}
 
 
 Despite being a potential enabler for a whole new class of mobile \CPS applications, \ST has not yet been used much outside academia. We identify at least three reasons for that:
@@ -47,10 +49,12 @@ This dissertation makes three main contributions to foster the adoption of \ST.
     \TTW statically co-schedules all task executions and message transfers to minimize end-to-end latency.
     In particular, together with project partners, we used the \TTW design to implement the first demonstrator of feedback-control of fast physical systems (multiple inverted pendulums) across a multi-hop network using low-power wireless technology~\cite{mager2019Demo}.
 
-    \item[\triscale]
-    With the design of \triscale, we worked towards more rigorous and reproducible experimental networking research.
-    For the first time, we went beyond simple guidelines and proposed a concrete methodology for designing networking experiments and analyzing their data, which allowed us to propose the first formalized definition of reproducibility in the context of networking experiments.
-    The driving principle of \triscale is to rationalize the evaluation process: \ie justify what is required to do and what data to collect in order to support one's performance claims.
+    \squarepar{%}
+      \item[\triscale]
+      With the design of \triscale, we worked towards more rigorous and reproducible experimental networking research.
+      For the first time, we went beyond simple guidelines and proposed a concrete methodology for designing networking experiments and analyzing their data, which allowed us to propose the first formalized definition of reproducibility in the context of networking experiments.
+      The driving principle of \triscale is to rationalize the evaluation process: \ie justify what is required to do and what data to collect in order to support one's performance claims.%
+    }
 
 
 \end{description}
@@ -72,21 +76,25 @@ Another port to the Bluetooth-compatible nRF52840 Dongle~\cite{nRF52840} is plan
 %
 These would allow to experiment with \ST-based networking on different physical layers and, by leveraging (hopefully upcoming) wireless protocol benchmarks, we would be able to objectively compare the performance trade-offs of these different technologies in a wide range of scenarios and applications.
 
-\fakepar{Dependable networking}
-One important limitation of the system designs presented in this dissertation is the reliance on a central authority, which we call \emph{host}, in order to coordinate communication within the network.
-This creates a single point of failure: if the host should fail (or be jammed), the entire network would stop its operation.
-For any safety-critical applications, this is not acceptable.
-It is therefore important to work on system designs that would ``distribute the responsibility'' of the host.
-Recent contributions provide consensus primitives in low-power networks~\cite{spina2019XPC, alnahas2019BlueFlood,poirot2019Paxos}, an important piece for fault-tolerance in distributed systems.
-However these works still rely on a central authority for elementary network functions, such as time synchronization.
-More efforts are required to designed truly dependable wireless networks.
+\squarepar{%}
+  \fakepar{Dependable networking}
+  One important limitation of the system designs presented in this dissertation is the reliance on a central authority, which we call \emph{host}, in order to coordinate communication within the network.
+  This creates a single point of failure: if the host should fail (or be jammed), the entire network would stop its operation.
+  For any safety-critical applications, this is not acceptable.
+  It is therefore important to work on system designs that would ``distribute the responsibility'' of the host.
+  Recent contributions provide consensus primitives in low-power networks~\cite{spina2019XPC, alnahas2019BlueFlood,poirot2019Paxos}, an important piece for fault-tolerance in distributed systems.
+  However these works still rely on a central authority for elementary network functions, such as time synchronization.
+  More efforts are required to designed truly dependable wireless networks.%
+}
 
 \newpage
 \section{Affirming Oneself as a Researcher}
 
-Pursuing a doctorate degree is not only about writing a dissertation: it is a fundamental training step towards affirming oneself as a researcher.
-The shaping of my own researcher identify has been strongly influenced by this statement%
-\footnote{Erin McKiernan. \href{http://dx.doi.org/10.6084/m9.figshare.954994}{10.6084/m9.figshare.954994}}
+\squarepar{%}
+  Pursuing a doctorate degree is not only about writing a dissertation: it is a fundamental training step towards affirming oneself as a researcher.
+  The shaping of my own researcher identify has been strongly influenced by this statement%
+  \footnote{Erin McKiernan. \href{http://dx.doi.org/10.6084/m9.figshare.954994}{10.6084/m9.figshare.954994}}%
+}
 \begin{center}
   ``\emph{If I am going to "make it" in science, it has to be on terms I can live with.}''
 \end{center}

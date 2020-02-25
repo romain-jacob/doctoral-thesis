@@ -32,7 +32,7 @@ This worst-case scenario for the source delay is illustrated on Fig.~\ref{fig:de
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{delta_source_time_graph.pdf}
+\includegraphics[scale=1]{delta_source_time_graph}
 \caption{Worst-case analysis of the source delay.
 \capt{A packet is written as early as possible such that it misses a \opflush and must wait until the next one.}}
 \label{fig:delta_source_time_graph}
@@ -61,7 +61,7 @@ For any flow \flowi, the network delay is upper-bounded by
 \end{equation}
 \end{lemma}
 \begin{proof}%
-As presented in \cref{subsec:details_blink}, \blink guarantees that every packet matching the \emph{expected arrival} is served in a round that terminates before the network deadline $D_i$. Hence, the \emph{delay of an expected packet} is no more than $D_i$.
+As presented in \cref{subsec:details_blink}, \blink guarantees that every packet matching the \emph{expected arrival} is served in a round that terminates before the network deadline $D_i$; \ie the \emph{delay of an expected packet} is no more than $D_i$.
 
 However, the actual arrival of packets at the source \cpsrc does not match the expected arrival in general, but results from \opflush operations, which occur every $T_f^s$ time unit.
 Hence, a packet may arrive \emph{earlier} than the next expected packet. That mismatch between the two arrival times (actual and expected) adds up with the delay of the expected packet (i.e., $D_i$).
@@ -74,7 +74,7 @@ The intuition is given with \cref{fig:delta_network_time_graph1}. See the captio
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{delta_network_time_graph1.pdf}
+\includegraphics[scale=1]{delta_network_time_graph1}
 \caption{Worst-case analysis of the network delay without jitter.
 \capt{Because of the \bolt queue being empty, packet \textbf{A} misses the first flush operation (similarly as in \cref{fig:delta_source_time_graph}), hence the slot allocated to \flowi in round \textbf{1} is wasted. Due to packets released from other flows in the meantime, packet \textbf{B} is flushed directly in the operation preceding round \textbf{3}, in which flow \flowi is allocated a new slot. However, as packet \textbf{A} is still in queue, packet \textbf{B} is not served right away but is delayed until the next allocated slot (\ie in round \textbf{6}). This creates a mismatch of \periodi for packet \textbf{B}.
 Furthermore, the mismatch cannot get bigger; assume \textbf{B} were to be available at \cpsrc earlier (\ie one flush operation before, at least), because the time interval between \textbf{A} and \textbf{B} must be at least \periodi, \textbf{A} would arrive earlier as well.
@@ -102,7 +102,7 @@ m \; \leq \;\; &
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{delta_network_time_graph2.pdf}
+\includegraphics[scale=1]{delta_network_time_graph2}
 
 \caption{Influence of jitter on the network delay.
 \capt{Let us have a closer look at packet \textbf{B} from the previous figure, positioned as early as possible (\ie if it were earlier, so would be \textbf{A}, which would then not miss its slot in round \textbf{1}).
@@ -153,7 +153,7 @@ A careful analysis of the \bolt dynamics shows that the \opread operation is sli
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=1]{delta_destination_time_graph.pdf}
+\includegraphics[scale=1]{delta_destination_time_graph}
 \caption{Worst-case analysis of the destination delay.
 \capt{A packet is written as early as possible such that it misses a \opflush and must wait until the next one.}}
 \label{fig:delta_destination_time_graph}

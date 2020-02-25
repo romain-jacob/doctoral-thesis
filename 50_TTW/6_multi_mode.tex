@@ -16,8 +16,10 @@ Doing so requires to ensure predictable mode switches; that is, applications alw
 The multi-mode case is essentially a multi-objective problem. One could decide to minimize the overall number of rounds used (\ie the sum of rounds in all the modes); however, it might also be interesting to optimize the ``most common mode''; this is, the mode in which the system operates most of the time.
 Ultimately, one must weight the different modes to define a globally optimal solution.
 
-Instead of solving the entire multi-mode problem at once, which would have scalability issues, we solve the problem sequentially: one mode at a time, in order of increasing priority.
-However, ensuring schedule compatibility between the different modes~\objective{2} creates dependencies, as illustrated below.
+\squarepar{%}
+	Instead of solving the entire multi-mode problem at once, which would have scalability issues, we solve the problem sequentially: one mode at a time, in order of increasing priority.
+	However, ensuring schedule compatibility between the different modes~\objective{2} creates dependencies, as illustrated below.%
+}
 
 \begin{example}
 \label{exp:sched_conflict_basic}
@@ -134,7 +136,7 @@ Similarly, persistent applications different scheduling domains can be replicate
 This is illustrated in the following example.
 
 \begin{example}\label{exp:sched_domain}
-Consider again the mode graph in \cref{fig:modeGraph}. Application \appl{6} has two distinct application domains, $\{\mode{3}\}$ and $\{\mode{5}\}$. It can be equivalently modeled as two distinct applications \appl{6.3} and \appl{6.6} executing in in \mode{3} and \mode{6} respectively.
+Consider again the mode graph in \cref{fig:modeGraph}. Application \appl{6} has two distinct application domains, $\{\mode{3}\}$ and $\{\mode{5}\}$, which can be modeled as two distinct applications \appl{6.3} and \appl{6.6} executing in \mode{3} and \mode{6} respectively.
 
 On the contrary, \appl{1} has only one schedule domain, $\{\mode{1},\mode{4}\}$.
 If \appl{1} is not persistent, the continuity constraint does not apply~(\cref{def:continuity_constraint}).
@@ -146,11 +148,13 @@ Thus, \appl{1} can be equivalently modeled as two distinct applications \appl{1.
 \subsection{Characterization of Conflicts}
 \label{subsec:conflict_def}
 
-As illustrated in \cref{exp:sched_conflict_basic}, the continuity constraint may lead to conflicts, leading to the failure of the multi-mode schedule synthesis problem, while a solution could exist.
-In particular, if a given mode \mode{} belongs to the schedule domains of two different applications which have been independently scheduled in higher priority modes, there is a risk of conflict, \ie the two inherited schedules may be non-compatible.
-This section formalizes the notions of (virtual) legacies and conflicting modes.
-$\overline{X}$ denotes the complement of $X$; \ie $\overline{X} = \appset \setminus X$.
-For each mode \modei, we define four sets of applications.
+\squarepar{%}
+	As illustrated in \cref{exp:sched_conflict_basic}, the continuity constraint may lead to conflicts, leading to the failure of the multi-mode schedule synthesis problem, while a solution could exist.
+	In particular, if a given mode \mode{} belongs to the schedule domains of two different applications which have been independently scheduled in higher priority modes, there is a risk of conflict, \ie the two inherited schedules may be non-compatible.
+	This section formalizes the notions of (virtual) legacies and conflicting modes.
+	$\overline{X}$ denotes the complement of $X$; \ie $\overline{X} = \appset \setminus X$.
+	For each mode \modei, we define four sets of applications.%
+}
 
 \textbf{Known applications} are the applications previously scheduled in higher priority modes. The set of known applications of mode \modei is denoted \knownAppi:
 	\begin{equation}
@@ -257,7 +261,9 @@ s.t. \quad
 		& \forall\, \app \in \freeAppi, \; s(\app) \; \cap \; s(\minvirtlegApp{i}{\app}) = \emptyset
 \end{align}
 
-In \cref{eq:sched_redef}, the first constraint \cf{\modei} is necessary for the schedule to be valid. The second enforces the continuity constraints of applications. Finally the third constraint aims to enforce \cref{eq:obj_conflict-free}. The idea is that the newly scheduled application in mode \modei, \ie \app $\in$ \freeAppi, should be compatible with the schedules of some virtual legacies. The objective is to derive the minimal sets \minvirtlegApp{i}{\app} for any $\app \in \freeAppi$ such that condition \cref{eq:obj_conflict-free} is satisfied.
+\squarepar{%}
+	In \cref{eq:sched_redef}, the first constraint \cf{\modei} is necessary for the schedule to be valid. The second enforces the continuity constraints of applications. Finally the third constraint aims to enforce \cref{eq:obj_conflict-free}. The idea is that the newly scheduled application in mode \modei, \ie \app $\in$ \freeAppi, should be compatible with the schedules of some virtual legacies. The objective is to derive the minimal sets \minvirtlegApp{i}{\app} for any $\app \in \freeAppi$ such that condition \cref{eq:obj_conflict-free} is satisfied.%
+}
 
 \begin{theorem}[Minimal virtual legacy sets]
 \label{thm:minVirtLegacy}
@@ -329,10 +335,13 @@ $A \in \virtlegApp{b}$. Furthermore,
 %{\Rightarrow} \;
 A \in \minvirtlegApp{b}{B}
 \end{equation}
-By hypothesis, \sched{\mode{b}} is feasible, thus $s(\appB) \; \cap \; s(\minvirtlegApp{b}{B}) = \emptyset$, which yields $s(B) \cap s(A) = \emptyset$ and contradicts \eqref{eq:square} again.
-Therefore, the recurrence hypothesis is necessarily false.
-Hence, if for any $k \in [1 .. i]$, \sched{\mode{k}} is feasible in the sense of \eqref{eq:sched_redef}, then \cf{\legApp{i+1}}.
-By recurrence, we can conclude that the \emph{virtual legacy sets as defined by \eqref{eq:minVirtLegSets} are sufficient} to satisfy \eqref{eq:obj_conflict-free}.
+
+\squarepar{%}
+	By hypothesis, \sched{\mode{b}} is feasible, thus $s(\appB) \; \cap \; s(\minvirtlegApp{b}{B}) = \emptyset$, which yields $s(B) \cap s(A) = \emptyset$ and contradicts \eqref{eq:square} again.
+	Therefore, the recurrence hypothesis is necessarily false.
+	Hence, if for any $k \in [1 .. i]$, \sched{\mode{k}} is feasible in the sense of \eqref{eq:sched_redef}, then \cf{\legApp{i+1}}.
+	By recurrence, we can conclude that the \emph{virtual legacy sets as defined by \eqref{eq:minVirtLegSets} are sufficient} to satisfy \eqref{eq:obj_conflict-free}.%
+}
 
 We now prove they are also necessary.
 Let us consider smaller virtual legacy sets than defined by \eqref{eq:minVirtLegSets}, \ie $\exists \; i \in [1..M],\, \app \in \freeAppi, \;\;\minminvirtlegApp{i}{A} \nsubseteq \minvirtlegApp{i}{A}$. Let us further assume that \sched{} is redefined to replace \minvirtlegApp{}{} by \minminvirtlegApp{}{}. By hypothesis,

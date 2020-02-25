@@ -24,10 +24,12 @@ Every round introduces some overhead (mainly from  sending the beacon), which co
 To reduce the energy consumption, \TTW aims to minimize the number of rounds \objective{1}.
 The schedule synthesis for a single mode is optimal in this respect; that is, the procedure guarantees that the schedule minimizes the number of communication rounds~(\cref{sec:single_mode}).
 
-The second objective of the scheduler is to allow persistent applications to keep the same schedule in different operation modes \objective{2}.
-This creates additional constraints that break the optimality guarantee: in other words, the schedule of mode \modej, when constrained to be compatible with mode \modei, may contain more rounds than required to schedule the mode \modej alone.
-A naive solution to meet \objective{2} is to completely ``reserve the space'' of previously scheduled modes. This is equivalent to consider that all applications executing in mode \modei are also executing in \modej, even if it is not actually the case. We call this the \emph{full inheritance} approach.
-This approach does guarantee compatibility but it is very pessimistic: it leads to an excessive increase of the number of rounds and find problems to be non-schedulable when they may in fact be feasible.
+\squarepar{%}
+  The second objective of the scheduler is to allow persistent applications to keep the same schedule in different operation modes \objective{2}.
+  This creates additional constraints that break the optimality guarantee: in other words, the schedule of mode \modej, when constrained to be compatible with mode \modei, may contain more rounds than required to schedule the mode \modej alone.
+  A naive solution to meet \objective{2} is to completely ``reserve the space'' of previously scheduled modes. This is equivalent to consider that all applications executing in mode \modei are also executing in \modej, even if it is not actually the case. We call this the \emph{full inheritance} approach.
+  This approach does guarantee compatibility but it is very pessimistic: it leads to an excessive increase of the number of rounds and find problems to be non-schedulable when they may in fact be feasible.%
+}
 
 
 \begin{figure}
@@ -63,14 +65,16 @@ This approach does increase the complexity of the synthesis formulation; however
 % ------------------------------------------------------------------------------
 \subsection{Offline Solving Time}
 
-We computational complexity of the schedule synthesis is made tractable by \TTW's sequential approach: modes are scheduled individually, in order of priority~(\cref{sec:multi_mode}) and for each mode, the number of rounds to schedule is kept fixed then incremented until a solution is found~(\cref{sec:single_mode}).
+\squarepar{%}
+  We computational complexity of the schedule synthesis is made tractable by \TTW's sequential approach: modes are scheduled individually, in order of priority~(\cref{sec:multi_mode}) and for each mode, the number of rounds to schedule is kept fixed then incremented until a solution is found~(\cref{sec:single_mode}).
 
-For the evaluation scenario described above, the solving time for one mode grows up to ten minutes~(\cref{table:solvingTimes}) and is generally correlated with the complexity of the mode to schedule: mode \mode{3} and \mode{4} contains the most applications~(\cref{append:inheritance_eval}), leading to more constraints in the formulation.
-Furthermore, we note that the minimal inheritance strategy does not increase the overall solving time compared to ``no inheritance''. The intuition is that, by reserving some applications' schedule, we fix the value of some of the problem variables, thereby reducing the complexity of the problem.
-However, as shown by the full inheritance approach, if too many variables are fixed, the resulting problem might become harder to solve: more communication rounds become required, which increases the number of variables and thus the complexity.
+  For the evaluation scenario described above, the solving time for one mode grows up to ten minutes~(\cref{table:solvingTimes}) and is generally correlated with the complexity of the mode to schedule: mode \mode{3} and \mode{4} contains the most applications~(\cref{append:inheritance_eval}), leading to more constraints in the formulation.
+  Furthermore, we note that the minimal inheritance strategy does not increase the overall solving time compared to ``no inheritance''. The intuition is that, by reserving some applications' schedule, we fix the value of some of the problem variables, thereby reducing the complexity of the problem.
+  However, as shown by the full inheritance approach, if too many variables are fixed, the resulting problem might become harder to solve: more communication rounds become required, which increases the number of variables and thus the complexity.
 
-\fakepar{Conclusion}
-The evaluation scenario is simple but representative of a middle-sized \CPS. Our evaluation shows that the computational complexity may grow to the scale of minutes for challenging modes, which remains perfectly tractable for a task that needs to be performed only once and before deployment.
+  \fakepar{Conclusion}
+  The evaluation scenario is simple but representative of a middle-sized \CPS. Our evaluation shows that the computational complexity may grow to the scale of minutes for challenging modes, which remains perfectly tractable for a task that needs to be performed only once and before deployment.%
+}
 
 \begin{table}
   \centering
@@ -106,19 +110,24 @@ On the communication side, we must store the mode hyperperiod and the rounds inf
 The message deadlines are not required at runtime and do not need being stored.
 As a result, we can generally estimate that the scheduling tables represent tens to hundreds of variables per mode for each processor.
 
-\fakepar{Conclusion}
-Our application and communication processors feature 64\kB~\cite{msp432} and 4\kB\cite{CC430F6137} of RAM, respectively. Thus, considering an average size of two\bytes per variable, storing the scheduling tables represent a significant overhead and limits the scalability of the system, in particular on the communication processor.
-This limitation would be significantly relaxed with newer platforms, which commonly feature 256\kB of RAM~\cite{nRF52840}.
+\squarepar{%}
+  \fakepar{Conclusion}
+  Our application and communication processors feature 64\kB~\cite{msp432} and 4\kB\cite{CC430F6137} of RAM, respectively. Thus, considering an average size of two\bytes per variable, storing the scheduling tables represent a significant overhead and limits the scalability of the system, in particular on the communication processor.
+  This limitation would be significantly relaxed with newer platforms, which commonly feature 256\kB of RAM~\cite{nRF52840}.%
+}
 
 % ------------------------------------------------------------------------------
 \subsection{\TTnet Model}
 \label{subsec:model}
-As discussed in \cref{sec:ttw_implementation}, we implement \TTnet using \baloo, which allows to derive a precise model of
-(i)~the execution time of a communication round and
-(ii)~the time spent with the radio turned on, which correlates with the energy consumed for communication.
-Estimating the communication time is necessary to synthesize the schedules since the scheduler must know how long the rounds last.
-This model should be as tight as possible not to ``waste'' time and thus minimize the end-to-end deadlines schedulable by \TTW, but it must be a safe upper-bound in order to prevent deadline misses.
-This section presents our \TTnet model and derives the theoretically achievable performance in terms of minimal message latency and the energy savings expected from using rounds.
+
+\squarepar{%}
+  As discussed in \cref{sec:ttw_implementation}, we implement \TTnet using \baloo, which allows to derive a precise model of
+  (i)~the execution time of a communication round and
+  (ii)~the time spent with the radio turned on, which correlates with the energy consumed for communication.
+  Estimating the communication time is necessary to synthesize the schedules since the scheduler must know how long the rounds last.
+  This model should be as tight as possible not to ``waste'' time and thus minimize the end-to-end deadlines schedulable by \TTW, but it must be a safe upper-bound in order to prevent deadline misses.
+  This section presents our \TTnet model and derives the theoretically achievable performance in terms of minimal message latency and the energy savings expected from using rounds.%
+}
 
 Let $\app.\delta$ denote the latency of an application \app. This latency represents the delay for a complete execution of \app; that is, the completion of all tasks in \app.\predG. Let $\app.c$ be a \emph{chain} in \app.\predG.
 A chain is defined as a path of \app.\predG starting with a task without predecessor and ending with a task without successor.%
@@ -245,9 +254,11 @@ For example, with $N$ set to 2, it takes less than 100\ms to complete a 10-slot 
 % ------------------------------------------------------------------------------
 \subsection{Model Validation}
 
-We now evaluate the runtime execution of our implementation and aim to validate our \TTnet model.
-In particular, it is important that the round length model gives safe upper-bounds since the \TTW scheduler relies on the model to schedule messages and tasks: if a round overruns, this may delay the execution of subsequent tasks and cause deadline misses.
-We test our \TTnet implementation for different number of slots per round \nslots and payload size $L$, we measure the round length and radio-on time experienced by the different nodes in the network, and we compare the results with the \TTnet model.
+\squarepar{%}
+  We now evaluate the runtime execution of our implementation and aim to validate our \TTnet model.
+  In particular, it is important that the round length model gives safe upper-bounds since the \TTW scheduler relies on the model to schedule messages and tasks: if a round overruns, this may delay the execution of subsequent tasks and cause deadline misses.
+  We test our \TTnet implementation for different number of slots per round \nslots and payload size $L$, we measure the round length and radio-on time experienced by the different nodes in the network, and we compare the results with the \TTnet model.%
+}
 
 \fakepar{Evaluation scenario}
 We program the network to execute, one round with \nslots slots, followed by \nslots rounds with one slot.
@@ -284,13 +295,15 @@ The KPI values from our evaluation are listed in~\cref{table:KPIs}.
 \end{figure}}
 
 \begin{remark}
+  \squarepar{%}
   Observe that certain values in~\cref{table:KPIs} are reported with a {\ssymbol{1}} or {\ssymbol{2}} symbol.
   The {\ssymbol{1}} marks series where \triscale independence test fails; this indicates that the metric data do not appear to be \iid and therefore the KPI value loose its predictive power (\ie it does not allow to infer what is the expected performance).
   However, in our evaluation, the autocorrelation plots show no significant differences between the series that passes the test and those that do not~(data available in~\cref{appendix:ttw_artifacts}).
   Moreover, the round length KPI values are almost the same in all series.
   Together, these two facts increase our confidence in the results and suggests that the reported KPIs are robust estimates of the expected performance.\\
   The {\ssymbol{2}} marks series where we could not collect enough data in order to compute the KPIs. This appended in Series 3 due to construction work taking place in the FlockLab building, where many test runs were lost due to sporadic power outages.
-  In both cases, the table shows the maximum round length or minimum energy savings metric values obtained across all the runs in the series.
+  In both cases, the table shows the maximum round length or minimum energy savings metric values obtained across all the runs in the series.%
+  }
 \end{remark}
 
 \fakepar{Results -- Round length}
@@ -301,11 +314,13 @@ Concretely, this means that, in all series, the largest round length measured by
 Furthermore, the KPI values are (i)~very close to and (ii)~consistently lower than the model. By definitions of the KPI, we can estimate with 95\% probability that (at least) 95\% of runs will yield a maximal round length smaller than the KPI value, and thus smaller than the model value.
 \cref{fig:exampleSeries} (top) shows the distribution of the round length measurements from all the nodes collected during one series of 60 runs. We observe that the distribution is narrow (less than 300\us of spread), which is expected. Indeed, the \TTnet rounds are fully time-triggered; thus, the measurement differences between nodes mainly come from the difference in execution time of \baloo's end-of-round operations, which is expected to be small.
 
-In our entire evaluation, there was one case where a node reported a value (77.85\ms) larger than the model (77.52\ms). This concerned only one node: in this run%
-\footnote{FlockLab test number 66992; data available in~\cref{appendix:ttw_artifacts}.}
-the second highest value reported (77.12\ms) was smaller than the model value.
-It is hard to know a posteriori what may have cause this.
-However, we argue that this one overshoot is more likely imputable to some sporadic hardware delay than due to a miscalibration of the model.
+\squarepar{%}
+  In our entire evaluation, there was one case where a node reported a value (77.85\ms) larger than the model (77.52\ms). This concerned only one node: in this run%
+  \footnote{FlockLab test number 66992; data available in~\cref{appendix:ttw_artifacts}.}
+  the second highest value reported (77.12\ms) was smaller than the model value.
+  It is hard to know a posteriori what may have cause this.
+  However, we argue that this one overshoot is more likely imputable to some sporadic hardware delay than due to a miscalibration of the model.%
+}
 
 \afterpage{
 \begin{figure}

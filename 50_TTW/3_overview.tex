@@ -12,12 +12,6 @@
 \end{figure}
 
 
-% \caption{(a) General system model and (b) time-slotted execution of \TTW.
-% \capt{%
-% As in LWB\emph{~\cite{ferrari2012LWB}}, communication rounds are divided into time slots, in which Glossy floods are executed. Each color shows one flooding step.
-% In \TTW, the first slot of each round contains a beacon sent by the host, followed by (up to) \nslotsmax slots, allocated to application messages. The beacons announce the identification number of the round (round \id) and trigger mode changes.
-% }
-
 \section{Overview of \TTW}
 \label{sec:ttw_overview}
 
@@ -47,23 +41,29 @@ We call this network stack \TTnet~(\cref{fig:ttnet}).
 	\label{fig:ttnet}
 \end{figure}
 
-\TTnet concept of round-based communication using Glossy floods is inspired by the Low-power Wireless Bus (LWB)~\cite{ferrari2012LWB}; this design has several benefits:
+\squarepar{%}
+	\TTnet concept of round-based communication using Glossy floods is inspired by the Low-power Wireless Bus (LWB)~\cite{ferrari2012LWB}; this design has several benefits:%
+}
 \begin{itemize}
 
 	\item
 	It is based on Glossy, which has been proven to be highly reliable and energy efficient~(\cite{schuss2017Competition,lim2017Competition,escobar-molero2019Improving}).
 
-	\item
-	Glossy provides sub-microsecond time synchronization across the network~\cite{ferrari2011Glossy}, which is instrumental to achieve \feature{Timeliness} and \feature{Reliability}.
+	\squarepar{%}
+		\item
+		Glossy provides sub-microsecond time synchronization across the network~\cite{ferrari2011Glossy}, which is instrumental to achieve \feature{Timeliness} and \feature{Reliability}.%
+	}
 
 	\item
 	The flooding process in Glossy is independent of the network state; thus it creates a virtual single-hop network where each node can communicate with every other node in bounded time. As a result, network stacks like LWB or \TTnet can be scheduled like a shared bus.
 
-	\item
-	As messages are flooded in the entire network, unicast multicast and broadcast are equivalent: for a given payload, the transmission time only depends on the network diameter (the maximal hop distance between nodes).
+	\squarepar{%}
+		\item
+		As messages are flooded in the entire network, unicast multicast and broadcast are equivalent: for a given payload, the transmission time only depends on the network diameter (the maximal hop distance between nodes).
 
-	\item
-	Thanks to its stateless flooding logic, Glossy inherently supports \feature{Mobility}.
+		\item
+		Thanks to its stateless flooding logic, Glossy inherently supports \feature{Mobility}.%
+	}
 
 \end{itemize}
 
@@ -91,11 +91,11 @@ Building on that structure, we design \TTW, a real-time scheduler for the entire
 	Therefore, \TTW statically synthesizes the schedule of all tasks, messages, and rounds to meet real-time constraints, minimize end-to-end latency, and minimize the energy consumed for communication.
 	The schedule is synthesized by solving an MILP (mixed integer linear programming) formulation.
 
-	\item[Static schedules]
-	Since \TTW relies on static scheduling, we distribute the schedules at deployment time to limit the communication overhead at runtime, thus optimizing energy efficiency.
-	Each node stores its own schedule information, thereby trading-off memory utilization with energy consumption; this significantly improves the \feature{Efficiency} of the system.
-
-
+	\squarepar{%}
+		\item[Static schedules]
+		Since \TTW relies on static scheduling, we distribute the schedules at deployment time to limit the communication overhead at runtime, thus optimizing energy efficiency.
+		Each node stores its own schedule information, thereby trading-off memory utilization with energy consumption; this significantly improves the \feature{Efficiency} of the system.%
+	}
 
 	\item[Multiple operation modes]
 	The obvious drawback of using static schedules is that the system always execute the same schedule, compromising \feature{Adaptability}.
@@ -122,9 +122,11 @@ Building on that structure, we design \TTW, a real-time scheduler for the entire
 
 \end{description}
 
-By globally optimizing the entire system schedule, \TTW can meet tight end-to-end deadlines (tens of \ms) while minimizing the energy spent for wireless communication, thus addressing the \feature{Timeliness} and \feature{Efficiency} requirements.
-The runtime control based on beacons provides \feature{Reliability}, while switching between multiple operation modes at runtime offers some degree of \feature{Adaptability}.
-Finally, \feature{Mobility} is supported by design thanks to the stateless logic of Glossy~\cite{ferrari2011Glossy}, the underlying communication primitive used by \TTW.
+\squarepar{%}
+	By globally optimizing the entire system schedule, \TTW can meet tight end-to-end deadlines (tens of \ms) while minimizing the energy spent for wireless communication, thus addressing the \feature{Timeliness} and \feature{Efficiency} requirements.
+	The runtime control based on beacons provides \feature{Reliability}, while switching between multiple operation modes at runtime offers some degree of \feature{Adaptability}.
+	Finally, \feature{Mobility} is supported by design thanks to the stateless logic of Glossy~\cite{ferrari2011Glossy}, the underlying communication primitive used by \TTW.%
+}
 
 \begin{remark}
 	\TTW combines offline scheduling and online decisions whereas \DRP~(\cref{ch:drp}), by contrast, does everything online.

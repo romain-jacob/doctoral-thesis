@@ -17,8 +17,9 @@ But~\cite{saifullah2010RealTime} is based on NP-hard multiprocessor scheduling a
 It is however possible to integrate the wireless protocol with the rest of the system to avoid interference by jointly schedule transmissions in the network and all other tasks in the system, as we demonstrate in \cref{ch:ttw}.
 Other wireless real-time protocols have been described recently~\cite{odonovan2013GINSENG,watteyne2017Teaching}. However, the integration of these protocols into a methodology to provide end-to-end real-time guarantees between \emph{application interfaces} is unsolved.
 
-Recently, a game-changing approach to wireless multi-hop communication using synchronous transmissions has been described~\cite{ferrari2011Glossy,ferrari2012LWB,zimmerling2013modeling}.
-It avoids the computation of multi-hop routing paths and per-node communication schedules based on, for example, neighbor lists and link qualities, because the protocol logic is independent of such volatile network state.
-Experiments on several large-scale testbeds show that the approach is highly adaptive and achieves an end-to-end packet reliability higher than 99.9\,\%~\cite{ferrari2011Glossy,ferrari2012LWB}.
-Furthermore, the few packet losses can be considered statistically independent~\cite{zimmerling2013modeling}, which eases the design of \CPS controllers that can deal with intermittent observations~\cite{sinopoli2004Kalman}.
-% Although our approach can be adapted to other types of communication protocols, the chapter is based on this concept of synchronous transmissions.
+\squarepar{%
+  Recently, a game-changing approach to wireless multi-hop communication using synchronous transmissions has been described~\cite{ferrari2011Glossy,ferrari2012LWB,zimmerling2013modeling}.
+  It avoids the computation of multi-hop routing paths and per-node communication schedules based on, for example, neighbor lists and link qualities, because the protocol logic is independent of such volatile network state.
+  Experiments on several large-scale testbeds show that the approach is highly adaptive and achieves an end-to-end packet reliability higher than 99.9\,\%~\cite{ferrari2011Glossy,ferrari2012LWB}.
+  Furthermore, the few packet losses can be considered statistically independent~\cite{zimmerling2013modeling}, which eases the design of \CPS controllers that can deal with intermittent observations~\cite{sinopoli2004Kalman}.%
+}

@@ -18,8 +18,10 @@ Concretely, the simulation is implemented using Matlab scripts (openly available
 \blink computes the round schedules assuming that the first message of each flow is available for communication at $t = 0\s$. The actual epoch at which the  \APs write the first packet of each flow is randomized between $0\s$ and the flow's minimal message interval $T$; subsequent packets are sent with period $T$.
 The random seed is fixed for reproduciblility.
 
-\fakepar{Scenario}
-Node 1 acts as the sink and communicates with all other nodes in the network. As described in \cref{sec:designDetailed}, \DRP is initialized with a set of control flows $\mathcal{F}_{control}$, which is necessary in order to register subsequent flows
+\squarepar{%
+	\fakepar{Scenario}
+	Node 1 acts as the sink and communicates with all other nodes in the network. As described in \cref{sec:designDetailed}, \DRP is initialized with a set of control flows $\mathcal{F}_{control}$, which is necessary in order to register subsequent flows%
+}
 \[
 \mathcal{F}_{control} =
 	\left\lbrace
@@ -78,8 +80,10 @@ The implementation of \blink on the \AP is built upon~\cite{acevedo2016Realtime}
 %
 We discuss our implementation performance in terms of memory usage, computation workload, and message latency.
 
-\fakepar{Memory usage}
-\DRP requires both \AP and \CP to store some state information related to the currently running flows, as well message queues and buffers. The available RAM on both processors is shown in \cref{table:memory}.
+\squarepar{%
+	\fakepar{Memory usage}
+	\DRP requires both \AP and \CP to store some state information related to the currently running flows, as well message queues and buffers. The available RAM on both processors is shown in \cref{table:memory}.%
+}
 
 The 64\kB of the \AP are largely sufficient; it would supports hundreds of flows. The \CP is more limited: With a payload size of 32\bytes, \CP is capped to a maximum for 40 flows~(\cref{table:memory}). For a regular node, this will likely be sufficient for most applications; however, on the host node, this seriously limits the scalability of the system.
 
@@ -96,8 +100,11 @@ One possible solution is to use the embedded external memory (128\kB); this woul
 \end{table}
 
 \pagebreak
-\fakepar{Computation}
-The most extensive computations in \DRP are the computations of the \blink schedules and admission tests. The evaluation of these computations on embedded hardware is discussed in depth in~\cite{zimmerling2017Blink}.
+
+\squarepar{%
+	\fakepar{Computation}
+	The most extensive computations in \DRP are the computations of the \blink schedules and admission tests. The evaluation of these computations on embedded hardware is discussed in depth in~\cite{zimmerling2017Blink}.%
+}
 
 In addition to \blink computations, the \APs must perform \DRP admission tests. These are simple operations~(\cref{thm:CP} and \ref{thm:AP}) which can be implemented efficiently. In our experiments, an admission test takes typically around 30\ms to complete (maximum observed execution time: 130\ms).
 
@@ -160,9 +167,11 @@ Such ``short'' average latency can be explained by the nature of the flow set. T
 
 It is interesting to observe that the average end-to-end latency is smaller for the high utilization flow set than for the low and middle ones. Again, this is due to the flow set. To meet the network deadline, \blink schedule at least one round per period. Thus, a flow set with shorter period results in more frequent rounds. Once a round is scheduled, it is filled with any message ready for transmission. Thus, flows are opportunistically served earlier than necessary to meet their end-to-end deadline. Conclusion: having a flow with a small period reduces the average latency experienced by all flows in the system. This is an interesting (and unforeseen) consequence of \DRP mechanism.
 
-\fakepar{Conclusions}
-The performance evaluation presented in this section validates the design of \DRP and our implementation: we showcased that we can run a wireless \CPS that meet end-to-end deadlines between distributed applications~(\cref{subsec:simulation} and \ref{subsec:flocklab}).
-In addition, we derived the theoretical optimal performance achievable based on \DRP's model~(\cref{subsec:perf_model}).
+\squarepar{%
+	\fakepar{Conclusions}
+	The performance evaluation presented in this section validates the design of \DRP and our implementation: we showcased that we can run a wireless \CPS that meet end-to-end deadlines between distributed applications~(\cref{subsec:simulation} and \ref{subsec:flocklab}).
+	In addition, we derived the theoretical optimal performance achievable based on \DRP's model~(\cref{subsec:perf_model}).%
+}
 
 A more thorough investigation of the actual system performance across different scenarios and environments remains to be performed.
 For such a performance evaluation, using \triscale~(\cref{ch:triscale}) would be natural.

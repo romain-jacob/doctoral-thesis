@@ -1,5 +1,6 @@
 % !TEX root = ../00_thesis.tex
 
+\pagebreak
 %-------------------------------------------------------------------------------
 \section{Related Work}
 \label{sec:relWorks}
@@ -27,15 +28,17 @@ None of the existing works provide scientists with \emph{quantitative} answers a
 
 %-------------------------------------------------------------------------------
 % Tools supporting repeatability while experimenting
-\fakepar{Supporting reproducibility}
-A large number of experimental facilities and tools have been developed in recent years to aid scientists and practitioners in carrying out reproducible networking studies~\cite{nussbaum17testbeds}.
-Testbeds such as EmuLab~\cite{white02emulab} and FlexLab~\cite{ricci07flexlab}, as well as emulation tools such as MiniNet~\cite{handigol12container} and MahiMahi~\cite{netravali2015mahimahi}, enable the creation of artificial network conditions using a given specification or passively-observed traffic.
-Emulated conditions offer a more controlled environment than experiments faced with real-world traffic (\eg by transmitting data over the Internet~\cite{chun03planetlab, berman2014GENI}, cloud~\cite{duplyakin19cloudlab, bolze06grid5000}, or wireless interfaces~\cite{adjih15iotlab, ganu05orbit, massouri14cortexlab}).
-Still, they suffer from performance variability caused by the underlying hardware and software components, which hampers reproducibility~\cite{maricq2018Taming}.
-To overcome these problems, several solutions have been proposed~\cite{edwards15testbeds}: \eg revisiting  operating system libraries~\cite{tazaki13directcode}, using virtualization~\cite{handigol12container, kannan18bnv, koponen14nvp}, adaptable profiles~\cite{ricci2015Apt}, and fault patterns~\cite{angainor_website}.
-Other tools have been developed to support mobility experiments~\cite{cho16phantomnet_repeatability, banerjee2015PhantomNet}, maximize the repeatability of interference generation~\cite{schuss19jamlabng}, and enable researchers to consistently evaluate congestion control schemes or transport protocols~\cite{yan18pantheon}.
-Other works model the execution of experiments, and uses such models to quantify the similarity between different runs~\cite{sharma17framework,ferreira2017MetaAnalysis}.
+\squarepar{%
+  \fakepar{Supporting reproducibility}
+  A large number of experimental facilities and tools have been developed in recent years to aid scientists and practitioners in carrying out reproducible networking studies~\cite{nussbaum17testbeds}.
+  Testbeds such as EmuLab~\cite{white02emulab} and FlexLab~\cite{ricci07flexlab}, as well as emulation tools such as MiniNet~\cite{handigol12container} and MahiMahi~\cite{netravali2015mahimahi}, enable the creation of artificial network conditions using a given specification or passively-observed traffic.
+  Emulated conditions offer a more controlled environment than experiments faced with real-world traffic (\eg by transmitting data over the Internet~\cite{chun03planetlab, berman2014GENI}, cloud~\cite{duplyakin19cloudlab, bolze06grid5000}, or wireless interfaces~\cite{adjih15iotlab, ganu05orbit, massouri14cortexlab}).
+  Still, they suffer from performance variability caused by the underlying hardware and software components, which hampers reproducibility~\cite{maricq2018Taming}.
+  To overcome these problems, several solutions have been proposed~\cite{edwards15testbeds}: \eg revisiting  operating system libraries~\cite{tazaki13directcode}, using virtualization~\cite{handigol12container, kannan18bnv, koponen14nvp}, adaptable profiles~\cite{ricci2015Apt}, and fault patterns~\cite{angainor_website}.
+  Other tools have been developed to support mobility experiments~\cite{cho16phantomnet_repeatability, banerjee2015PhantomNet}, maximize the repeatability of interference generation~\cite{schuss19jamlabng}, and enable researchers to consistently evaluate congestion control schemes or transport protocols~\cite{yan18pantheon}.
+  Other works model the execution of experiments, and uses such models to quantify the similarity between different runs~\cite{sharma17framework,ferreira2017MetaAnalysis}.
 
-While all aforementioned tools aim to improve reproducibility \emph{during} the experiments, \triscale assists researchers \emph{before} and \emph{after} their execution.
-It does so by informing about the number and length of runs necessary to obtain a sufficient statistical significance, as well as by computing a score quantifying the variability of the results.
-Hence, \triscale complements the existing body of literature promoting and enhancing reproducibility in networking research.
+  While all aforementioned tools aim to improve reproducibility \emph{during} the experiments, \triscale assists researchers \emph{before} and \emph{after} their execution.
+  It does so by informing about the number and length of runs necessary to obtain a sufficient statistical significance, as well as by computing a score quantifying the variability of the results.
+  Hence, \triscale complements the existing body of literature promoting and enhancing reproducibility in networking research.%
+}

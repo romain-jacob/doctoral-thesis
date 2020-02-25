@@ -4,13 +4,15 @@
 \section{Single Mode Schedule Synthesis}
 \label{sec:single_mode}
 % ------------------------------------------------------------------------------
-\TTW statically synthesizes the schedule of all tasks, messages, and communication rounds to meet real-time constraints by solving a MILP formulation.
-This section presents how to solve it efficiently and ensure that the resulting schedule minimizes the number of communication rounds~\objective{1}.
+\squarepar{%}
+	\TTW statically synthesizes the schedule of all tasks, messages, and communication rounds to meet real-time constraints by solving a MILP formulation.
+	This section presents how to solve it efficiently and ensure that the resulting schedule minimizes the number of communication rounds~\objective{1}.
 
-The schedule of a mode \modeany is computed for one hyperperiod, after which it repeats itself.
-To minimize the number of rounds used while handling computational complexity, we solve the problem sequentially, as described in~\cref{alg:outerlayer}.
-Each formulation considers a fixed number of rounds $R_{\mode{}}$ to be scheduled, starting with $R_{\mode{}}=0$. The number of rounds is incremented until a feasible solution is found, or until the maximum number of rounds $R_{max}$ (the number of rounds that can ``fit'' into one hyperperiod) is reached.
-Thus, \cref{alg:outerlayer} guarantees by construction that if the problem is feasible, the synthesized schedule is optimal in terms of number of rounds used.
+	The schedule of a mode \modeany is computed for one hyperperiod, after which it repeats itself.
+	To minimize the number of rounds used while handling computational complexity, we solve the problem sequentially, as described in~\cref{alg:outerlayer}.
+	Each formulation considers a fixed number of rounds $R_{\mode{}}$ to be scheduled, starting with $R_{\mode{}}=0$. The number of rounds is incremented until a feasible solution is found, or until the maximum number of rounds $R_{max}$ (the number of rounds that can ``fit'' into one hyperperiod) is reached.
+	Thus, \cref{alg:outerlayer} guarantees by construction that if the problem is feasible, the synthesized schedule is optimal in terms of number of rounds used.%
+}
 
 \begin{algorithm}
 \begin{algorithmic}
@@ -62,20 +64,22 @@ The MILP formulation contains a set of classical scheduling constraints:
 	Rounds must not be allocated more then \nslotsmax messages.
 %
 % \end{itemize}
-These constraints can be easily formulated using our system model (full formulation in \cref{appendix:ttw_artifacts}).
-However, one must also guarantee that the allocation of messages to rounds is valid, \ie
-\begin{description}
-	\item [\constraint{1}]
-	Messages must be served in rounds that start after their release time.
-	\item [\constraint{2}]
-	Messages must be served in rounds that finish before their deadline.
-\end{description}
+	These constraints can be easily formulated using our system model (full formulation in \cref{appendix:ttw_artifacts}).
+	However, one must also guarantee that the allocation of messages to rounds is valid, \ie
+	\begin{description}
+		\squarepar{%}
+			\item [\constraint{1}]
+			Messages must be served in rounds that start after their release time.%
+			\item [\constraint{2}]
+			Messages must be served in rounds that finish before their deadline.%
+		}
+	\end{description}%
 In other word, we must integrate the bin-packing problem of messages to rounds within the MILP formulation.
 This is non-trivial and a major difference with the existing approaches for wired architectures~(\eg \cite{craciunas2016Combined}).
 
 To address this challenge, we first formulate the constraints \constraint{1} and \constraint{2} using \emph{arrival}, \emph{demand}, and \emph{service} functions, \af \df and \sf, using network calculus~\cite{leboudec2001Network}.
 Those functions count the number of message instances released, with passed deadlines, and served since the beginning of the hyperperiod, respectively.
-Those three functions are illustrated in \cref{fig:afdfsf}.
+These functions are illustrated in \cref{fig:afdfsf}.
 It must hold that
 \begin{flalign}
 \label{eq:df<sf<af}
@@ -135,6 +139,7 @@ The arrival and demand functions are step functions. They cannot be used directl
 	\quad \Leftrightarrow \quad
 	0 \, < \, t - m_i.o - m_i.d - (k-1)m_i.p \,\leq\, m_i.p &&
 \end{flalign}
+
 For each message $m_i\in \messageset$ and each round $r_j$, $j \in [1..R_{\mode{}}]$, we introduce two integer variables $k^a_{ij}$ and $k^d_{ij}$ that we constraint to take the values of \af and \df at the time points of interest (respectively $r_j.t$ and $r_j.t + \Troundj$). That is,
 \begin{align}
 \label{eq:ka} %\qquad

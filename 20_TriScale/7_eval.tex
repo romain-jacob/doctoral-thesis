@@ -85,8 +85,10 @@ This however has an unexpected side-effect: while they appear to have a very sta
 This leads to the exact same metric values; in other words, the throughput is \emph{perfectly correlated} across runs.
 Naturally, this is an artifact of the experiment: the independence test will always fail if all data samples have the same value.
 
-\triscale always computes the KPIs and variability scores, even if the independence test fails. The experimenter is responsible to judge whether there is indeed true correlation in the data, or if one can overrule the test result and proceed with the analysis.
-In the example of \emph{TCP BBR} and \emph{TCP Cubic}, one can proceed.
+\squarepar{%
+  \triscale computes the KPIs and variability scores even if the independence test fails. The experimenter is responsible to judge whether there is indeed true correlation in the data, or if one can overrule the test result and proceed with the analysis.
+  In the example of \emph{TCP BBR} and \emph{TCP Cubic}, one can proceed.%
+}
 
 %-------------------------------------------------------------------------------
 \fakepar{KPIs}
@@ -96,13 +98,15 @@ We use 30\s to compare with the Pantheon results shown in~\Cref{fig:example_pant
 However, five schemes fail to converge sufficiently often and thus do not appear in~\cref{fig:example_triscale}.
 
 %-------------------------------------------------------------------------------
-\fakepar{Variability scores}
-Although \triscale's KPIs unambiguously compare the performance of diverse schemes, they only consider one series of runs, which does not indicate how reproducible the results actually are.
-\triscale investigates reproducibility using sequels and quantifies the expected variability in the KPI values with a variability score~(\cref{subsec:repeatability}).
-In this case study, we define the variability score as the difference between the 75th and 25th percentiles, estimated with 75\% confidence.
-We compute the variability scores for our two performance dimensions (average throughput and one-way delay -- \Cref{fig:score_matrix}).
-The scores can be interpreted as follows: with 75\% probability, the variability scores (orange bars) give the magnitude of variation expected (shall one perform infinitely many series) in the middle 50\% of KPI values.
-Hence the variability score quantifies reproducibility: the larger the score, the less reproducible the results are.
+\squarepar{%
+  \fakepar{Variability scores}
+  Although \triscale's KPIs unambiguously compare the performance of diverse schemes, they only consider one series of runs, which does not indicate how reproducible the results actually are.
+  \triscale investigates reproducibility using sequels and quantifies the expected variability in the KPI values with a variability score~(\cref{subsec:repeatability}).
+  In this case study, we define the variability score as the difference between the 75th and 25th percentiles, estimated with 75\% confidence.
+  We compute the variability scores for our two performance dimensions (average throughput and one-way delay -- \Cref{fig:score_matrix}).
+  The scores can be interpreted as follows: with 75\% probability, the variability scores (orange bars) give the magnitude of variation expected (for infinitely many series) in the middle 50\% of KPI values.
+  Hence the variability score quantifies reproducibility: the larger the score, the less reproducible the results.%
+}
 
 \begin{remark}
   \triscale's variability scores are absolute values with units (\eg in \mbps). Arguably, it may be useful to use relative scores (in percentages) to compare the scores of different protocols.

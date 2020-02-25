@@ -4,13 +4,15 @@
 \fakepar{Debugging the scheduler is hard}
 When a system configuration is found unfeasible by the \TTW scheduler, it is not easy to identify which of the constraints are responsible. Our scheduler implementation would benefit from better built-in support to turn the IIS (irreducible constraint set, returned by the Gurobi solver) into a legible output for the user.
 
-\fakepar{The multi-mode scheduling strategy is not complete}
-Even with our minimal inheritance approach~(\cref{sec:multi_mode}), the \TTW scheduler may find a problem unfeasible even though a solution exists.
-This is due to the sequential synthesis of schedules, which is a generally under-defined problem: the choices made when synthesizing a mode's schedule may make lower-priority modes unfeasible.
-Completeness (the guarantee to find a solution if one exists) can be obtained by synthesizing all schedules within a single MILP formulation; however, the complexity scales exponentially with the number of variables~\cite{jeffay1991nonpreemptive}, which limits the practicality of this ``one-shot'' approach.
-Another alternative would be to leverage the IIS information to iterate on previously scheduled modes.
-This is not trivial and, in particular, the scheduler must be careful not to search forever
-shall the system configuration would be truly unfeasible.
+\squarepar{%}
+  \fakepar{The multi-mode scheduling strategy is not complete}
+  Even with our minimal inheritance approach~(\cref{sec:multi_mode}), the \TTW scheduler may find a problem unfeasible even though a solution exists.
+  This is due to the sequential synthesis of schedules, which is a generally under-defined problem: the choices made when synthesizing a mode's schedule may make lower-priority modes unfeasible.
+  Completeness (the guarantee to find a solution if one exists) can be obtained by synthesizing all schedules within a single MILP formulation; however, the complexity scales exponentially with the number of variables~\cite{jeffay1991nonpreemptive}, which limits the practicality of this ``one-shot'' approach.
+  Another alternative would be to leverage the IIS information to iterate on previously scheduled modes.
+  This is not trivial and, in particular, the scheduler must be careful not to search forever
+  shall the system configuration would be truly unfeasible.%
+}
 
 In practice though, the lack of completeness is not a critical problem. If one mode \modeany is found unfeasible, a practical work-around is to add the conflicting applications (derived from the IIS) to the specification of \modeany.
 This triggers the minimal inheritance mechanism and prevents conflicts in mode \mode, at a cost of an increase in utilization.
@@ -20,14 +22,16 @@ We presented in \cref{sec:ttw_implementation} our implementation of \TTnet and t
 To obtain a full-fledged \TTW implementation, one needs to integrate these two pieces. Concretely, that means designing a pipeline that turns the outputs of the \TTW scheduler into individual nodes' scheduling tables, which can be then patched in the \TTnet firmware.
 There is no technical limitation in realizing this; it could not be done in time before the completion of this dissertation, but we intend to make this happen in the near future.
 
-\fakepar{Showcasing the full feature set of \TTW}
-A running implementation of the \TTW concept, including switching between operation modes, has been presented in the 2019 IPSN Demo Session~\cite{mager2019Demo}. This demo ran a more static and rigid software than the implementation presented in this chapter. Furthermore, all applications were considered non persistent; in other words, applications were re-starting from scratch with every mode change.\linebreak
-A demonstration of the full feature set of \TTW remains to be done.
+\squarepar{%}
+  \fakepar{Showcasing the full feature set of \TTW}
+  A running implementation of the \TTW concept, including switching between operation modes, has been presented in the 2019 IPSN Demo Session~\cite{mager2019Demo}. This demo ran a more static and rigid software than the implementation presented in this chapter. Furthermore, all applications were considered non persistent; in other words, applications were re-starting from scratch with every mode change.\linebreak
+  A demonstration of the full feature set of \TTW remains to be done.
 
-\fakepar{Porting to other platforms}
-Our implementation of \TTnet currently supports the TI CC430 SoC~\cite{CC430F6137}, which is not a commonly used platform and features only little memory.
-Porting \TTnet to newer platforms would be beneficial, and this is made simple by the use of the \baloo framework: whenever \baloo becomes available for a new platform, so does \TTnet.
-In particular, a port to the nRF52840 Dongle~\cite{nRF52840} is envisioned, which would provide a physical layer (up to) 8x faster (and therefore, support for shorter end-to-end deadlines) and larger memory, which would facilitate the storing of scheduling tables.
+  \fakepar{Porting to other platforms}
+  Our implementation of \TTnet currently supports the TI CC430 SoC~\cite{CC430F6137}, which is not a commonly used platform and features only little memory.
+  Porting \TTnet to newer platforms would be beneficial, and this is made simple by the use of the \baloo framework: whenever \baloo becomes available for a new platform, so does \TTnet.
+  In particular, a port to the nRF52840 Dongle~\cite{nRF52840} is envisioned, which would provide a physical layer (up to) 8x faster (and therefore, support for shorter end-to-end deadlines) and larger memory, which would facilitate the storing of scheduling tables.%
+}
 
 \fakepar{Adaptability by reprogramming}
 The main limitation of \TTW is that the schedules are static: the system executes pre-computed scheduling tables stored in the nodes' memory, with runtime adaptability limited to switching between different operating modes.

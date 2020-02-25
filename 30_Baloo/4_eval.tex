@@ -86,7 +86,7 @@ As much as possible, we designed the experiments to match those from the origina
 	We ran tests varying the percentage of nodes that that have a packet to transmit in each round.
 	We used $12.5\%$, $25\%$, and $50\%$ of the available nodes.
 	All other parameters were set according to the author's paper~\cite{sarkar2016Sleeping}.
-	
+
 	\item[LWB]
 	We ran tests varying the inter-packet interval $IPI$ of the data stream registered by each node in the network.
 	We used $IPI = \{4\s, 30\s\}$ and the dynamic scheduler aiming to minimize energy consumption.
@@ -160,21 +160,22 @@ As Crystal transmits all its data packets using contention slots,%
 the sink only rarely receives packets in these rounds, thus resulting in poor PRR.
 
 \fakepar{Radio Duty Cycle (DC)}
-The radio duty cycle (DC) is expected to reveal more of the actual overhead induced by \baloo. Our results are summarized in Table~\ref{table:DC}.
+The radio duty cycle (DC) results are expected to reveal more of the actual overhead induced by \baloo~(\cref{table:DC}).
 
 The LWB experiment perfectly matches our expectations: the DC are comparable, with a slight increase for \baloo (5 to 15\% more compared to the native code), which is due to the cost of sending more information in the control packet.
 
-In the original \baloo paper~\cite{jacob2019Baloo}, we reported surprising results regarding Crystal: Our results on the same platform (TelosB) showed significantly higher DC both for the native code and our re-implementation (from 50\% to 100\% increase) whereas on the CC430 SoC, results are more comparable.
-This was due to a misconfiguration of the clear channel assessment (CCA) threshold value: there is an offset of approximately $45dB$ between the value set in the register and the actual sensitivity of the CCA pin.%
-\footnote{\cite{cc2420_datasheet}: RSSI / Energy Detection, page 48}
-%
-Consequently, when setting $-60\dBm$ (the value suggested by the Crystal authors~\cite{istomin2018Interferenceresilient}), we actually obtained a CCA sensitivity of about $-105\dBm$, which is lower than the noise floor. Hence, Crystal consistently detected possible interference and (often needlessly) prolonged the communication rounds, thus artificially increasing the DC.
-We have re-run these experiments with the correct CCA setting (\ie $-60\dBm$) and validate that, as expected, the DC is slightly increased by \baloo~(\cref{table:DC}).
+\squarepar{%
+	In the original \baloo paper~\cite{jacob2019Baloo}, we reported surprising results regarding Crystal: Our results on the same platform (TelosB) showed significantly higher DC both for the native code and our re-implementation (from 50\% to 100\% increase) whereas on the CC430 SoC, results are more comparable.
+	This was due to a misconfiguration of the clear channel assessment (CCA) threshold value: there is an offset of approximately $45dB$ between the value set in the register and the actual sensitivity of the CCA pin.%
+	\footnote{\cite{cc2420_datasheet}: RSSI / Energy Detection, page 48}
+	%
+	Consequently, when setting $-60\dBm$ (the value suggested by the Crystal authors~\cite{istomin2018Interferenceresilient}), we actually obtained a CCA sensitivity of about $-105\dBm$, which is lower than the noise floor. Hence, Crystal consistently detected possible interference and (often needlessly) prolonged the communication rounds, thus artificially increasing the DC.
+	We have re-run these experiments with the correct CCA setting (\ie $-60\dBm$) and validate that, as expected, the DC is slightly increased by \baloo~(\cref{table:DC}).
 
-The results for Sleeping Beauty are more surprising. In spite of the overhead induced by \baloo, our re-implementation achieves about $2.5$x reduction in DC. It is unclear what can be the source of such difference.
-As we based our re-implementation only on the original paper description~\cite{sarkar2016Sleeping}, one possible explanation is that we might lack some of the original protocol features, that would induce more radio on time.
-However, the good results we obtain with our re-implementation would question the usefulness of such features.
-% This remains an open question.
+	The results for Sleeping Beauty are more surprising. In spite of the overhead induced by \baloo, our re-implementation achieves about $2.5$x reduction in DC. It is unclear what can be the source of such difference.
+	As we based our re-implementation only on the original paper description~\cite{sarkar2016Sleeping}, one possible explanation is that we might lack some of the original protocol features, that would induce more radio on time.
+	However, the good results we obtain with our re-implementation would question the usefulness of such features.%
+}
 
 \fakepar{Binary size}
 The binary file size is another metric where we expect \baloo to induce some overhead, as the middleware introduces additional files, types and features that are not always necessary for all protocols.

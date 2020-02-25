@@ -1,0 +1,26 @@
+%	Table summarizing all the variables involved in the ILP formulation, their type, and the associatted lower- and upper-bound																								
+%																									
+%																									
+\begin{tabular}{		l			c		@{\qquad}	c	@{\qquad}			r		@{\,}		c		@{\,}			l		@{\,}	l	}
+	\toprule																								
+		Name	&		Notation		&	Type	&					&		Value		&					&		\\
+		\toprule																							
+		Task offset	&	$	\tau.o	$	&	Continuous	&	$	0	\leq	$	&	$	\tau.o	$	&	$	<	\tau.p	$	&		\\
+		Message offset	&	$	m.o	$	&	Continuous	&	$	0	\leq	$	&	$	m_i.o	$	&	$	<	m.p	$	&		\\
+		Message deadline	&	$	m.d	$	&	Continuous	&	$	0	\leq	$	&	$	m_i.d	$	&	$	\leq	m.p	$	&		\\
+		\quad -	&	$	\sigma	$	&	Binary	&					&		0 \, or \, 1		&					&		\\
+		\quad -	&	$	\lambda	$	&	Binary	&					&		0 \, or \, 1		&					&		\\
+		Round starting time	&	$	r.t	$	&	Continuous	&	$	0	\leq	$	&	$	r_j.t	$	&	$	\leq	LCM - C_{net}	$	&		\\
+		Round allocation	&	$	r.[B]	$	&	Integer	&	$	0	\leq	$	&	$	r_j.B_s	$	&	$	\leq	1	$	&		\\
+		\quad -	&	$	r_0.B_i	$	&	Integer	&	$	0	\leq	$	&	$	r_0.B_i	$	&	$	\leq	1	$	&		\\
+		\quad -	&	$	k^a_ {i,j}	$	&	Integer	&	$	0	\leq	$	&	$	k^a_ {i,j}	$	&	$	\leq	LCM/m_i.p	$	&		\\
+		\quad -	&	$	k^d_ {i,j}	$	&	Integer	&	$	-1	\leq	$	&	$	k^d_ {i,j}	$	&	$	\leq	LCM/m_i.p	$	&		\\
+		Number of rounds	&	$	R_{\mode{}}	$	&	Constant	&	$	0	\leq	$	&	$	R_{\mode{}}	$	&	$	\leq	R_{max}	$	&		\\
+		Round time length	&	$	\Tround	$	&	Constant	&					&		1		&					&	time unit	\\
+		Number of slots per round	&	$	B	$	&	Constant	&					&		5		&					&	slots	\\
+		Minimal inter-round time	&	$	T_{max}	$	&	Constant	&					&		30		&					&	time unit	\\
+		``Big'' time constant	&	$	M\!M	$	&	Constant	&					&		10*LCM		&					&		\\
+		``Small'' time constant	&	$	mm	$	&	Constant	&					&		0.0001		&					&	time unit	\\
+	\bottomrule																								
+\end{tabular}																									
+																

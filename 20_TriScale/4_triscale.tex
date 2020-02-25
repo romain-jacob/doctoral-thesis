@@ -24,7 +24,7 @@ We finally show how \triscale helps assessing the reproducibility of experiments
         \label{fig:analysis_metric}
     \end{subfigure}
 
-
+    \vspace{5pt}
 
     \begin{subfigure}{0.45\linewidth}
         \centering
@@ -51,7 +51,7 @@ We finally show how \triscale helps assessing the reproducibility of experiments
 \end{figure}
 }
 
-A \triscale's metric evaluates a performance dimension across one run. For example, a metric may be the average throughput achieved by a congestion-control scheme over 30\s runtime of a full-throttle flow.
+Metrics in \triscale evaluate a performance dimension across a run, for example, the mean throughput achieved by a congestion-control scheme over 30\s runtime of a full-throttle flow.
 Computing a metric takes the following inputs.
 
 \fakepar{Inputs}
@@ -62,30 +62,31 @@ Computing a metric takes the following inputs.
     \begin{tabular}{@{\quad}l@{\quad}r@{\;\;:\;\;}ll@{\quad}l}
       \{  & expected & \multicolumn{2}{@{}l}{true/false,} &\\
           & confidence & $C$  &(\textit{default: 95\%}),  &\\
-          & tolerance & $t$   &(\textit{default: 1\%})    &\}
+          & tolerance & $t$   &(\textit{default: 5\%})    &\}
     \end{tabular}
   \item The raw data of the run.
   \end{itemize}
 }%
 
-
-In its current implementation, \triscale supports only percentiles as measures.
-This can be easily extended to offer a catalog of common measures for networking experiments~(mean, max, fairness index, \etc).
+\noindent
+In general, any measure can be used. The current implementation (\cref{sec:triscale_implementation}) supports the arithmetic mean, the minimum, the maximum, and any percentile.
 
 \fakepar{Procedure}
-If the run is expected to convergence, \triscale starts by performing a convergence test.
-The purpose of the convergence test is to assess whether the metric measure has reached a ``stable'' value by the end of the run, and therefore if it is a good estimate of the ``long-running'' performance.
+If the run is expected to converge, \triscale starts by performing a convergence test, whose purpose is to assess whether the metric has reached a stable value by the end of the run (and hence if it is a good estimate of the long-running performance).
+%
+To test this, \triscale computes metric values over a sliding window of the raw data points. For each window, whose size is fixed to half of the data points, one metric value is computed, starting with the first half of the data.
+The window repeatedly slides by 100th of the number of samples until all data points are used, leading to a set of 100 metric values.%
+\triscale performs its convergence test~(detailed in \cref{subsec:triscale_stats}) on the metric values.
+This procedure tests the convergence of the \emph{metric} (not the raw data) and damps the impact of transient behavior on the convergence test.
+If the test is passed, \triscale returns the median of metric values as run metric.
+If convergence is not expected, \triscale simply computes the run metric over the whole raw data.
 
-To test this, \triscale divides the raw data in 200 chunks. First, it considers the first 100 chunks (\ie the first half of the data) and computes a first value of the measure. Then, \triscale adds one chunk of data and recomputes a new measure value (\ie using the first 101 chunks). The process repeats until all chunks are used, leading to a set of 100 measure values. \triscale performs its convergence test~(detailed in \cref{subsec:triscale_stats}) on the measure data.
-This procedure (i)~tests what we are interested in (\ie the convergence of the \emph{measure}, not of the protocol in general) and (ii)~smooths the effects of ramp-up time by computing the first measure with already half of the run data.
-If the test is passed, \triscale returns the median of the measure data as the metric measure for the run.
+% To test this, \triscale divides the raw data in 200 chunks. First, it considers the first 100 chunks (\ie the first half of the data) and computes a first value of the measure. Then, \triscale adds one chunk of data and recomputes a new measure value (\ie using the first 101 chunks). The process repeats until all chunks are used, leading to a set of 100 measure values. \triscale performs its convergence test~(detailed in \cref{subsec:triscale_stats}) on the measure data.
+% This procedure (i)~tests what we are interested in (\ie the convergence of the \emph{measure}, not of the protocol in general) and (ii)~smooths the effects of ramp-up time by computing the first measure with already half of the run data.
+% If the test is passed, \triscale returns the median of the measure data as the metric measure for the run.
 
 \begin{remark}
-  The choice of 200 chunks is arbitrary. We choose this value as it is practical and leads to 100 measure data samples. Empirically, we found this is enough to reliably test for the metric convergence.
-\end{remark}
-
-\begin{remark}
-  If there are less than 200 raw data points, \triscale reduces the number of chunks to the number of data points.
+  If there are less than 100 raw data points, \triscale reduces the number of windows to the number of data points.
   \triscale (arbitrarily) sets a minimum of 20 data points for a convergence test.
 \end{remark}
 
@@ -161,11 +162,10 @@ This is important because networks often feature time-dependent conditions; for 
 \label{subsec:repeatability}
 %-------------------------------------------------------------------------------
 
+\emph{Sequels} are repetitions of series of runs.
+\triscale's variability score evaluates the variations of KPI values across sequels, which enable to detect long-term variations of KPIs and ultimately quantify the reproducibility of an experiment.
 
-\triscale's variability score evaluates the variations of KPI values across repetitions of the experiment (\ie a series of run), which we call sequels.
-Performing sequels allows to detect long-term variations in the KPI values which ultimately quantify the reproducibility of the experiment.
-Concretely, a variability score is a two-sided CI for a symmetric pair of percentiles, \eg the 75\% CI for the 25-75th percentiles of the delay KPI.
-Computing a variability score takes the following inputs.
+Concretely, a variability score is a two-sided CI, \ie a symmetric pair of percentiles. For example, a 75\% confidence interval is defined by the 25-75th percentiles of the delay KPIs from all sequels. Again, we attach a confidence value to the confidence interval, or equivalently, to the percentiles.
 
 \fakepar{Inputs}
 \custommini{%
@@ -232,11 +232,18 @@ This very quickly increases the number of runs that one must perform:\\
 This illustrates that it is ``easier'' to increase the confidence level of an estimate than to estimate a more extreme percentile with the same confidence level.
 Note that both \emph{\#runs} and \emph{\#series} are only derived based on the definition of the KPI and variability score; these parameters are not influenced by the runtime or the time span of an experiment.
 
-The second use case in \Cref{table:triscale_param} (bottom rows) illustrates two different perspectives on ``averages'', using delay as an example:\\
-\inlineitem
-  If the metric is the median and the KPI the 90th percentile, one can conclude that 90\% of the runs have a median delay equal or better than the KPI value.\linebreak
-\inlineitem
-  If the metric is the 90th percentile and the KPI the median, one can conclude that, in half of the runs, the 90th percentile of the delay in the run is equal or better than the KPI.\\
+The second use case in \Cref{table:triscale_param} (bottom rows) illustrates two different perspectives on ``averages'', using delay as an example:
+\\
+% \begin{itemize}
+    % \item
+    \inlineitem
+    If the metric is the median and the KPI the 90th percentile, one can conclude that 90\% of the runs have a median delay equal or better than the KPI value.
+\\
+    % \item
+    \inlineitem
+    If the metric is the 90th percentile and the KPI the median, one can conclude that, in half of the runs, the 90th percentile of the delay in the run is equal or better than the KPI.
+% \end{itemize}
+\\
 Both are ``averages'' but with different meanings and different requirements in terms of number of runs.
 
 
@@ -256,11 +263,13 @@ We then introduce the computation of confidence intervals using Thompson's metho
 \label{subsec:test_convergence}
 When an evaluation aims to estimate the ``long-running'' performance (\ie the expected performance if the run would run “forever”), one must verify whether the runs are long enough to produce reliable estimates.
 
-To verify this, \triscale implements a convergence test based on the Theil-Sen linear regression~\cite{theil1992RankInvariant, sen1968Estimates}.
-The approach computes the slope of the regression line as the median of all slopes between paired values.
-A $C$\% confidence interval (CI) for the slope is defined as the interval containing the middle $C$\% of slopes between single pairs.
-\triscale convergence test is passed if the $C$\% CI for the regression is included in the tolerance value ($\pm$\,$t$\%).
-To test the convergence of a run, \triscale uses the confidence $C$ and tolerance $t$ parameters specified in the evaluation objectives (\Cref{sec:triscale_overview}); $C$ and $t$ are set to 95\% and 1\% by default.
+\squarepar{%
+  To verify this, \triscale implements a convergence test based on the Theil-Sen linear regression~\cite{theil1992RankInvariant, sen1968Estimates}.
+  This approach computes the slope of the regression line as the median of all slopes between paired values.
+  A $C$\% confidence interval (CI) for the slope is defined as the interval containing the middle $C$\% of slopes between single pairs.
+  \triscale convergence test is passed if the $C$\% CI for the regression is included in the tolerance value ($\pm$\,$t$\%).
+  To test the convergence of a run, \triscale uses the confidence $C$ and tolerance $t$ parameters specified in the evaluation objectives (\Cref{sec:triscale_overview});
+  otherwise defaults to 95\% and 5\%.}
 
 Such a test is sensitive to the scale of the input data.
 To remove this dependency, \triscale first maps the data to $[-1, 1]$ using a linear transformation then performs the convergence test on the scaled data.
@@ -268,8 +277,8 @@ Hence, the convergence test becomes dimensionless and the same tolerance value c
 An example of the Theil-Sen slope (brown, solid), its CI (light orange, solid), and tolerance (black, dotted) is shown in \Cref{fig:analysis_metric}.
 
 %-------------------------------------------------------------------------------
-\fakepar{Confidence Intervals}
-\triscale defines KPIs~(\cref{subsec:KPIs}) and variability scores~(\cref{subsec:repeatability}) based on CIs for distribution percentiles, which can be computed using Thompson's method~\cite{thompson1936Confidence}, a robust and non-parametric approach.
+\fakepar{Confidence intervals}
+\triscale defines KPIs and variability scores based on CIs for distribution percentiles, which can be computed using a robust and non-parametric approach based on Thompson's method~\cite{thompson1936Confidence}, later shown to be valid for any independent samples of a continuous distribution~\cite{david2005Order}.
 
 Let us denote by $P_p$, the $p$-th percentile of a distribution and $\mathbb{P}(X)$ the probability of an event $X$.
 By definition, every data sample $x$ is smaller than $P_p$ with probability $p$ (and larger with probability $1-p$).
@@ -277,7 +286,7 @@ For a sorted list of \iid samples $x_i$ (where $i = 1 .. N$), the probability th
 \begin{equation}
     \mathbb{P}(x_k \leq P_p \leq x_{k+1}) = \binom{N}{k} p^k(1-p)^{N-k}, \quad k = 0 .. N
 \end{equation}
-where we assume $x_0 \rightarrow - \infty$ and $x_{N+1} \rightarrow +\infty$. From this result, it follows that the probability of $P_p$ to be larger than any sample $x_m$ (where $1\leq m < N/2$) can be computed as:
+where we assume $x_0 \rightarrow - \infty$ and $x_{N+1} \rightarrow +\infty$. From this result, it follows that the probability of $P_p$ to be larger than any sample $x_m$ (where $1\leq m < N$) can be computed as:
 \begin{align}
   \nonumber
     \mathbb{P}(x_m \leq P_p)
@@ -286,7 +295,14 @@ where we assume $x_0 \rightarrow - \infty$ and $x_{N+1} \rightarrow +\infty$. Fr
       &= 1 - \sum_{k=0}^{m-1} \binom{N}{k} p^k(1-p)^{N-k}
 \end{align}
 \Cref{eq:lb} provides the upper- and lower-bound required for computing of CIs.
-See~\cite{schmid2014measuring} for more details.
+Further, one can derive the minimum number of samples $N$ needed to compute a CI for any percentile $p$ with any confidence level $C$~\cite{schmid2014measuring}:
+\begin{equation}
+\label{eq:minN}
+     \cref{eq:lb} \quad \Rightarrow \quad N \;\geq\; \frac{\log(1-C)}{\log(1-p)}
+\end{equation}
+which defines the minimum number of runs and series required based on the definitions of the KPIs and the variability scores.
+If the probability distribution is discrete, \cref{eq:lb} becomes an inequality ($\mathbb{P}(x_m \leq P_p) \geq \ldots$~) that provides a safe (\ie conservative) estimate of which sample $x_m$ is the bound of the CI of interest~\cite{david2005Order}.
+
 
 This approach provides robust estimates for distribution percentiles and \emph{does not make any assumption on the nature of the underlying distribution}.
 It does, however, require that the data samples are \iid. \triscale checks whether this hypothesis holds using an independence test, described below.
@@ -295,6 +311,12 @@ It does, however, require that the data samples are \iid. \triscale checks wheth
 \fakepar{Independence test}
 Estimating the percentile of a distribution requires often (if not always) that the samples are \iid (\cref{sec:stats}); this is also the case for Thompson's method~\cite{thompson1936Confidence}.
 \triscale implements an empirical independence test to verify whether the \iid assumption holds.
+
+\begin{remark}
+  Generally, independence results from the experiment design. For networking experiments, however, it is generally not possible to guarantee independence, \eg the experimental conditions cannot be fully controlled and may be correlated.
+  In such cases, it is common to empirically check whether the data are correlated. If the effective dependence between data samples is sufficiently low, it is considered safe to treat the samples as \iid.
+\end{remark}
+
 This independence test is applied to the metric data (resp. KPI data) before the computation of a KPI (resp. a variability score).
 This poses the particular challenge that the number of data samples may be very small (\eg 3 or 5 KPI values). \triscale's independence test must therefore not be too strict.
 
@@ -328,13 +350,15 @@ Indeed, it is common for real-world networks to exhibit periodic patterns.
 For example, there may be a lot more cross-traffic (\ie interference) at specific times. In the statistics literature, these patterns are called \emph{seasonal components}.
 Neglecting these may result in biased experiments leading to wrong conclusions, as illustrated in the case study below.
 
-\fakepar{Case study: low-power wireless}
-We run a simple evaluation of Glossy~\cite{ferrari2011Glossy}, a low-power wireless protocol based on synchronous transmissions~(\cref{sec:ST}). Glossy includes as parameter the number of retransmissions of a packet, called $N$. We investigate the impact of two values of $N$ on the reliability of Glossy, measured as the packet reception ratio (PRR). We define our KPI as the median with 95\% confidence level.
-Refer to \cref{append:triscale_artifacts} for the complete case study.
+\squarepar{%
+  \fakepar{Case study: low-power wireless}
+  We run a simple evaluation of Glossy~\cite{ferrari2011Glossy}, a low-power wireless protocol based on synchronous transmissions~(\cref{sec:ST}). Glossy includes as parameter the number of retransmissions of a packet, called $N$. We investigate the impact of two values of $N$ on the reliability of Glossy, measured as the packet reception ratio (PRR). We define our KPI as the median with 95\% confidence level.
+  Refer to \cref{append:triscale_artifacts} for the complete case study.%
+}
 
 We collect data using the FlockLab testbed~\cite{lim2013FlockLab}.
 This testbed is located in an office building, where we expect more interference during daytime than nighttime.
-Thus, we schedule a series of 24 runs randomly within one day.\\
+Thus, we schedule a series of 24 runs randomly within one day.\linebreak
   \inlineitem $N=1$ leads to a PRR of 88\%,\\
   \inlineitem $N=2$ leads to a PRR of 84\%.\\
 In other words, it appears that doing two retransmissions (instead of one) reduces reliability.
@@ -354,7 +378,8 @@ However, we illustrated that systematic patterns are also present. In other word
   enable reproducibility of the evaluations.
 The series span must be long enough such that it does not matter when the series actually starts (\eg a weekend or a weekday)
 
-\triscale integrates a network profiling function that analyzes link quality data (such as those available at~\cite{jacob2019datasetLQE}) and searches for seasonal components in the link quality data. This helps the experimenter detecting (sometimes unexpected) time dependencies, thus choosing a suitable time span for series of runs.
+\squarepar{%
+  \triscale integrates a network profiling function that analyzes link quality data (\eg available at~\cite{jacob2019datasetLQE}) and searches for seasonal components in the link quality data. This helps the experimenter detecting (sometimes unexpected) time dependencies, thus choosing a suitable time span for series of runs.}
 
 
 %-------------------------------------------------------------------------------

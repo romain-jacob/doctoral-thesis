@@ -33,8 +33,10 @@ Moreover, the memory and computational requirements of the protocol must be comp
 On all nodes, the computations related to \DRP admission tests are performed by the \AP, including \CP's buffer checks~(\cref{thm:CP}).
 These tests only require minimal state keeping, which can be easily delegated to the \AP. This has two benefits: (i)~it limits the modification to the \CP firmware (\ie LWB) and (ii)~it improves performance (the admission test is more efficiently computed by the \AP than by the \CP).
 
-\fakepar{Round structure}
-Our implementation maintains the original LWB round structure, only removing the contention slot~(\cref{fig:drp_round}). This slot becomes redundant in \DRP since each node bootstraps with registered control flows, which are used for further \DRP requests and flow registrations~(\cref{sec:designDetailed}).
+\squarepar{%}
+  \fakepar{Round structure}
+  Our implementation maintains the original LWB round structure, only removing the contention slot~(\cref{fig:drp_round}). This slot becomes redundant in \DRP since each node bootstraps with registered control flows, which are used for further \DRP requests and flow registrations~(\cref{sec:designDetailed}).%
+}
 
 \begin{figure}
   \centering
@@ -53,11 +55,13 @@ The communication between \AP and \CP over \bolt can be based on polling or inte
 \begin{description}
 
   % \item[\AP $\boldsymbol{\rightarrow}$ \CP]
-  \item[\AP to \CP]
-  When \AP writes to \bolt, we trigger an interrupt on the \CP and read out the message immediately.
-  Since \DRP flow model is sporadic and new packets are expected infrequently~(\cref{sec:problem}), using interrupt is fast, energy efficient, and avoids building up the \bolt queue.
+  \squarepar{%}
+    \item[\AP to \CP]
+    When \AP writes to \bolt, we trigger an interrupt on the \CP and read out the message immediately.
+    Since \DRP flow model is sporadic and new packets are expected infrequently~(\cref{sec:problem}), using interrupt is fast, energy efficient, and avoids building up the \bolt queue.%
 
-  However, during LWB rounds, it is paramount that \CP operations are not delayed or disturbed. Thus, during the rounds, interrupts are disabled and (potential) new messages written by \AP are read out after the round.
+    However, during LWB rounds, it is paramount that \CP operations are not delayed or disturbed. Thus, during the rounds, interrupts are disabled and (potential) new messages written by \AP are read out after the round.%
+  }
 
   % \item[\CP $\boldsymbol{\rightarrow}$ \AP]
   \item[\CP to \AP]
@@ -71,8 +75,10 @@ The communication between \AP and \CP over \bolt can be based on polling or inte
 
 \end{description}
 
-\fakepar{Host \AP state-machine}
-The host \AP is responsible to compute the \blink schedules and to perform the admission tests for incoming \DRP requests. As processing \DRP requests takes a variable (and possibly long) time, priority is given to the schedule computation: as soon as the schedule for the round $i$ has been fetched by the \CP, \AP computes the schedule of round $i+1$.
+\squarepar{%
+  \fakepar{Host \AP state-machine}
+  The host \AP is responsible to compute the \blink schedules and to perform the admission tests for incoming \DRP requests. As processing \DRP requests takes a variable (and possibly long) time, priority is given to the schedule computation: as soon as the schedule for the round $i$ has been fetched by the \CP, \AP computes the schedule of round ($i+1$).%
+}
 
 Once the schedule is ready, \AP continues with the processing of \DRP requests. After each processed request, if the flow is admitted, \AP recomputes a schedule for round $i+1$ taking the new flow into account. The procedure repeats until the schedule is fetched by \CP or when all requests have been processed. The host \AP state-machine is illustrated in \cref{fig:AP_statemachine}.
 
@@ -100,12 +106,14 @@ Once the schedule is ready, \AP continues with the processing of \DRP requests. 
 \end{figure}
 }
 
-\fakepar{Alternating buffers}
-The host \CP fetches the next round schedule from its \AP, which sends a valid schedule immediately.
-However, this conflicts with the admission of new flow requests: the \AP may be processing a request (including the computation of a new schedule) when \CP requests the schedule.
+\squarepar{%
+  \fakepar{Alternating buffers}
+  The host \CP fetches the next round schedule from its \AP, which sends a valid schedule immediately.
+  However, this conflicts with the admission of new flow requests: the \AP may be processing a request (including the computation of a new schedule) when \CP requests the schedule.%
+  }
 
+\pagebreak
 We handle this situation using an alternating buffer for the next round schedule~(\cref{fig:AP_alternatingbuffer}). One buffer is used to store a valid schedule for the next round, which the \AP computes first. After each \DRP request is processed, the newly computed schedule is written into the other buffer. The process repeats until all requests are processed.
-%
 Hence, even if \CP fetches while \AP is writing a schedule in one buffer, the other buffer still contains a valid schedule, which can be immediately sent to \CP over \bolt.
 This guarantees a fast transmission of the schedule from \AP to \CP while avoiding memory corruption on the \AP.
 

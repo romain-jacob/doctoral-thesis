@@ -3,8 +3,10 @@
 \section{Discussion and Limitations}
 \label{sec:requirements}
 
-We argued that \baloo is a usable, flexible, and performant design framework (\cref{sec:baloo_eval}).
-To complete the description, we now detail hardware and software requirements and discuss the portability and limitations of the framework.
+\squarepar{%
+	We argued that \baloo is a usable, flexible, and performant design framework (\cref{sec:baloo_eval}).
+	To complete the description, we now detail hardware and software requirements and discuss the portability and limitations of the framework.%
+}
 
 \subsection{Requirements}
 \label{subsec:requirements}
@@ -31,7 +33,9 @@ On the other hands, it makes \baloo harder to port to \emph{other platforms}, as
 
 Furthermore, \baloo does not require much of the complex machinery of a full-fledge operating system. Thus, a bare-metal implementation of \baloo could bring multiple benefits: increased reliability (as there is no interference from the OS), lighter weight, and simpler to port on any platform (as there is no need to port an entire OS first).
 
-At the time of writing, the only known publicly available implementation of \baloo uses Contiki. Ongoing development efforts are discussed in \cref{sec:outcomes}.
+\squarepar{%
+	At the time of writing, the only known publicly available implementation of \baloo uses Contiki. Ongoing development efforts are discussed in \cref{sec:outcomes}.%
+}
 
 \subsection{Limitations}
 
@@ -51,7 +55,8 @@ there is no \ST-based network layer protocol in the literature that is incompati
 \subsection{Lessons Learned}
 \label{sec:lessonsLearned}
 
-During this work, we have learned a few lessons that might be worth sharing.
+\squarepar{During this work, we have learned a few lessons that might be worth sharing.}
+
 \begin{description}
 
 	\item[Re-implementing protocols.] Re-implementing a complete protocol (solely) based on the description from a research paper is very difficult, if not impossible. Many implementation details and design choices are omitted, for good reasons: research papers rather focus on novel concepts and ideas.
@@ -62,9 +67,8 @@ During this work, we have learned a few lessons that might be worth sharing.
 
 \end{description}
 
-The point here is not to say that every research work \emph{must} openly release code together with an extensive documentation.
-However, \emph{if} one claims his or her research is providing practical solutions to concrete problems, then these solutions must be made available.
-When such a solution is a piece of software (\eg a network stack for low-power wireless), the (re)usability of the software is at least as important as the research paper presenting the underlying concepts.
-
-% The availability and reusability of research artefacts is an increasingly important topic. Scientific societies start to incentivize reusable research; the ACM introduced in 2018 a badging system~\cite{acmBadges} which starts being used in leading conferences like CoNEXT 2018~\cite{acmCoNEXT2018}.
-% We believe this is really important to keep in mind: if we want to see our research being used and impactful beyond academia, we must strive to make it more accessible. This is why \baloo is open source and accompanied by an extensive documentation of the code and how to use it~\cite{Baloo}.
+\squarepar{%
+	The point here is not to say that every research work \emph{must} openly release code together with an extensive documentation.
+	However, \emph{if} one claims his or her research is providing practical solutions to concrete problems, then these solutions must be made available.
+	When such a solution is a piece of software (\eg a network stack for low-power wireless), the (re)usability of the software is at least as important as the research paper presenting the underlying concepts.%
+}

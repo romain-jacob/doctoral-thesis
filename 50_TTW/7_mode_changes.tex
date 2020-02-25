@@ -23,9 +23,10 @@ When $\beacon = \{j, k, 0\}$ is sent, the mode change from mode \modei to \mode{
 Finally, $\beacon = \{j, k, 1\}$ is sent, which triggers the mode change: the next round is the first round of mode \mode{k}.
 
 
-% The mode change protocol is not specified by \TTW.
-Many mode change protocols have been proposed in the literature~(see~\cite{chen2018SafeMC} for an overview). These protocols define the expected behavior of applications in the old and new modes; for example, they specify whether the running applications should be left enough time to complete, or be interrupted by the mode change.
-\TTW does not define a specific mode change protocol. Instead, it provides a general strategy to execute mode changes and lets the user define the desired mode change protocol and implement it at the application level.
+\squarepar{%}
+	Many mode change protocols have been proposed in the literature~(see~\cite{chen2018SafeMC} for an overview). These protocols define the expected behavior of applications in the old and new modes; for example, they specify whether the running applications should be left enough time to complete, or be interrupted by the mode change.
+	\TTW does not define a specific mode change protocol. Instead, it provides a general strategy to execute mode changes and lets the user define the desired mode change protocol and implement it at the application level.%
+}
 
 \begin{figure}
 	\centering
