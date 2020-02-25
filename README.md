@@ -4,7 +4,8 @@ Romain Jacob
 
 #### Doctoral Dissertation
 This repository contains all source files and visualization notebooks of my doctoral dissertation.  
-The files are archived on Zenodo.  
+The [compiled PDF](https://github.com/romain-jacob/doctoral-thesis/raw/master/00_thesis.pdf) is readily available.  
+The files are stored on Zenodo for long-term archiving.  
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3510184.svg)](https://doi.org/10.5281/zenodo.3510184)
 
 #### Doctoral Examination Presentation
