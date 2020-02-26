@@ -40,7 +40,9 @@ Leveraging Synchronous Transmissions for the Design of Real-time Wireless Cyber-
 \pagestyle{empty}
 \pagenumbering{Alph}
 
-% \input{02_title_cover}
+\firstpagetrue % For background image
+\input{02_title_cover}
+\firstpagefalse % For background image
 
 \input{02_title_eth}
 \cleardoublepage
@@ -98,24 +100,21 @@ Leveraging Synchronous Transmissions for the Design of Real-time Wireless Cyber-
 \input{50_TTW/ttw}
 \input{60_conclusions}
 
+\backmatter
 \cleardoublepage
+\endingtrue % For chapter labels
 \def\bibname{Bibliography}
 \phantomsection\addcontentsline{toc}{chapter}{Bibliography}
-% \bibliographystyle{alphaabbr}
-% \bibliographystyle{abbrv}
 \bibliographystyle{plainurl}
-% {\smaller \bibliography{Thesis}}
 {\smaller \bibliography{Thesis}}
 
 \cleardoublepage
 \pagestyle{empty}
-% \pdfbookmark[0]{Credits}{Credits}
 \input{70_credits}
 
-\cleardoublepage
-\backmatter
+% \cleardoublepage
 %\input{60_pubs.tex}
-%\cleardoublepage
+\cleardoublepage
 \input{70_cv}
 % \cleardoublepage
 % \newpage

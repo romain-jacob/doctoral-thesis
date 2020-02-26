@@ -35,17 +35,26 @@
 
 \usepackage[pages=some,scale=1,angle=0,opacity=1]{background}
 
+\newif\ifending
+\endingfalse
+\newif\iffirstpage
+
 \newcommand{\chapterLabels}{
 \AddEverypageHook{%
 \ifthenelse{\isodd{\value{page}}}%
 {
-  % \ifthenelse{\FirstPage}%
-  % \ifthenelse{\equal{\FirstPage}{\true}}%
-  \ifnum\value{chapter}>0%
-  % \backgroundsetup{contents={\includegraphics[scale=1]{Cover/cover_background}}}%
-  \backgroundsetup{contents={\includegraphics[scale=1]{Cover/chap\thechapter}}}%
+  \iffirstpage
+    \backgroundsetup{contents={\includegraphics[scale=1]{Cover/cover_background}}}%
   \else
-  \backgroundsetup{contents={}}%
+    \ifnum\value{chapter}>0%
+      \ifending
+        \backgroundsetup{contents={}}%
+      \else
+        \backgroundsetup{contents={\includegraphics[scale=1]{Cover/chap\thechapter}}}%
+      \fi
+    \else
+    \backgroundsetup{contents={}}%
+    \fi
   \fi
 }%
 {
