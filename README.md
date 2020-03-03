@@ -13,7 +13,7 @@ This dissertation was defended successfully on December 17th, 2019 at ETH Zurich
 The presentation is available under various formats.
 - [PDF](https://osf.io/rgkdx/)
 - [Source (.pptx)](https://osf.io/6vd9j/)
-- [Video (20min)](https://youtu.be/t-cynMz2s0c)
+- [Video (20min)](https://youtu.be/m_jfX4SiHlw)
 
 #### How to Cite
 > Romain Jacob. 
