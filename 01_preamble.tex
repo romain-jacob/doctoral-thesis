@@ -13,7 +13,7 @@
 \usepackage{xspace}
 \usepackage{tabularx}
 \usepackage{multirow}
-\usepackage{pdflscape}
+\usepackage{pdflscape} % add landscape environments
 
 \usepackage{xcolor}
 \definecolor{orange}{RGB}{255,153,51}
@@ -44,7 +44,7 @@
 \ifthenelse{\isodd{\value{page}}}%
 {
   \iffirstpage
-    \backgroundsetup{contents={\includegraphics[scale=1]{Cover/cover_background}}}%
+    \backgroundsetup{contents={\includegraphics[scale=1.42]{Cover/cover_frontpage}}}%
   \else
     \ifnum\value{chapter}>0%
       \ifending
